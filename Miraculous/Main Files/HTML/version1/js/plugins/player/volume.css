@@ -19,9 +19,11 @@ body {
   position: absolute;
   z-index: 1;
 }
+
 .knob-container .knob-wrapper-outer.nogauge .knob:after, .knob-container .knob-wrapper-outer.nogauge .knob-mask:after {
   display: none;
 }
+
 .knob-container .knob-wrapper-outer.nogauge .knob-wrapper .knob:before {
   content: "";
   position: absolute;
@@ -35,14 +37,17 @@ body {
   border-radius: 100% !important;
   box-shadow: 0 0 0 3rem rgba(0, 0, 255, 0.2), 0 0 2px 0 #fafafa;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper {
   width: 55px;
   position: relative;
   cursor: -webkit-grab;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper:active {
   cursor: -webkit-grabbing;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .knob-mask {
   width: 100%;
   padding-bottom: 100%;
@@ -50,6 +55,7 @@ body {
   pointer-events: none;
   position: relative;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .knob-mask:before {
   content: "";
   position: absolute;
@@ -58,9 +64,10 @@ body {
   right: 0;
   bottom: 0;
   border-radius: 100%;
-  border: 5px solid grey;
+  border: 4px solid grey;
   z-index: 0;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .knob-mask:after {
   content: "";
   position: absolute;
@@ -70,17 +77,19 @@ body {
   bottom: 0rem;
   border-radius: 100%;
   border: 5px solid transparent;
-	border-bottom-color: grey;
+  border-bottom-color: grey;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .round {
-    content: "";
-    position: absolute;
-    top: 14rem;
-    left: 18rem;
-    right: 10rem;
-    bottom: 18rem;
-    border-radius: 100%;
+  content: "";
+  position: absolute;
+  top: 14rem;
+  left: 18rem;
+  right: 10rem;
+  bottom: 18rem;
+  border-radius: 100%;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .knob {
   position: absolute;
   top: 0;
@@ -90,6 +99,7 @@ body {
   pointer-events: none;
   transform: rotateZ(270deg);
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .knob:after {
   content: "";
   position: absolute;
@@ -101,13 +111,16 @@ body {
   border: 3rem solid transparent;
   border-bottom-color: #fff;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .knob.d2:after {
   border-right-color: #fff;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .knob.d3:after {
   border-top-color: #fff;
   border-right-color: #fff;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .handle {
   position: absolute;
   top: 0;
@@ -118,6 +131,7 @@ body {
   z-index: 1;
   transform: rotateZ(270deg);
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .handle:before {
   content: "";
   position: absolute;
@@ -129,6 +143,7 @@ body {
   border: none !important;
   border-radius: 100% !important;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .handle:after {
   content: "";
   position: absolute;
@@ -139,12 +154,14 @@ body {
   border: none !important;
   border-radius: 100% !important;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .pip {
   position: absolute;
   font-size: 11rem;
   color: black;
   pointer-events: none;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .pip.min {
   bottom: 6rem;
   left: 0;
@@ -152,6 +169,7 @@ body {
   width: 50%;
   text-align: center;
 }
+
 .knob-container .knob-wrapper-outer .knob-wrapper .pip.max {
   bottom: 6rem;
   left: 50%;
