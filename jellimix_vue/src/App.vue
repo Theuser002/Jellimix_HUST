@@ -1,28 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-link to="/"><span @click="testToast('Developing')">Developing</span></router-link><br>
+    <router-link to="/Hello"><span @click="testToast('HelloWorld')">HelloWorld</span></router-link><br>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  methods: {
+    testToast(page){
+      console.log("toast");
+      this.$toast.open({
+        message: 'Chuyển sang trang '+page,
+        type: 'success'}
+      )
+    }
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
