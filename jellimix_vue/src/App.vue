@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <the-menu></the-menu>
+    <the-header></the-header>
     <router-view class="router-view"></router-view>
   </div>
 </template>
@@ -16,5 +17,6 @@ export default {
 
 .router-view {
   padding-left: 80px;
+  padding-top: 70px;
 }
 </style>

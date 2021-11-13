@@ -3,7 +3,7 @@ import App from './App.vue'
 import './components/components'
 import router from './routes/route'
 import VueToast from 'vue-toast-notification';
-import 'vue-toast-notification/dist/theme-sugar.css';
+import './css/custom-toast.css';
 
 Vue.config.productionTip = false
 

@@ -6,7 +6,7 @@
     }"
   >
     <div class="sidemenu_inner">
-      <button @click="isOpenMenu = !isOpenMenu">Đóng/Mở</button>
+      <button type="button" class="btn btn-success" @click="isOpenMenu=!isOpenMenu">Đóng/Mở</button>
       <router-link to="/"
         ><span @click="testToast('Developing')">Developing</span></router-link
       ><br />
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     testToast(page){
-      console.log("toast");
+      this.isOpenMenu = false
       this.$toast.open({
         message: 'Chuyển sang trang '+page,
         type: 'success'}
