@@ -1,5 +1,10 @@
 <template>
-<h1>Trang web đang được phát triển</h1>    
+<!----Loader Start---->
+    <div class="ms_loader">
+        <div class="wrap">
+            <img src="../assets/loader1.gif" alt="">
+        </div>
+    </div>   
 </template>
 
 <script>

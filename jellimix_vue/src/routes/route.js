@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HelloWorld from '../views/HelloWorld.vue'
-import Developing from '../views/Developing.vue'
+
+const HelloWorld = () =>
+    import ('../views/HelloWorld.vue')
+const Developing = () =>
+    import ('../views/Developing.vue')
 
 const routes = [
-    {path: '/Hello', component: HelloWorld},
-    {path: '', component: Developing}
+    { path: '/Hello', component: HelloWorld },
+    { path: '', component: Developing }
 ]
 
 const router = new VueRouter({

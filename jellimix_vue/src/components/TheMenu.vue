@@ -6,7 +6,7 @@
     }"
   >
     <div class="sidemenu_inner">
-      <button type="button" class="btn btn-success" @click="isOpenMenu=!isOpenMenu">Đóng/Mở</button>
+      <button type="button" class="btn btn-outline-primary" @click="isOpenMenu=!isOpenMenu">Đóng/Mở</button>
       <router-link to="/"
         ><span @click="testToast('Developing')">Developing</span></router-link
       ><br />

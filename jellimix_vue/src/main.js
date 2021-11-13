@@ -4,6 +4,8 @@ import './components/components'
 import router from './routes/route'
 import VueToast from 'vue-toast-notification';
 import './css/custom-toast.css';
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 Vue.config.productionTip = false
 
