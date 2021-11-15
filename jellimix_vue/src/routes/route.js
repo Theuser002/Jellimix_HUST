@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+//thực hiện import các component áp dụng lazy loading, đọc tài liệu để hiểu
 const HelloWorld = () =>
     import ('../views/HelloWorld.vue')
 const Developing = () =>
@@ -26,8 +27,8 @@ const routes = [
 const router = new VueRouter({
     mode: 'history',
     routes,
-    base: process.env.BASE_URL,
-    linkActiveClass: 'route-selected'
+    base: process.env.BASE_URL, //URL gốc của môi trường đang chạy, dưới local chính là localhost:8080, trên môi trường product chính là domain name
+    linkActiveClass: 'route-selected' //router-link của trang hiện tại sẽ có class này, tương tự như class active
 })
 
 Vue.use(VueRouter)
