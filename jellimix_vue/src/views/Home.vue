@@ -1,13 +1,10 @@
 <template>
-<div>Trang chủ Home</div>    
+  <div>Trang chủ Home</div>
 </template>
 
 <script>
-export default {
-    
-}
+export default {};
 </script>
 
 <style scoped>
-
 </style>

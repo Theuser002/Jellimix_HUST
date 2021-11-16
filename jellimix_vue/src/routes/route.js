@@ -17,7 +17,7 @@ const AlbumPage = () =>
 
 const routes = [
     { path: '/Hello', component: HelloWorld },
-    { path: '/dev', component: Developing },
+    { path: '/Home/dev', component: Developing },
     { path: '/Home', component: Home },
     { path: '/Song', component: SongPage },
     { path: '/Artist', component: ArtistPage },
@@ -28,7 +28,7 @@ const router = new VueRouter({
     mode: 'history',
     routes,
     base: process.env.BASE_URL, //URL gốc của môi trường đang chạy, dưới local chính là localhost:8080, trên môi trường product chính là domain name
-    linkActiveClass: 'route-selected' //router-link của trang hiện tại sẽ có class này, tương tự như class active
+    linkExactActiveClass: 'route-selected' //router-link của trang hiện tại sẽ có class này, tương tự như class active
 })
 
 Vue.use(VueRouter)

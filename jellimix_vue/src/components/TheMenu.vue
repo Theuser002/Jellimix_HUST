@@ -68,6 +68,7 @@ export default {
     return {
       isOpenMenu: false,
       menuItems: [
+        { path: "/Home/dev", name: "Dev", x: 0, y: 0 },//đường dẫn router, tên lựa chọn, tọa độ x-y của icon trong ảnh svg
         { path: "/Home", name: "Trang chủ", x: 0, y: 0 },//đường dẫn router, tên lựa chọn, tọa độ x-y của icon trong ảnh svg
         { path: "/Song", name: "Bài hát", x: -150, y: -28 },
         { path: "/Artist", name: "Nghệ sĩ", x: -60, y: 2 },
