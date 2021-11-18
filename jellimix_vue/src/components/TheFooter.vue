@@ -1,16 +1,16 @@
 <!--TODO: Phúc-->
 <template>
-    <div class="header">
-        
-    </div>
+    
 </template>
 
 <script>
+// import js file here
+
 export default {
     
 }
 </script>
 
 <style scoped>
-@import '../css/TheHeader.css';
+@import '../css/TheFooter.css';
 </style>
