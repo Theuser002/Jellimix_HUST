@@ -5,8 +5,10 @@ import router from './routes/route'
 import VueToast from 'vue-toast-notification';
 import './components/components'
 import './css/custom-toast.css';
-import "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "./css/bootstrap.css";
+import './css/font-awesome.min.css';
+import './css/fonts.css';
+import './css/style.css';
 
 Vue.config.productionTip = false
 
