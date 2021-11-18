@@ -1,6 +1,6 @@
 <!--TODO: Hùng 4-->
 <template>
-    
+    <div></div>
 </template>
 
 <script>

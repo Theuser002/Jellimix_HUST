@@ -1,6 +1,6 @@
 <!--TODO: Phúc-->
 <template>
-    
+    <div></div>
 </template>
 
 <script>
