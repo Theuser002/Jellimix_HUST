@@ -1,6 +1,6 @@
 <!--TODO: Dzuong-->
 <template>
-    
+    <div></div>
 </template>
 
 <script>

@@ -1,8 +1,8 @@
 <template>
-  <div class="swiper-slide" style="width: 297.25px; margin-right: 30px">
+  <div class="swiper-slide" style="width: 240px; margin-right: 10px">
     <div class="ms_rcnt_box">
       <div class="ms_rcnt_box_img">
-        <img :src="require(`../../../assets/images/album/${media_data.img}`)" />
+        <img :src="img_url || require(`../../../assets/images/album/${defaultImg}`)" />
         <div class="ms_main_overlay">
           <div class="ms_box_overlay"></div>
           <div class="ms_more_icon" @click="isOpenOption = !isOpenOption">
@@ -52,15 +52,16 @@
       </div>
       <div class="ms_rcnt_box_text">
         <h3>
-          <a href="#">{{ media_data.title }}</a>
+          <a href="#">{{ media_data.Name }}</a>
         </h3>
-        <p>{{media_data.info}}</p>
+        <p>{{media_data.AlbumArtist}}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   props: {
     media_data: {
@@ -70,7 +71,20 @@ export default {
   data() {
     return {
       isOpenOption: false,
+      img_url: null,
+      defaultImg: 'album1.jpg'
     };
+  },
+  mounted() {
+    this.getImage()
+  },
+  methods: {
+    getImage(){
+      if(Object.keys(this.media_data.ImageTags)[0]!=undefined){
+        let url = axios.defaults.baseURL+`Items/${this.media_data.Id}/Images/${Object.keys(this.media_data.ImageTags)[0]}?fillWidth=240&fillHeight=240&tag=${Object.values(this.media_data.ImageTags)[0]}&quality=100`
+        this.img_url = url
+      }
+    }
   },
 };
 </script>

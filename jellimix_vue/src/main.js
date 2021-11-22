@@ -3,6 +3,8 @@ import App from './App.vue'
 import axiosConfig from './common/axiosConfig'
 import router from './routes/route'
 import VueToast from 'vue-toast-notification';
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import './css/swiper.css'
 import './components/components'
 import './css/custom-toast.css';
 import "./css/bootstrap.css";
@@ -19,6 +21,8 @@ Vue.use(VueToast, {
     duration: 3000,
     dismissible: true,
 });
+
+Vue.use(VueAwesomeSwiper, /* { default options with global component } */ )
 
 new Vue({
     router,

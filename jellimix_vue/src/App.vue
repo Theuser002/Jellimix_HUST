@@ -16,6 +16,6 @@ export default {
 <style>
 .router-view {
   padding-left: 80px;
-  padding-top: 70px;
+  padding-top: 80px;
 }
 </style>
