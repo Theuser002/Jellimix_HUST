@@ -59,8 +59,8 @@
         </div>
       </div>
       <div class="ms_rcnt_box_text">
-        <h3>
-          <a href="#">{{ media_data.Name }}</a>
+        <h3 @click="playAudio">
+          <a>{{ media_data.Name }}</a>
         </h3>
         <p>{{ media_data.AlbumArtist }}</p>
       </div>

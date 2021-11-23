@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <the-featured-song @play-song="playAudio" />
-    <the-featured-song @play-song="playAudio" />
-    <the-featured-song @play-song="playAudio" />
+    <the-featured-album @play-song="playAudio" />
+    <the-weekly-top/>
   </div>
 </template>
 

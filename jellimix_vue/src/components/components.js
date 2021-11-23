@@ -15,6 +15,8 @@ const MiniMedia = () =>
     import ('../components/MediaBlock/Media/MiniMedia.vue')
 const TheFeaturedSong = () =>
     import ('../components/MediaBlock/TheFeaturedSong.vue')
+const TheFeaturedAlbum = () =>
+    import ('../components/MediaBlock/TheFeaturedAlbum.vue')
 
 //Global components
 Vue.component('TheMenu', TheMenu);
@@ -22,6 +24,7 @@ Vue.component('TheHeader', TheHeader);
 Vue.component('TheFooter', TheFooter);
 Vue.component('TheBanner', TheBanner);
 Vue.component('TheWeeklyTop', TheWeeklyTop);
-Vue.component('TheFeaturedSong', TheFeaturedSong);
 Vue.component('PrimaryMedia', PrimaryMedia);
 Vue.component('MiniMedia', MiniMedia);
+Vue.component('TheFeaturedSong', TheFeaturedSong);
+Vue.component('TheFeaturedAlbum', TheFeaturedAlbum);
