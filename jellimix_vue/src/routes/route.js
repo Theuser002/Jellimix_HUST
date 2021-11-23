@@ -28,7 +28,10 @@ const router = new VueRouter({
     mode: 'history',
     routes,
     base: process.env.BASE_URL, //URL gốc của môi trường đang chạy, dưới local chính là localhost:8080, trên môi trường product chính là domain name
-    linkExactActiveClass: 'route-selected' //router-link của trang hiện tại sẽ có class này, tương tự như class active
+    linkExactActiveClass: 'route-selected', //router-link của trang hiện tại sẽ có class này, tương tự như class active
+    scrollBehavior() {
+        return { x: 0, y: 0 }
+    }
 })
 
 Vue.use(VueRouter)

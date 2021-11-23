@@ -8,7 +8,7 @@
     </div>
     <swiper v-if="mediaList" class="swiper" ref="swiper" :options="swiperOption">
       <swiper-slide v-for="(media, index) in mediaList" :key="index"
-        ><PrimaryMedia :media_data="media"
+        ><PrimaryMedia :media_data="media" @play-song="playAudio"
       /></swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -61,12 +61,16 @@ export default {
         console.log(res);
       });
   },
-  methods: {},
+  methods: {
+    playAudio(...e){
+      this.$emit('play-song', e)
+    }
+  },
 };
 </script>
 
 <style scoped>
-@import "../../css/MediaBlock/TheFeaturedSong.css";
+@import "../../css/MediaBlock/MediaSlider.css";
 .feature-song {
   width: 100%;
 }

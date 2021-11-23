@@ -5,8 +5,9 @@ const user = '4c6717a89bec419c8e396db40eb9713f/'
 var SongServices = {
     methods: {
         async getAllSong() {
-            let url = axios.defaults.baseURL + 'emby/Users/' + user + 'Items?parentId=7e64e319657a9516ec78490da03edccb&api_key=' + api_key
-            console.log(url);
+            let url = axios.defaults.baseURL +
+                'Users/' + user +
+                'Items?SortBy=Name&SortOrder=Ascending&IncludeItemTypes=Audio&Recursive=true&Fields=AudioInfo%2CParentId&StartIndex=0&ImageTypeLimit=1&EnableImageTypes=Primary&Limit=100&ParentId=7e64e319657a9516ec78490da03edccb&api_key=' + api_key
             return axios.get(url);
         }
     },

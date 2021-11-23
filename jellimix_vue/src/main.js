@@ -4,6 +4,7 @@ import axiosConfig from './common/axiosConfig'
 import router from './routes/route'
 import VueToast from 'vue-toast-notification';
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+
 import './css/swiper.css'
 import './components/components'
 import './css/custom-toast.css';
