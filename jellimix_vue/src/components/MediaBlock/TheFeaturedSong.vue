@@ -2,8 +2,8 @@
   <div class="feature-song">
     <div class="ms_rcnt_slider">
       <div class="ms_heading">
-        <h1>{{title}}</h1>
-        <span class="veiw_all"><a href="#">view more</a></span>
+        <h1>Featured Song</h1>
+        <span class="veiw_all"><router-link to="/Song">View more</router-link></span>
       </div>
     </div>
     <swiper v-if="mediaList" class="swiper" ref="swiper" :options="swiperOption">
@@ -24,11 +24,6 @@ import SongServices from "../../common/SongServices.js";
 
 export default {
   mixins: [SongServices],
-  props:{
-    title: {
-      type: String
-    }
-  },
   data() {
     return {
       swiperOption: {
@@ -55,7 +50,7 @@ export default {
       .then((res) => {
         setTimeout(() => {
           this.mediaList = res.data.Items;
-        }, 1000);
+        }, 500);
       })
       .catch((res) => {
         console.log(res);
@@ -70,7 +65,7 @@ export default {
 </script>
 
 <style scoped>
-@import "../../css/MediaBlock/MediaSlider.css";
+@import "../../css/MediaBlock/TheFeaturedSong.css";
 .feature-song {
   width: 100%;
 }

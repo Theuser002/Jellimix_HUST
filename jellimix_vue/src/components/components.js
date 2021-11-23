@@ -13,8 +13,8 @@ const PrimaryMedia = () =>
     import ('../components/MediaBlock/Media/PrimaryMedia.vue')
 const MiniMedia = () =>
     import ('../components/MediaBlock/Media/MiniMedia.vue')
-const MediaSlider = () =>
-    import ('../components/MediaBlock/MediaSlider.vue')
+const TheFeaturedSong = () =>
+    import ('../components/MediaBlock/TheFeaturedSong.vue')
 
 //Global components
 Vue.component('TheMenu', TheMenu);
@@ -22,6 +22,6 @@ Vue.component('TheHeader', TheHeader);
 Vue.component('TheFooter', TheFooter);
 Vue.component('TheBanner', TheBanner);
 Vue.component('TheWeeklyTop', TheWeeklyTop);
-Vue.component('MediaSlider', MediaSlider);
+Vue.component('TheFeaturedSong', TheFeaturedSong);
 Vue.component('PrimaryMedia', PrimaryMedia);
 Vue.component('MiniMedia', MiniMedia);
