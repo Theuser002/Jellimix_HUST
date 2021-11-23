@@ -7,6 +7,7 @@
     <div style="z-index: 20000; position: sticky; bottom: 0">
     <Aplayer
       v-if="audio_src!=null"
+      style="z-index: 1"
       autoplay
       :music="{
         title: audio_title,
@@ -15,6 +16,7 @@
         pic: audio_img,
       }"
     />
+    <button style="z-index: 2; position: absolute; top: 0; right: 0" @click="audio_src=null">Close</button>
     </div>
   </div>
 </template>

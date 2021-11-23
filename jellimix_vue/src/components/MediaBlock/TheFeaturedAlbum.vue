@@ -1,9 +1,9 @@
 <template>
-  <div class="feature-song">
+  <div class="feature-album">
     <div class="ms_rcnt_slider">
       <div class="ms_heading">
-        <h1>{{title}}</h1>
-        <span class="veiw_all"><a href="#">view more</a></span>
+        <h1>Featured Album</h1>
+        <span class="veiw_all"><router-link to="/Album">View more</router-link></span>
       </div>
     </div>
     <swiper v-if="mediaList" class="swiper" ref="swiper" :options="swiperOption">
@@ -20,15 +20,10 @@
 </template>
 
 <script>
-import SongServices from "../../common/SongServices.js";
+import AlbumServices from "../../common/AlbumServices.js";
 
 export default {
-  mixins: [SongServices],
-  props:{
-    title: {
-      type: String
-    }
-  },
+  mixins: [AlbumServices],
   data() {
     return {
       swiperOption: {
@@ -51,11 +46,11 @@ export default {
     };
   },
   created() {
-    this.getAllSong()
+    this.getAllAlbum()
       .then((res) => {
         setTimeout(() => {
           this.mediaList = res.data.Items;
-        }, 1000);
+        }, 500);
       })
       .catch((res) => {
         console.log(res);
@@ -70,8 +65,8 @@ export default {
 </script>
 
 <style scoped>
-@import "../../css/MediaBlock/MediaSlider.css";
-.feature-song {
+@import "../../css/MediaBlock/TheFeaturedSong.css";
+.feature-album {
   width: 100%;
 }
 </style>

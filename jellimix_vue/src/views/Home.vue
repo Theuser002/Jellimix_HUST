@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <MediaSlider :title="'Featured Song'" @play-song="playAudio" />
-    <MediaSlider :title="'Recent Played'" @play-song="playAudio" />
-    <MediaSlider :title="'Live Radio'" @play-song="playAudio" />
+    <the-featured-song @play-song="playAudio" />
+    <the-featured-album @play-song="playAudio" />
+    <the-weekly-top/>
   </div>
 </template>
 
