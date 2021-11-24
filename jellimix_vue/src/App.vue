@@ -2,7 +2,12 @@
   <div id="app">
     <the-menu></the-menu>
     <the-header></the-header>
+<<<<<<< HEAD
     <router-view class="router-view" @play-song="playAudio"></router-view>
+=======
+    <router-view class="router-view"></router-view>
+    <the-banner></the-banner>
+>>>>>>> origin/banner
     <the-footer></the-footer>
     <div style="z-index: 20000; position: sticky; bottom: 0">
     <Aplayer
