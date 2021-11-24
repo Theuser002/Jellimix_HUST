@@ -3,6 +3,7 @@
     <the-menu></the-menu>
     <the-header></the-header>
     <router-view class="router-view" @play-song="playAudio"></router-view>
+    <the-banner></the-banner>
     <the-footer></the-footer>
     <div style="z-index: 20000; position: sticky; bottom: 0">
     <Aplayer
