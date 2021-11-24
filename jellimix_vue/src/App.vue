@@ -3,6 +3,7 @@
     <the-menu></the-menu>
     <the-header></the-header>
     <router-view class="router-view"></router-view>
+    <the-banner></the-banner>
     <the-footer></the-footer>
   </div>
 </template>
