@@ -22,7 +22,7 @@
                         ><img src="../assets/images/album/album1.jpg"
                       /></span>
                       <div class="que_data">
-                        Cro Magnon Man
+                        {{name}}
                         <div class="jp-artist-name">Mushroom Records</div>
                       </div>
                     </div>
@@ -110,12 +110,16 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
     data() {
         return {
             isOpenPlayer:true
         }
     },
+    computed:{
+      ...mapGetters(['name'])
+    }
 };
 </script>
 

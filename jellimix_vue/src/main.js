@@ -4,6 +4,7 @@ import axiosConfig from './common/axiosConfig'
 import router from './routes/route'
 import VueToast from 'vue-toast-notification';
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import store from './store';
 
 import './css/swiper.css'
 import './components/components'
@@ -27,5 +28,6 @@ Vue.use(VueAwesomeSwiper, /* { default options with global component } */ )
 
 new Vue({
     router,
+    store,
     render: h => h(App),
 }).$mount('#app')
