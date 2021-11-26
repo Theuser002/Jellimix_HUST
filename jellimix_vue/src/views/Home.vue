@@ -8,9 +8,7 @@
 </template>
 
 <script>
-import TheBanner from '../components/MediaBlock/TheBanner.vue';
 export default {
-  components: { TheBanner },
   methods: {
     playAudio(e){
       this.$emit('play-song',e)
