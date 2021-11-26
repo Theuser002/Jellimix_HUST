@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <the-banner></the-banner>
     <the-featured-song @play-song="playAudio" />
     <the-featured-album @play-song="playAudio" />
     <the-weekly-top/>
@@ -7,7 +8,9 @@
 </template>
 
 <script>
+import TheBanner from '../components/MediaBlock/TheBanner.vue';
 export default {
+  components: { TheBanner },
   methods: {
     playAudio(e){
       this.$emit('play-song',e)

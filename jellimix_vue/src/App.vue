@@ -3,11 +3,9 @@
     <the-menu></the-menu>
     <the-header></the-header>
     <router-view class="router-view" @play-song="playAudio"></router-view>
-    <the-banner></the-banner>
     <the-footer></the-footer>
-    <div style="z-index: 20000; position: sticky; bottom: 0">
-    <Aplayer
-      v-if="audio_src!=null"
+    <!-- <div style="z-index: 20000; position: sticky; bottom: 0" v-if="audio_src!=null">
+    <Aplayer   
       style="z-index: 1"
       autoplay
       :music="{
@@ -18,18 +16,17 @@
       }"
     />
     <button style="z-index: 2; position: absolute; top: 0; right: 0" @click="audio_src=null">Close</button>
-    </div>
+    </div> -->
+    <ThePlayer/>
   </div>
 </template>
 
 <script>
-import Aplayer from "vue-aplayer";
+// import Aplayer from "vue-aplayer";
 
 export default {
   name: "App",
-  components: {
-    Aplayer,
-  },
+  // components:{Aplayer},
   data() {
     return {
       audio_src: null,
