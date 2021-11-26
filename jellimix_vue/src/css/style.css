@@ -1904,7 +1904,6 @@ span.ovrly_text2 {
     background-size: cover;
     position: relative;
     z-index: 1;
-    margin-bottom: 75px;
     padding-top: 50px;
 }
 
@@ -2210,10 +2209,13 @@ h1.footer_title:after {
 
 .play_song_name span.que_img {
     width: 50px;
+    height: 50px;
     float: left;
 }
 
 .play_song_name span.que_img img {
+    width: 50px;
+    height: 50px;
     border-radius: 5px;
 }
 
@@ -6519,9 +6521,9 @@ h2.widget-title:after {
     .ms_copyright {
         padding: 0px 0px 20px 0px;
     }
-    .ms_footer_wrapper {
+    /* .ms_footer_wrapper {
         margin-bottom: 70px;
-    }
+    } */
     .ms_footer_logo {
         padding-left: 0;
         padding-top: 50px;
