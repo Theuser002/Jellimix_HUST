@@ -52,8 +52,8 @@ export default {
           this.mediaList = res.data.Items;
         }, 500);
       })
-      .catch((res) => {
-        console.log(res);
+      .catch((err) => {
+        this.$toast.error(err.message)
       });
   },
   methods: {
