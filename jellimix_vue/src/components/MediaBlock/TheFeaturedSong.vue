@@ -8,7 +8,7 @@
     </div>
     <swiper v-if="mediaList" class="swiper" ref="swiper" :options="swiperOption">
       <swiper-slide v-for="(media, index) in mediaList" :key="index"
-        ><PrimaryMedia :media_data="media" @play-song="playAudio"
+        ><PrimaryMedia :media_data="media"
       /></swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -56,11 +56,7 @@ export default {
         this.$toast.error(err.message)
       });
   },
-  methods: {
-    playAudio(...e){
-      this.$emit('play-song', e)
-    }
-  },
+
 };
 </script>
 
