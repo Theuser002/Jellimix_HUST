@@ -164,16 +164,9 @@ export default {
 
 <style>
 .search-result {
-  /* width: 230px; */
-  /* height: 210px;
-  background-color: aqua;
-  position: absolute; */
   top: 45px;
   left: 0;
   border-radius: 5px;
-  /* overflow-y: auto; */
-
-  /* display: none; */
   position: absolute;
   background-color: white;
   min-width: 100%;
@@ -181,9 +174,6 @@ export default {
   overflow: auto;
   border: 1px solid #ddd;
   z-index: 0;
-  /* right: -214%;
-  top: 120%; */
-  /* width: 400px */
 }
 
 .search-result .result-item {
