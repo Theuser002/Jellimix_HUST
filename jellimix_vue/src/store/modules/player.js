@@ -1,24 +1,24 @@
 const player = {
     state() {
         return {
-            name: 'Tran Phi Hung'
+            audio: []
         }
     },
 
 
     getters: {
-        name: state => state.name
+        audio: state => state.audio
     },
 
-    actions: {
-        updateName(context) {
-            context.commit('setName', 'Nguyễn Thị Hồng Êinh')
-        }
-    },
+    // actions: {
+    //     updateName(context) {
+    //         context.commit('setName', 'Nguyễn Thị Hồng Êinh')
+    //     }
+    // },
 
     mutations: {
-        setName(state, newName) {
-            state.name = newName
+        setAudio(state, newAudio) {
+            state.audio = newAudio
         }
     },
 }
