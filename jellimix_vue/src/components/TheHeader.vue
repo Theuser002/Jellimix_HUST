@@ -14,17 +14,21 @@
           <img src="../assets/images/svg/search.svg" alt="" />
         </span>
         <div class="search-result" v-if="inputValue != ''">
-          <div v-if="searchResponse == null || searchResponse.length == 0">
-            Không tìm thấy
+          <div
+            v-if="searchResponse == null || searchResponse.length == 0"
+            class="search-item-wrapper"
+          >
+            <span class="result-item" href="#">Không tìm thấy</span>
           </div>
           <div v-else class="search-item-wrapper">
-            <div
+            <a
               class="result-item"
               v-for="(item, index) in searchResponse"
               :key="index"
+              href="#"
             >
               {{ item.Name }},{{ index }}
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -128,7 +132,7 @@ export default {
   methods: {
     debounceSearch() {
       clearTimeout(this.timeout);
-      if (this.inputValue.trim().length>0) {
+      if (this.inputValue.trim().length > 0) {
         console.log(this.inputValue.trim().length, this.inputValue);
         this.timeout = setTimeout(() => {
           let url =
@@ -160,19 +164,39 @@ export default {
 
 <style>
 .search-result {
-  width: 230px;
-  height: 210px;
+  /* width: 230px; */
+  /* height: 210px;
   background-color: aqua;
-  position: absolute;
+  position: absolute; */
   top: 45px;
   left: 0;
   border-radius: 5px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
+
+  /* display: none; */
+  position: absolute;
+  background-color: white;
+  min-width: 100%;
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 0;
+  /* right: -214%;
+  top: 120%; */
+  /* width: 400px */
 }
 
-.result-item {
+.search-result .result-item {
+  padding: 7px 20px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  display: block;
+  color: unset;
+}
+.search-result .result-item:hover {
+  color: var(--primary-color) !important;
+  cursor: pointer;
+  background: #e6fffc !important ;
 }
 </style>
