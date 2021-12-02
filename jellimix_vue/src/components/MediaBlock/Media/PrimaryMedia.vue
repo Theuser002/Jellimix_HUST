@@ -53,7 +53,7 @@
               >
             </li>
           </ul>
-          <div class="ms_play_icon" @click="setAudio(media_data)">
+          <div class="ms_play_icon" @click="playAudio">
             <img src="../../../assets/images/svg/play.svg" alt="" />
           </div>
         </div>
@@ -100,13 +100,13 @@ export default {
       `&MaxSampleRate=48000` +
       `&PlaySessionId=1496213367201` +
       `&api_key=0727c7e03dfa4b46bc5925ce7c6fff9c`;
-      this.media_data.song_url = this.song_url
+    this.media_data.song_url = this.song_url;
   },
   mounted() {
     this.getImage();
   },
   methods: {
-    ...mapMutations(["setAudio"]),
+    ...mapMutations(["setAudio", "setOpenPlayer"]),
     getImage() {
       var url;
       if (Object.keys(this.media_data.ImageTags)[0] != undefined) {
@@ -115,6 +115,11 @@ export default {
           `Items/${this.media_data.Id}/Images/${
             Object.keys(this.media_data.ImageTags)[0]
           }?fillWidth=240&fillHeight=240&quality=100`;
+      } else if (this.media_data.ParentBackdropItemId != undefined) {
+        console.log(this.media_data.ParentBackdropItemId);
+        url =
+          axios.defaults.baseURL +
+          `Items/${this.media_data.ParentBackdropItemId}/Images/Backdrop?fillWidth=240&fillHeight=240&quality=100`;
       } else if (this.media_data.AlbumId != undefined) {
         url =
           axios.defaults.baseURL +
@@ -123,17 +128,11 @@ export default {
           }?fillWidth=240&fillHeight=240&quality=100`;
       }
       this.img_url = url;
-      this.media_data.img_url = url
+      this.media_data.img_url = url;
     },
     playAudio() {
-      // this.$emit(
-      //   "play-song",
-      //   this.song_url,
-      //   this.media_data.Name,
-      //   this.media_data.AlbumArtist,
-      //   this.img_url
-      // );
-      this.$emit("play-song", this.media_data);
+      this.setAudio(this.media_data);
+      this.setOpenPlayer(true);
     },
     download() {
       saveAs(this.song_url, `Jellimix-${this.media_data.Name}.mp3`);

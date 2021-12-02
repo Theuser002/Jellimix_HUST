@@ -4,12 +4,13 @@
     style="height: 70px"
     :class="{ close_player: !isOpenPlayer }"
   >
-    <div class="ms_player_close" @click="isOpenPlayer = !isOpenPlayer">
+    <div class="ms_player_close" @click="setOpenPlayer(!isOpenPlayer)">
       <i class="fa fa-angle-up" aria-hidden="true"></i>
     </div>
     <div class="player_mid">
       <div class="audio-player">
         <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+
         <div
           id="jp_container_1"
           class="jp-audio"
@@ -48,21 +49,21 @@
             <div class="play_song_options">
               <ul>
                 <li>
-                  <a href="#"
+                  <a @click="download"
                     ><span class="song_optn_icon"
                       ><i class="ms_icon icon_download"></i></span
                     >download now</a
                   >
                 </li>
                 <li>
-                  <a href="#"
+                  <a
                     ><span class="song_optn_icon"
                       ><i class="ms_icon icon_fav"></i></span
                     >Add To Favourites</a
                   >
                 </li>
                 <li>
-                  <a href="#"
+                  <a
                     ><span class="song_optn_icon"
                       ><i class="ms_icon icon_playlist"></i></span
                     >Add To Playlist</a
@@ -107,18 +108,18 @@
               </div>
             </div>
           </div>
-          <div class="jp-type-playlist">
-            <audio :src="audio.song_url" controls autoplay></audio>
+          <div class="jp-type-playlist" style="display: none">
+            <audio ref="audio" :src="audio.song_url" controls autoplay></audio>
           </div>
-          <!--
+
           <div class="jp-type-playlist">
             <div class="jp-gui jp-interface flex-wrap">
               <div class="jp-controls flex-item">
                 <button class="jp-previous" tabindex="0">
                   <i class="ms_play_control"></i>
                 </button>
-                <button class="jp-play" tabindex="0">
-                  <i class="ms_play_control"></i>
+                <button class="jp-play" tabindex="0" @click="testPause">
+                  <i class="ms_play_control" :class="{ pause: isPlaying }"></i>
                 </button>
                 <button class="jp-next" tabindex="0">
                   <i class="ms_play_control"></i>
@@ -158,7 +159,6 @@
                         </div>
                       </div>
                     </div>
-                    
                   </div>
                 </div>
               </div>
@@ -192,7 +192,7 @@
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -201,19 +201,43 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
+import { saveAs } from "file-saver";
+
 export default {
   data() {
     return {
-      isOpenPlayer: true,
       isOpenOption: false,
+      // isOpenPlayer: true,
+      // isPlaying: true,
     };
   },
   computed: {
-    ...mapGetters(["audio"]),
+    ...mapGetters(["audio","isPlaying","isOpenPlayer"]),
+  },
+  methods: {
+    ...mapMutations(["setPlaying","setOpenPlayer"]),
+    testPause() {
+      if (this.isPlaying === true) {
+        this.$refs.audio.pause();
+      } else {
+        this.$refs.audio.play();
+      }
+      this.setPlaying(!this.isPlaying)
+    },
+    download() {
+      saveAs(this.audio.song_url, `Jellimix-${this.audio.Name}.mp3`);
+    },
   },
 };
 </script>
 
 <style scoped>
+a{
+  color: #fff !important;
+  cursor: pointer;
+}
+button.jp-play .ms_play_control.pause {
+    background-position: 1021px 0px !important;
+}
 </style>
