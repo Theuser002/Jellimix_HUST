@@ -77,7 +77,7 @@
                                 src="../assets/images/svg/lang.svg" alt=""></span>
                     </div> -->
       <div class="ms_top_btn">
-        <a
+        <a @click="openRegisterForm"
           href="javascript:;"
           class="ms_btn reg_btn"
           data-toggle="modal"
@@ -158,6 +158,9 @@ export default {
         }, this.timer);
       }
     },
+    openRegisterForm(){
+      this.$emit('open-form', this.timer)
+    }
   },
 };
 </script>

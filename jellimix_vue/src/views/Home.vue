@@ -1,19 +1,15 @@
 <template>
   <div class="home">
     <the-banner></the-banner>
-    <the-featured-song @play-song="playAudio" />
-    <the-featured-album @play-song="playAudio" />
+    <the-featured-song/>
+    <the-featured-album/>
+    <the-featured-artist/>
     <the-weekly-top/>
   </div>
 </template>
 
 <script>
 export default {
-  methods: {
-    playAudio(e){
-      this.$emit('play-song',e)
-    }
-  },
 };
 </script>
 

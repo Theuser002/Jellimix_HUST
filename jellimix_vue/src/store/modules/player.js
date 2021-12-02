@@ -1,13 +1,17 @@
 const player = {
     state() {
         return {
-            audio: []
+            audio: [],
+            isOpenPlayer: false,
+            isPlaying: false
         }
     },
 
 
     getters: {
-        audio: state => state.audio
+        audio: state => state.audio,
+        isOpenPlayer: state => state.isOpenPlayer,
+        isPlaying: state => state.isPlaying
     },
 
     // actions: {
@@ -19,6 +23,12 @@ const player = {
     mutations: {
         setAudio(state, newAudio) {
             state.audio = newAudio
+        },
+        setOpenPlayer(state, newOpenPlayer) {
+            state.isOpenPlayer = newOpenPlayer
+        },
+        setPlaying(state, newIsPlaying) {
+            state.isPlaying = newIsPlaying
         }
     },
 }
