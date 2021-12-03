@@ -9,11 +9,13 @@
           placeholder="Search Music Here.."
           v-model="inputValue"
           @keyup="debounceSearch"
+          v-on:click="isHidden = false"
+          v-on-clickaway="away"
         />
         <span class="search_icon">
           <img src="../assets/images/svg/search.svg" alt="" />
         </span>
-        <div class="search-result" v-if="inputValue != ''">
+        <div class="search-result" v-if="inputValue != '' && !isHidden">
           <div
             v-if="searchResponse == null || searchResponse.length == 0"
             class="search-item-wrapper"
@@ -98,6 +100,7 @@
 
 <script>
 import axios from "axios";
+import { mixin as clickaway } from "vue-clickaway";
 
 export default {
   data() {
@@ -106,8 +109,11 @@ export default {
       searchResponse: null,
       timer: 500,
       timeout: null,
+      isHidden: null,
     };
   },
+
+  mixins: [clickaway],
   // watch:{
   //   inputValue(newValue, oldValue){
   //     console.log(newValue, oldValue);
@@ -130,6 +136,10 @@ export default {
   //   }
   // },
   methods: {
+    away: function () {
+      this.isHidden = true;
+    },
+
     debounceSearch() {
       clearTimeout(this.timeout);
       if (this.inputValue.trim().length > 0) {
@@ -169,11 +179,15 @@ export default {
   border-radius: 5px;
   position: absolute;
   background-color: white;
-  min-width: 100%;
-  max-width: 100%;
+  width: 100%;
+  min-height: 0px;
+  max-height: 450px;
   overflow: auto;
-  border: 1px solid #ddd;
   z-index: 0;
+}
+
+.search-item-wrapper {
+  max-height: calc(100vh - 100px);
 }
 
 .search-result .result-item {
@@ -188,5 +202,27 @@ export default {
   color: var(--primary-color) !important;
   cursor: pointer;
   background: #e6fffc !important ;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--nav-button-color);
 }
 </style>
