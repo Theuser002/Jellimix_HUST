@@ -28,7 +28,7 @@
             <span class="result-item">Không có kết quả</span>
           </div>
           <div v-else class="search-item-wrapper">
-            <span>Songs</span>
+            <div class="search-item-type" v-if="searchSongRes.length>0">Songs</div>
             <a
               class="result-item"
               v-for="item in searchSongRes"
@@ -37,7 +37,7 @@
             >
               {{ item.Name }}
             </a>
-            <span>Albums</span>
+            <div class="search-item-type" v-if="searchAlbumRes.length>0">Albums</div>
             <a
               class="result-item"
               v-for="item in searchAlbumRes"
@@ -46,7 +46,7 @@
             >
               {{ item.Name }}
             </a>
-            <span>Artists</span>
+            <div class="search-item-type" v-if="searchArtistRes.length>0">Artists</div>
             <a
               class="result-item"
               v-for="item in searchArtistRes"
@@ -143,25 +143,23 @@ export default {
   },
 
   mixins: [clickaway, SearchServices,SongServices],
-  watch: {
-    inputValue(newValue) {
-      if (newValue === "") {
-        this.searchSongRes = [];
-        this.searchAlbumRes = [];
-        this.searchArtistRes = [];
-      }
-    },
-  },
   methods: {
     ...mapMutations(["setAudio", "setOpenPlayer"]),
     away: function () {
       this.isHidden = true;
     },
 
+    /**
+     * Bắt đầu search sau khi ngừng nhập input 0.5s
+     * By: Tran Phi Hung
+     */
     debounceSearch() {
       clearTimeout(this.timeout);
       if (this.inputValue.trim().length > 0) {
         this.timeout = setTimeout(() => {
+          this.searchSongRes = []
+          this.searchAlbumRes = []
+          this.searchArtistRes = []
           // search song, album
           this.searchItem(this.inputValue.trim())
             .then((res) => {
@@ -188,11 +186,22 @@ export default {
         }, this.timer);
       }
     },
+
+    /**
+     * Phát sự kiện bấm mỏ form đăng kí user
+     * By: Tran Phi Hung
+     */
     openRegisterForm() {
-      this.$emit("open-form", this.timer);
+      this.$emit("open-form");
     },
+
+    /**
+     * Xử lý hành động bấm chọn bài hát trong thanh search
+     * By: Tran Phi Hung
+     */
     playSong(song){
-      song.img_url = this.getImageLink(song)
+      song.img_url = this.getImageLink(song);
+      song.song_url = this.getAudioLink(song.Id)
       this.setAudio(song);
       this.setOpenPlayer(true);
     }
@@ -201,60 +210,5 @@ export default {
 </script>
 
 <style>
-.search-result {
-  top: 45px;
-  left: 0;
-  border-radius: 5px;
-  position: absolute;
-  background-color: white;
-  width: 100%;
-  min-height: 0px;
-  max-height: 450px;
-  overflow: auto;
-  z-index: 0;
-}
-
-.search-item-wrapper {
-  max-height: calc(100vh - 100px);
-}
-
-.search-item-wrapper span {
-  color: var(--dark);
-}
-
-.search-result .result-item {
-  padding: 7px 20px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  display: block;
-  color: unset;
-}
-.search-result .result-item:hover {
-  color: var(--primary-color) !important;
-  cursor: pointer;
-  background: #e6fffc !important ;
-}
-
-/* width */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 10px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--nav-button-color);
-}
+@import '../css/TheHeader.css';
 </style>
