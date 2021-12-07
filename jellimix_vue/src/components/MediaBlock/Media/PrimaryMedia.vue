@@ -116,7 +116,6 @@ export default {
             Object.keys(this.media_data.ImageTags)[0]
           }?fillWidth=240&fillHeight=240&quality=100`;
       } else if (this.media_data.ParentBackdropItemId != undefined) {
-        console.log(this.media_data.ParentBackdropItemId);
         url =
           axios.defaults.baseURL +
           `Items/${this.media_data.ParentBackdropItemId}/Images/Backdrop?fillWidth=240&fillHeight=240&quality=100`;

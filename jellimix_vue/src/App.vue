@@ -51,15 +51,25 @@ export default {
         this.audio_img = e[3];
       })
     },
-    openRegisterForm(event){
+    openRegisterForm(){
       this.isOpenModal = true
-      console.log(event);
     }
   },
 };
 </script>
 
 <style>
+#login-form{
+  z-index: 12;
+  padding-top: 100px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
 .router-view {
   padding-left: 80px;
   padding-top: 80px;

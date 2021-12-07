@@ -9,7 +9,12 @@
       <div class="modal-dialog register_dialog">
         <!-- Modal content-->
         <div class="modal-content">
-          <button type="button" class="close" data-dismiss="modal" @click="closeForm">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            @click="closeForm"
+          >
             <i class="fa_icon form_close"></i>
           </button>
           <div class="modal-body">
@@ -139,29 +144,29 @@
 
 <script>
 export default {
-    data() {
-        return {
-            isOpenModal:false
-        }
+  data() {
+    return {
+      isOpenModal: false,
+    };
+  },
+  methods: {
+    closeForm() {
+      this.$emit("close-form");
     },
-    methods: {
-        closeForm(){
-            this.$emit('close-form')
-        }
-    },
-}
+  },
+};
 </script>
 
 <style scoped>
 .modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-    display: none;
-    overflow: hidden;
-    outline: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0;
 }
 </style>

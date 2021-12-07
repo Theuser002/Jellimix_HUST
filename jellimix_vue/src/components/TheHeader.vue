@@ -29,7 +29,7 @@
               :key="index"
               href="#"
             >
-              {{ item.Name }},{{ index }}
+              {{ item.Name }}
             </a>
           </div>
         </div>
@@ -79,7 +79,8 @@
                                 src="../assets/images/svg/lang.svg" alt=""></span>
                     </div> -->
       <div class="ms_top_btn">
-        <a @click="openRegisterForm"
+        <a
+          @click="openRegisterForm"
           href="javascript:;"
           class="ms_btn reg_btn"
           data-toggle="modal"
@@ -99,8 +100,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mixin as clickaway } from "vue-clickaway";
+import SearchServices from "../common/SearchServices.js";
 
 export default {
   data() {
@@ -113,7 +114,7 @@ export default {
     };
   },
 
-  mixins: [clickaway],
+  mixins: [clickaway, SearchServices],
   // watch:{
   //   inputValue(newValue, oldValue){
   //     console.log(newValue, oldValue);
@@ -143,21 +144,8 @@ export default {
     debounceSearch() {
       clearTimeout(this.timeout);
       if (this.inputValue.trim().length > 0) {
-        console.log(this.inputValue.trim().length, this.inputValue);
         this.timeout = setTimeout(() => {
-          let url =
-            axios.defaults.baseURL +
-            `Users/4c6717a89bec419c8e396db40eb9713f/` +
-            `Items?searchTerm=${this.inputValue.trim()}&IncludePeople=false&` +
-            `IncludeMedia=true&IncludeGenres=false&` +
-            `IncludeStudios=false&IncludeArtists=false&` +
-            `IncludeItemTypes=Audio,MusicAlbum&` +
-            `Limit=24&Fields=PrimaryImageAspectRatio%2C` +
-            `CanDelete%2CBasicSyncInfo%2CMediaSourceCount` +
-            `&Recursive=true&EnableTotalRecordCount=false` +
-            `&ImageTypeLimit=1&api_key=0727c7e03dfa4b46bc5925ce7c6fff9c`;
-          axios
-            .get(url)
+          this.searchItem(this.inputValue.trim())
             .then((res) => {
               this.searchResponse = res.data.Items;
               console.log(res.data.Items);
@@ -168,9 +156,9 @@ export default {
         }, this.timer);
       }
     },
-    openRegisterForm(){
-      this.$emit('open-form', this.timer)
-    }
+    openRegisterForm() {
+      this.$emit("open-form", this.timer);
+    },
   },
 };
 </script>
