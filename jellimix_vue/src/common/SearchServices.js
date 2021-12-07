@@ -16,6 +16,18 @@ var SearchServices = {
                 `&Recursive=true&EnableTotalRecordCount=false` +
                 `&ImageTypeLimit=1&api_key=${api_key}`;
             return axios.get(url);
+        },
+        async searchArtist(term) {
+            let url =
+                axios.defaults.baseURL +
+                `Artists?searchTerm=${term}&IncludePeople=false&` +
+                `IncludeMedia=false&IncludeGenres=false&` +
+                `IncludeStudios=false&IncludeArtists=true&Limit=24&` +
+                `ParentId=7e64e319657a9516ec78490da03edccb&` +
+                `Fields=PrimaryImageAspectRatio%2CCanDelete%2CBasicSyncInfo%2C` +
+                `MediaSourceCount&Recursive=true&EnableTotalRecordCount=false&ImageTypeLimit=1&` +
+                `userId=${user}&api_key=${api_key}`;
+            return axios.get(url)
         }
     },
 }
