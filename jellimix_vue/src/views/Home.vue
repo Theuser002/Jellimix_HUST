@@ -4,7 +4,6 @@
     <the-featured-song/>
     <the-featured-album/>
     <the-featured-artist/>
-    <!-- <the-weekly-top/> -->
   </div>
 </template>
 
