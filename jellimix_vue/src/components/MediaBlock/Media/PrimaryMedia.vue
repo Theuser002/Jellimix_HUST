@@ -72,7 +72,10 @@
 import axios from "axios";
 import { mapMutations } from "vuex";
 import { saveAs } from "file-saver";
+import SongServices from '../../../common/SongServices.js'
+
 export default {
+  mixins: [SongServices],
   props: {
     media_data: {
       type: Object,
@@ -108,24 +111,7 @@ export default {
   methods: {
     ...mapMutations(["setAudio", "setOpenPlayer"]),
     getImage() {
-      var url;
-      if (Object.keys(this.media_data.ImageTags)[0] != undefined) {
-        url =
-          axios.defaults.baseURL +
-          `Items/${this.media_data.Id}/Images/${
-            Object.keys(this.media_data.ImageTags)[0]
-          }?fillWidth=240&fillHeight=240&quality=100`;
-      } else if (this.media_data.ParentBackdropItemId != undefined) {
-        url =
-          axios.defaults.baseURL +
-          `Items/${this.media_data.ParentBackdropItemId}/Images/Backdrop?fillWidth=240&fillHeight=240&quality=100`;
-      } else if (this.media_data.AlbumId != undefined) {
-        url =
-          axios.defaults.baseURL +
-          `Items/${this.media_data.AlbumId}/Images/${
-            Object.keys(this.media_data.ImageBlurHashes)[0]
-          }?fillWidth=240&fillHeight=240&quality=100`;
-      }
+      let url = this.getImageLink(this.media_data)
       this.img_url = url;
       this.media_data.img_url = url;
     },
