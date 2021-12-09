@@ -9,7 +9,7 @@
             <img
               src="../../assets/images/singer1.png"
               alt="simger image"
-              style="height: 70%; width: 70%"
+              
               class="img-fluid"
             />
           </div>
@@ -77,5 +77,5 @@ export default {
 
 <style scoped>
 /* local styles */
-@import "../../css/MediaBlock/TheBanner.css";
+@import "../../css/TheBanner.css";
 </style>
