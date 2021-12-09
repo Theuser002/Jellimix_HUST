@@ -15,10 +15,5 @@ export default {
 </script>
 
 <style scoped>
-.song {
-  display: flex;
-  flex-direction: column;
-  margin-left: 50px;
-  margin-right: 50px;
-}
+
 </style>
