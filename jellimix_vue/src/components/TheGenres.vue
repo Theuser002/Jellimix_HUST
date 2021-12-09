@@ -151,7 +151,7 @@ export default {
             `Genres?SortBy=SortName&SortOrder=Ascending&`+
             `Recursive=true&Fields=PrimaryImageAspectRatio%2CItemCounts&`+
             `StartIndex=0&ParentId=7e64e319657a9516ec78490da03edccb&`+
-            `userId=4c6717a89bec419c8e396db40eb9713f&api_key=0727c7e03dfa4b46bc5925ce7c6fff9c`
+            `userId=4c6717a89bec419c8e396db40eb9713f&api_key=cf8b1134702b42c790966bedc4adf878`
             axios.get(url).then((res)=>{
                 this.genreList = res.data.Items
                 this.genreList.forEach(item => {
