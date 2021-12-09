@@ -14,6 +14,8 @@ const ArtistPage = () =>
     import ('../views/ArtistPage.vue')
 const AlbumPage = () =>
     import ('../views/AlbumPage.vue')
+const PlaylistPage = () =>
+    import ('../views/PlaylistPage.vue')
 
 const routes = [
     { path: '/Hello', component: HelloWorld },
@@ -22,6 +24,7 @@ const routes = [
     { path: '/Song', component: SongPage },
     { path: '/Artist', component: ArtistPage },
     { path: '/Album', component: AlbumPage },
+    { path: '/Playlist', component: PlaylistPage },
 ]
 
 const router = new VueRouter({
