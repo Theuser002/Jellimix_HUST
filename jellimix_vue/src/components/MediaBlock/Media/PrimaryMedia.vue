@@ -102,7 +102,7 @@ export default {
       `&AudioCodec=aac` +
       `&MaxSampleRate=48000` +
       `&PlaySessionId=1496213367201` +
-      `&api_key=0727c7e03dfa4b46bc5925ce7c6fff9c`;
+      `&api_key=cf8b1134702b42c790966bedc4adf878`;
     this.media_data.song_url = this.song_url;
   },
   mounted() {

@@ -1,9 +1,19 @@
+.ms_banner_text h1 {
+    font-size: 40px;
+}
+
 #brand {
-    font-size: 200px;
+    font-size: 60px;
     color: #15d8be;
 }
 
-.ms_banner_img{
+
+/* .ms_banner_img {
     height: 70%;
     width: 70%;
+} */
+
+.ms_banner_img img {
+    height: 70%;
+    width: 70%
 }
