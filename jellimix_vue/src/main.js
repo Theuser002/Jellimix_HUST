@@ -25,7 +25,7 @@ Vue.use(VueToast, {
 });
 
 
-Vue.use(VueAwesomeSwiper, /* { default options with global component } */ )
+Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 
 new Vue({
     router,

@@ -574,7 +574,7 @@ body.loaded .ms_loader {
     height: 25px;
     display: inline-block;
     vertical-align: middle;
-    background-image: url(../images/svg/icon.svg);
+    background-image: url(../assets/images/svg/icon.svg);
     background-repeat: no-repeat;
     transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
@@ -1115,7 +1115,7 @@ ul.ms_lang_box:after {
 }
 
 .slider_nav_next {
-    background-image: url(../images/svg/right_arrow.svg);
+    background-image: url(../assets/images/svg/right_arrow.svg);
     right: -40px;
     left: auto;
     position: absolute;
@@ -1131,7 +1131,7 @@ ul.ms_lang_box:after {
 }
 
 .slider_nav_prev {
-    background-image: url(../images/svg/left_arrow.svg);
+    background-image: url(../assets/images/svg/left_arrow.svg);
     left: -40px;
     right: auto;
     position: absolute;
@@ -1329,7 +1329,7 @@ ul.more_option li a .opt_icon .icon {
     height: 16px;
     display: inline-block;
     vertical-align: middle;
-    background-image: url(../images/svg/icon.svg);
+    background-image: url(../assets/images/svg/icon.svg);
     background-repeat: no-repeat;
     transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
@@ -1710,7 +1710,7 @@ ul.more_option li a:hover .opt_icon .icon_share {
 
 .ms_releases_wrapper .swiper-slide.swiper-slide-active .ms_play_icon:after {
     position: absolute;
-    content: url(../images/svg/sound.svg);
+    content: url(../assets/images/svg/sound.svg);
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
@@ -1822,7 +1822,7 @@ span.ovrly_text2 {
 /*====Footer Css Start====*/
 
 .ms_footer_wrapper {
-    background-image: url(../images/footer_bg1.jpg);
+    background-image: url(../assets/images/footer_bg1.jpg);
     background-size: cover;
     position: relative;
     z-index: 1;
@@ -2047,7 +2047,7 @@ h1.footer_title:after {
 /*====Player Css Start====*/
 
 .ms_player_wrapper {
-    background: url(../images/play-bg-1.jpg);
+    background: url(../assets/images/play-bg-1.jpg);
     background-size: cover;
     position: fixed;
     bottom: 0px;
@@ -2242,7 +2242,7 @@ span.play-left-arrow {
     height: 25px;
     display: inline-block;
     vertical-align: middle;
-    background-image: url(../images/svg/icon.svg);
+    background-image: url(../assets/images/svg/icon.svg);
     background-repeat: no-repeat;
     transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
@@ -2256,7 +2256,7 @@ span.play-left-arrow {
 }
 
 i.ms_icon.icon_share {
-    background-image: url(../images/svg/share.svg);
+    background-image: url(../assets/images/svg/share.svg);
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
@@ -2879,7 +2879,7 @@ li.option.selected.focus:after {
 }
 
 .jp-interface .ms_play_control {
-    background: url(../images/svg/play_icon.svg) !important;
+    background: url(../assets/images/svg/play_icon.svg) !important;
     width: 30px;
     height: 30px;
     background-repeat: no-repeat;
@@ -3199,7 +3199,7 @@ ul.album_list_name:after {
 }
 
 .ms_icon1 {
-    background: url(../images/svg/play_icon.svg);
+    background: url(../assets/images/svg/play_icon.svg);
     width: 30px;
     height: 30px;
     background-repeat: no-repeat;
@@ -3225,7 +3225,7 @@ ul.album_list_name:after {
 }
 
 .play_hover {
-    background: url(../images/svg/play_icon.svg);
+    background: url(../assets/images/svg/play_icon.svg);
     width: 35px;
     height: 35px;
     background-repeat: no-repeat;
@@ -3634,7 +3634,7 @@ span.ms_frequency {
 }
 
 .fa_icon {
-    background: url(../images/svg/play_icon.svg);
+    background: url(../assets/images/svg/play_icon.svg);
     width: 30px;
     height: 30px;
     background-repeat: no-repeat;
@@ -4771,7 +4771,7 @@ ul.pro_dropdown_menu li a:hover {
 }
 
 .blog_single_content blockquote:before {
-    background-image: url(../images/svg/quote.svg);
+    background-image: url(../assets/images/svg/quote.svg);
     position: absolute;
     width: 40px;
     height: 40px;
@@ -7826,4 +7826,17 @@ h2.widget-title:after {
         -ms-flex-preferred-size: 190px;
         flex-basis: 190px;
     }
+}
+
+.content-block ul {
+    list-style-type: none;
+    margin: auto;
+    text-align: center
+}
+
+.content-block ul li {
+    display: inline-block;
+    margin: auto;
+
+
 }
