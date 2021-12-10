@@ -47,7 +47,11 @@
             @click="isOpenMenu = false"
           >
             <!--Loop qua các lựa chọn trong menu-->
-            <router-link :to="item.path" active-class="active ">
+            <router-link
+              :to="item.path"
+              active-class="active"
+              :title="item.name"
+            >
               <span class="nav_icon">
                 <span class="icon" :class="item.icon"></span>
               </span>
