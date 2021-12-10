@@ -6,7 +6,7 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Search Music Here.."
+          placeholder="Search Music, Album or Artist Here..."
           v-model="inputValue"
           @keyup="debounceSearch"
           v-on:click="isHidden = false"
@@ -17,16 +17,40 @@
         </span>
         <div class="search-result" v-if="inputValue != '' && !isHidden">
           <div
-            v-if="searchResponse == null || searchResponse.length == 0"
+            v-if="
+              searchSongRes.length +
+                searchAlbumRes.length +
+                searchArtistRes.length ==
+              0
+            "
             class="search-item-wrapper"
           >
-            <span class="result-item" href="#">Không tìm thấy</span>
+            <span class="result-item">Không có kết quả</span>
           </div>
           <div v-else class="search-item-wrapper">
+            <div class="search-item-type" v-if="searchSongRes.length>0">Songs</div>
             <a
               class="result-item"
-              v-for="(item, index) in searchResponse"
-              :key="index"
+              v-for="item in searchSongRes"
+              :key="item.Id"
+              @click="playSong(item)"
+            >
+              {{ item.Name }}
+            </a>
+            <div class="search-item-type" v-if="searchAlbumRes.length>0">Albums</div>
+            <a
+              class="result-item"
+              v-for="item in searchAlbumRes"
+              :key="item.Id"
+              href="#"
+            >
+              {{ item.Name }}
+            </a>
+            <div class="search-item-type" v-if="searchArtistRes.length>0">Artists</div>
+            <a
+              class="result-item"
+              v-for="item in searchArtistRes"
+              :key="item.Id"
               href="#"
             >
               {{ item.Name }}
@@ -101,54 +125,60 @@
 
 <script>
 import { mixin as clickaway } from "vue-clickaway";
+import { mapMutations } from "vuex";
 import SearchServices from "../common/SearchServices.js";
+import SongServices from "../common/SongServices.js";
 
 export default {
   data() {
     return {
       inputValue: "",
-      searchResponse: null,
+      searchSongRes: [],
+      searchAlbumRes: [],
+      searchArtistRes: [],
       timer: 500,
       timeout: null,
       isHidden: null,
     };
   },
 
-  mixins: [clickaway, SearchServices],
-  // watch:{
-  //   inputValue(newValue, oldValue){
-  //     console.log(newValue, oldValue);
-  //     let url = axios.defaults.baseURL+
-  //     `Users/4c6717a89bec419c8e396db40eb9713f/`+
-  //     `Items?searchTerm=${newValue}&IncludePeople=false&`+
-  //     `IncludeMedia=true&IncludeGenres=false&`+
-  //     `IncludeStudios=false&IncludeArtists=false&`+
-  //     `IncludeItemTypes=Audio,MusicAlbum&`+
-  //     `Limit=24&Fields=PrimaryImageAspectRatio%2C`+
-  //     `CanDelete%2CBasicSyncInfo%2CMediaSourceCount`+
-  //     `&Recursive=true&EnableTotalRecordCount=false`+
-  //     `&ImageTypeLimit=1&api_key=0727c7e03dfa4b46bc5925ce7c6fff9c`
-  //     axios.get(url).then((res)=>{
-  //       this.searchResponse = res.data.Items;
-  //       console.log(res.data.Items);
-  //     }).catch((res)=>{
-  //       console.log(res);
-  //     })
-  //   }
-  // },
+  mixins: [clickaway, SearchServices,SongServices],
   methods: {
+    ...mapMutations(["setAudio", "setOpenPlayer"]),
     away: function () {
       this.isHidden = true;
     },
 
+    /**
+     * Bắt đầu search sau khi ngừng nhập input 0.5s
+     * By: Tran Phi Hung
+     */
     debounceSearch() {
       clearTimeout(this.timeout);
       if (this.inputValue.trim().length > 0) {
         this.timeout = setTimeout(() => {
+          this.searchSongRes = []
+          this.searchAlbumRes = []
+          this.searchArtistRes = []
+          // search song, album
           this.searchItem(this.inputValue.trim())
             .then((res) => {
-              this.searchResponse = res.data.Items;
-              console.log(res.data.Items);
+              res.data.Items.forEach((item) => {
+                if (item.Type == "Audio") {
+                  this.searchSongRes.push(item);
+                } else {
+                  this.searchAlbumRes.push(item);
+                }
+              });
+            })
+            .catch((res) => {
+              console.log(res);
+            });
+
+          // search artist
+          this.searchArtist(this.inputValue.trim())
+            .then((res) => {
+              this.searchArtistRes = res.data.Items;
             })
             .catch((res) => {
               console.log(res);
@@ -156,64 +186,29 @@ export default {
         }, this.timer);
       }
     },
+
+    /**
+     * Phát sự kiện bấm mỏ form đăng kí user
+     * By: Tran Phi Hung
+     */
     openRegisterForm() {
-      this.$emit("open-form", this.timer);
+      this.$emit("open-form");
     },
+
+    /**
+     * Xử lý hành động bấm chọn bài hát trong thanh search
+     * By: Tran Phi Hung
+     */
+    playSong(song){
+      song.img_url = this.getImageLink(song);
+      song.song_url = this.getAudioLink(song.Id)
+      this.setAudio(song);
+      this.setOpenPlayer(true);
+    }
   },
 };
 </script>
 
 <style>
-.search-result {
-  top: 45px;
-  left: 0;
-  border-radius: 5px;
-  position: absolute;
-  background-color: white;
-  width: 100%;
-  min-height: 0px;
-  max-height: 450px;
-  overflow: auto;
-  z-index: 0;
-}
-
-.search-item-wrapper {
-  max-height: calc(100vh - 100px);
-}
-
-.search-result .result-item {
-  padding: 7px 20px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  display: block;
-  color: unset;
-}
-.search-result .result-item:hover {
-  color: var(--primary-color) !important;
-  cursor: pointer;
-  background: #e6fffc !important ;
-}
-
-/* width */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 10px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--nav-button-color);
-}
+@import '../css/TheHeader.css';
 </style>

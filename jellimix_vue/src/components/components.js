@@ -23,6 +23,8 @@ const ThePlayer = () =>
     import ('../components/ThePlayer.vue')
 const TheLoginForm = () =>
     import ('./TheLoginForm.vue')
+const TheGenres = () =>
+    import ('./TheGenres.vue')
 
 //Global components
 Vue.component('TheMenu', TheMenu);
@@ -37,3 +39,4 @@ Vue.component('TheFeaturedAlbum', TheFeaturedAlbum);
 Vue.component('TheFeaturedArtist', TheFeaturedArtist);
 Vue.component('ThePlayer', ThePlayer);
 Vue.component('TheLoginForm', TheLoginForm);
+Vue.component('TheGenres', TheGenres);
