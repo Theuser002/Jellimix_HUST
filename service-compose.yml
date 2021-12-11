@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  jelli-fe:
+    image: jellimix-fe:1.0
+    ports:
+      - "6969:6969"
+    networks:
+      - jelli-network
+    restart: unless-stopped
+  
+  jellyfin:
+    image: jellyfin/jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Ho_Chi_Minh
+    volumes:
+      - jellyfin-config:/config
+      - jellyfin-cache:/data
+      - jellyfin-media:/media
+    ports:
+      - 8096:8096
+    restart: unless-stopped
+    networks:
+      - jelli-network
+
+volumes:
+  jellyfin-cache:
+    external: true
+  jellyfin-config:
+    external: true
+  jellyfin-media:
+    external: true
+
+networks:
+  jelli-network:
+    external: true
+
+
