@@ -13,7 +13,8 @@ WORKDIR /app
 COPY ./jellimix_vue .
 
 # install project dependencies
-RUN npm install && npm run serve
+RUN npm install 
+RUN npm run build
 
 EXPOSE 6969
-CMD [ "http-server", "-g", "6969", "dist" ]
+CMD [ "http-server", "-p", "6969", "dist" ]
