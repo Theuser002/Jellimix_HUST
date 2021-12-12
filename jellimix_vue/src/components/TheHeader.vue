@@ -108,7 +108,7 @@
                         <span data-toggle="modal" data-target="#lang_modal" style="margin-left: 15px">languages <img
                                 src="../assets/images/svg/lang.svg" alt=""></span>
                     </div> -->
-      <div class="ms_top_btn" v-if="this.tokenAuth.length == 0">
+      <div class="ms_top_btn" v-if="this.tokenAuth == null || this.tokenAuth.length == 0">
         <a
           @click="openRegisterForm"
           href="javascript:;"
