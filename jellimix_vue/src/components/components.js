@@ -23,6 +23,8 @@ const ThePlayer = () =>
     import ('../components/ThePlayer.vue')
 const TheRegisterForm = () =>
     import ('./TheRegisterForm.vue')
+const TheLoginForm = () =>
+    import ('./TheLoginForm.vue')
 const TheGenres = () =>
     import ('./TheGenres.vue')
 
@@ -39,4 +41,5 @@ Vue.component('TheFeaturedAlbum', TheFeaturedAlbum);
 Vue.component('TheFeaturedArtist', TheFeaturedArtist);
 Vue.component('ThePlayer', ThePlayer);
 Vue.component('TheRegisterForm', TheRegisterForm);
+Vue.component('TheLoginForm', TheLoginForm);
 Vue.component('TheGenres', TheGenres);

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueCookies from 'vue-cookies'
 import axiosConfig from './common/axiosConfig'
 import router from './routes/route'
 import VueToast from 'vue-toast-notification';
@@ -32,3 +33,4 @@ new Vue({
     store,
     render: h => h(App),
 }).$mount('#app')
+Vue.use(VueCookies)
