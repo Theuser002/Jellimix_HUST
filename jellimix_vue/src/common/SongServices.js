@@ -5,10 +5,23 @@ var SongServices = {
     methods: {
         async getAllSong() {
             let url = axios.defaults.baseURL +
-                'Users/' + user +
-                '/Items?SortBy=Name&SortOrder=Ascending&IncludeItemTypes=Audio&Recursive=true&Fields=AudioInfo%2CParentId&StartIndex=0&ImageTypeLimit=1&EnableImageTypes=Primary&Limit=12&ParentId=7e64e319657a9516ec78490da03edccb&api_key=' + api_key
+                `Users/${user}/Items?SortBy=Name&SortOrder=Ascending&` +
+                `IncludeItemTypes=Audio&Recursive=true&Fields=AudioInfo%2C` +
+                `ParentId&StartIndex=0&ImageTypeLimit=1&` +
+                `EnableImageTypes=Primary&Limit=12&` +
+                `ParentId=7e64e319657a9516ec78490da03edccb&api_key=${api_key}`
 
-            return axios.get(url);
+            return await axios.get(url);
+        },
+        async getSongByPage(page) {
+            let url = axios.defaults.baseURL +
+                `Users/d114269f64ac422783e5ff2c43f1f9ba/Items?` +
+                `SortBy=Name%2CSortName&SortOrder=Ascending&` +
+                `IncludeItemTypes=Audio&Recursive=true&Fields=AudioInfo%2C` +
+                `ParentId&StartIndex=${(page-1)*12}&ImageTypeLimit=1&EnableImageTypes=Primary&` +
+                `Limit=100&ParentId=7e64e319657a9516ec78490da03edccb` +
+                `&api_key=${api_key}`
+            return await axios.get(url)
         },
         getImageLink(media_data) {
             var url;

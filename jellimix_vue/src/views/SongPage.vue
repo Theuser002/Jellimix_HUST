@@ -15,6 +15,11 @@
         </div>
       </div>
     </div>
+    <div class="pagination">
+      <div class="page" v-for="index in getPaginationList" :key="index">
+        {{index}}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -26,16 +31,23 @@ export default {
   data() {
     return {
       mediaList: [],
+      currentPage: 1
     };
   },
   created() {
-    this.getAllSong()
+    this.getSongByPage(this.currentPage)
       .then((res) => {
         this.mediaList = res.data.Items;
       })
       .catch((res) => {
         console.log(res);
       });
+  },
+  computed:{
+    getPaginationList(){
+
+      return [1,2,3]
+    }
   },
   methods: {
     previousRoute() {
@@ -46,4 +58,9 @@ export default {
 </script>
 
 <style scoped>
+.page{
+  background-color: aqua;
+  width: 20px;
+  height: 20px;
+}
 </style>

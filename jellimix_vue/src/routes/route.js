@@ -4,8 +4,6 @@ import VueRouter from 'vue-router'
 //thực hiện import các component áp dụng lazy loading, đọc tài liệu để hiểu
 const HelloWorld = () =>
     import ('../views/HelloWorld.vue')
-const Developing = () =>
-    import ('../views/Developing.vue')
 const Home = () =>
     import ('../views/Home.vue')
 const SongPage = () =>
@@ -16,12 +14,12 @@ const AlbumPage = () =>
     import ('../views/AlbumPage.vue')
 
 const routes = [
+    { path: '/', component: Home },
     { path: '/Hello', component: HelloWorld },
-    { path: '/Home/dev', component: Developing },
-    { path: '/Home', component: Home },
     { path: '/Song', component: SongPage },
     { path: '/Artist', component: ArtistPage },
     { path: '/Album', component: AlbumPage },
+    { path: '*', redirect: '/' }
 ]
 
 const router = new VueRouter({
