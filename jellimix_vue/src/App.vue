@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <the-login-form id="login-form" v-if="isOpenModal" @close-form="isOpenModal=false"/>
+    <the-register-form id="login-form" v-if="isOpenModal" @close-form="isOpenModal=false"/>
     <the-menu></the-menu>
     <the-header @open-form="openRegisterForm"></the-header>
     <router-view class="router-view" @play-song="playAudio"></router-view>
@@ -23,11 +23,9 @@
 </template>
 
 <script>
-import TheLoginForm from './components/TheLoginForm.vue';
 // import Aplayer from "vue-aplayer";
 
 export default {
-  components: { TheLoginForm },
   name: "App",
   // components:{Aplayer},
   data() {
@@ -36,7 +34,8 @@ export default {
       audio_title: null,
       audio_artist: null,
       audio_img: null,
-      isOpenModal: false
+      isOpenModal: false,
+      isOpenLoginModal: false
     }
   },
   methods: {
@@ -53,6 +52,9 @@ export default {
     },
     openRegisterForm(){
       this.isOpenModal = true
+    },
+    openLoginForm() {
+      this.isOpenLoginModal = true
     }
   },
 };

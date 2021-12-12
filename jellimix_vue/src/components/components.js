@@ -21,8 +21,8 @@ const TheFeaturedArtist = () =>
     import ('../components/MediaBlock/TheFeaturedArtist.vue')
 const ThePlayer = () =>
     import ('../components/ThePlayer.vue')
-const TheLoginForm = () =>
-    import ('./TheLoginForm.vue')
+const TheRegisterForm = () =>
+    import ('./TheRegisterForm.vue')
 const TheGenres = () =>
     import ('./TheGenres.vue')
 
@@ -38,5 +38,5 @@ Vue.component('TheFeaturedSong', TheFeaturedSong);
 Vue.component('TheFeaturedAlbum', TheFeaturedAlbum);
 Vue.component('TheFeaturedArtist', TheFeaturedArtist);
 Vue.component('ThePlayer', ThePlayer);
-Vue.component('TheLoginForm', TheLoginForm);
+Vue.component('TheRegisterForm', TheRegisterForm);
 Vue.component('TheGenres', TheGenres);
