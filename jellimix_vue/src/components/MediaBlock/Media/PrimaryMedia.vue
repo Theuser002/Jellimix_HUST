@@ -69,7 +69,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapMutations } from "vuex";
 import { saveAs } from "file-saver";
 import SongServices from '../../../common/SongServices.js'
@@ -90,23 +89,15 @@ export default {
     };
   },
   created() {
-    this.song_url =
-      axios.defaults.baseURL +
-      `Audio/${this.media_data.Id}` +
-      `/universal?UserId=4c6717a89bec419c8e396db40eb9713f` +
-      `&DeviceId=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzk0LjAuNDYwNi44MSBTYWZhcmkvNTM3LjM2IEVkZy85NC4wLjk5Mi40N3wxNjM0MjI2OTQ2MDU0` +
-      `&MaxStreamingBitrate=140000000` +
-      `&Container=opus,mp3,aac,m4a,flac,webma,webm,wav,ogg,aac,mp3,mpa,wav,wma,mp2,ogg,oga,webma,ape,opus,flac,m4a` +
-      `&TranscodingContainer=ts` +
-      `&TranscodingProtocol=hls` +
-      `&AudioCodec=aac` +
-      `&MaxSampleRate=48000` +
-      `&PlaySessionId=1496213367201` +
-      `&api_key=cf8b1134702b42c790966bedc4adf878`;
-    this.media_data.song_url = this.song_url;
-  },
-  mounted() {
+    this.getSong();
     this.getImage();
+  },
+  watch:{
+    media_data(){
+      console.log("prop thay đổi");
+      this.getSong();
+    this.getImage();
+    }
   },
   methods: {
     ...mapMutations(["setAudio", "setOpenPlayer"]),
@@ -114,6 +105,11 @@ export default {
       let url = this.getImageLink(this.media_data)
       this.img_url = url;
       this.media_data.img_url = url;
+    },
+    getSong(){
+      let url = this.getAudioLink(this.media_data.Id)
+      this.song_url = url;
+      this.media_data.song_url = url
     },
     playAudio() {
       this.setAudio(this.media_data);
