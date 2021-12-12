@@ -16,7 +16,7 @@
       >
         <div class="sidemenu-logo" v-if="!isOpenMenu">
           <!-- Icon khi đóng menu -->
-          <router-link to="/Home">
+          <router-link to="/">
             <img
               src="../assets/images/musical-note-ver2.png"
               alt=""
@@ -27,7 +27,7 @@
         </div>
         <div class="sidemenu-logo_open" v-else>
           <!-- Icon khi mở menu -->
-          <router-link to="/Home">
+          <router-link to="/">
             <img
               src="../assets/images/musical-note-logo-text-ver2.png"
               alt=""
@@ -68,8 +68,7 @@ export default {
     return {
       isOpenMenu: false,
       menuItems: [
-        { path: "/Home/dev", name: "Dev", x: 0, y: 0 },//đường dẫn router, tên lựa chọn, tọa độ x-y của icon trong ảnh svg
-        { path: "/Home", name: "Trang chủ", x: 0, y: 0 },//đường dẫn router, tên lựa chọn, tọa độ x-y của icon trong ảnh svg
+        { path: "/", name: "Trang chủ", x: 0, y: 0 },//đường dẫn router, tên lựa chọn, tọa độ x-y của icon trong ảnh svg
         { path: "/Song", name: "Bài hát", x: -150, y: -28 },
         { path: "/Artist", name: "Nghệ sĩ", x: -60, y: 2 },
         { path: "/Album", name: "Album", x: -30, y: -28 },
