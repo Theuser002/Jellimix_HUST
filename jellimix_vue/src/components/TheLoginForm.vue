@@ -1,20 +1,12 @@
 <template>
-  <div class="ms_register_popup">
-    <div
-      id="myModal"
-      class="modal centered-modal show"
-      role="dialog"
-      style="padding-right: 16px; display: block"
-    >
-      <div class="modal-dialog register_dialog">
+    <!----Login Popup Start---->
+    <div id="LoginModal" class="modal centered-modal" role="dialog"
+    style="padding-right: 16px; display: block">
+      <div class="modal-dialog login_dialog">
         <!-- Modal content-->
         <div class="modal-content">
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            @click="closeForm"
-          >
+          <button type="button" class="close" data-dismiss="modal"
+          @click="closeForm">
             <i class="fa_icon form_close"></i>
           </button>
           <div class="modal-body">
@@ -22,12 +14,13 @@
               <img src="images/register_img.png" alt="" class="img-fluid" />
             </div>
             <div class="ms_register_form">
-              <h2>Register / Sign Up</h2>
+              <h2>Login</h2>
               <div class="form-group">
                 <input
                   type="text"
-                  placeholder="Enter Your Name"
+                  placeholder="Enter Your Username"
                   class="form-control"
+                  v-model="usernameInput"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-user" aria-hidden="true"></i>
@@ -35,78 +28,10 @@
               </div>
               <div class="form-group">
                 <input
-                  type="text"
-                  placeholder="Enter Your Email"
-                  class="form-control"
-                />
-                <span class="form_icon">
-                  <i class="fa_icon form-envelope" aria-hidden="true"></i>
-                </span>
-              </div>
-              <div class="form-group">
-                <input
                   type="password"
                   placeholder="Enter Password"
                   class="form-control"
-                />
-                <span class="form_icon">
-                  <i class="fa_icon form-lock" aria-hidden="true"></i>
-                </span>
-              </div>
-              <div class="form-group">
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  class="form-control"
-                />
-                <span class="form_icon">
-                  <i class="fa_icon form-lock" aria-hidden="true"></i>
-                </span>
-              </div>
-              <a href="#" class="ms_btn">register now</a>
-              <p>
-                Already Have An Account?
-                <a
-                  href="#myModal1"
-                  data-toggle="modal"
-                  class="ms_modal hideCurrentModel"
-                  >login here</a
-                >
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!----Login Popup Start---->
-    <div id="myModal1" class="modal centered-modal" role="dialog">
-      <div class="modal-dialog login_dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <button type="button" class="close" data-dismiss="modal">
-            <i class="fa_icon form_close"></i>
-          </button>
-          <div class="modal-body">
-            <div class="ms_register_img">
-              <img src="images/register_img.png" alt="" class="img-fluid" />
-            </div>
-            <div class="ms_register_form">
-              <h2>login / Sign in</h2>
-              <div class="form-group">
-                <input
-                  type="text"
-                  placeholder="Enter Your Email"
-                  class="form-control"
-                />
-                <span class="form_icon">
-                  <i class="fa_icon form-envelope" aria-hidden="true"></i>
-                </span>
-              </div>
-              <div class="form-group">
-                <input
-                  type="password"
-                  placeholder="Enter Password"
-                  class="form-control"
+                  v-model="passwordInput"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-lock" aria-hidden="true"></i>
@@ -119,7 +44,7 @@
                   <span class="checkmark"></span>
                 </label>
               </div>
-              <a href="profile.html" class="ms_btn" target="_blank"
+              <a @click="loginUser" class="ms_btn" target="_blank"
                 >login now</a
               >
               <div class="popup_forgot">
@@ -139,20 +64,42 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
+import AuthenticationServices from "../common/AuthenticationServices"
+import { mapMutations } from "vuex";
 export default {
+  mixins: [AuthenticationServices],
   data() {
     return {
       isOpenModal: false,
+      usernameInput: "",
+      passwordInput: "",
     };
   },
   methods: {
+    ...mapMutations(["setTokenAuth"]),
     closeForm() {
       this.$emit("close-form");
     },
+    loginUser() {
+      if (this.usernameInput.length == 0 || this.passwordInput.length == 0) {
+        this.$toast.error("empty username or password")
+        return
+      }
+      this.loginService([this.usernameInput, this.passwordInput])
+      .then((res) => {
+        this.setTokenAuth(res.data.AccessToken);
+        this.$toast.success("Welcome back, " + res.data.User.Name + "!");
+        this.closeForm();
+      })
+      .catch((err) => {
+        console.log("error: ", err.message)
+        this.$toast.error(err.message)
+      });
+    }
+
   },
 };
 </script>
