@@ -18,7 +18,7 @@
       >
         <div class="ms_logo" v-if="!isOpenMenu">
           <!-- Icon khi đóng menu -->
-          <router-link to="/Home">
+          <router-link to="/">
             <img
               src="../assets/images/musical-note-ver1.png"
               alt=""
@@ -30,7 +30,7 @@
         </div>
         <div class="ms_logo_open" v-else>
           <!-- Icon khi mở menu -->
-          <router-link to="/Home">
+          <router-link to="/">
             <img
               src="../assets/images/musical-note-logo-text-ver1.png"
               alt=""

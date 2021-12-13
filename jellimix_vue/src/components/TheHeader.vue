@@ -109,7 +109,10 @@
                         <span data-toggle="modal" data-target="#lang_modal" style="margin-left: 15px">languages <img
                                 src="../assets/images/svg/lang.svg" alt=""></span>
                     </div> -->
-      <div class="ms_top_btn">
+      <div
+        class="ms_top_btn"
+        v-if="this.tokenAuth == null || this.tokenAuth.length == 0"
+      >
         <a
           @click="openRegisterForm"
           href="javascript:;"
@@ -119,11 +122,17 @@
           ><span>register</span></a
         >
         <a
+          @click="openLoginForm"
           href="javascript:;"
           class="ms_btn login_btn"
           data-toggle="modal"
           data-target="#myModal1"
           ><span>login</span></a
+        >
+      </div>
+      <div class="ms_top_btn" v-else>
+        <a @click="logoutAction" href="javascript:;" class="ms_btn login_btn"
+          ><span>logout</span></a
         >
       </div>
     </div>
@@ -132,7 +141,7 @@
 
 <script>
 import { mixin as clickaway } from "vue-clickaway";
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 import SearchServices from "../common/SearchServices.js";
 import SongServices from "../common/SongServices.js";
 
@@ -152,67 +161,15 @@ export default {
     };
   },
 
-  // getTheme() {
-  //   return localStorage.getItem("theme") || "";
-  // },
-  // saveTheme(theme) {
-  //   localStorage.setItem("theme", theme);
-  // },
-
-  // applyTheme(theme) {
-  //   let body = document.querySelector("body");
-  //     this.lightTheme = !this.lightTheme;
-
-  //     if (!this.lightTheme) {
-  //       body.setAttribute("id", "theme--dark");
-  // },
-
-  // rotateTheme(theme) {
-  //   if (theme === "css/style.css") {
-  //     return "css/light-theme.css";
-  //   }
-  //   return "css/style.css";
-  // },
-
-  // Mimic heavy load done by other JS scripts
-
-  // created() {
-  //   setTimeout(() => {
-  //     let theme = getTheme();
-  //     applyTheme(theme);
-  //     if (theme === "css/style.css") {
-  //       btn.checked = true;
-  //       msLogo.src = "images/musical-note-ver2.png";
-  //       msLogoOpen.src = "images/musical-note-logo-text-ver2.png";
-  //       msLogoFooter.src = "images/musical-note-logo-text-ver2.png";
-  //     } else {
-  //       btn.checked = false;
-  //       msLogo.src = "images/musical-note-ver1.png";
-  //       msLogoOpen.src = "images/musical-note-logo-text-ver1.png";
-  //       msLogoFooter.src = "images/musical-note-logo-text-ver1.png";
-  //     }
-
-  //     btn.onchange = () => {
-  //       const newTheme = rotateTheme(theme);
-  //       applyTheme(newTheme);
-  //       // themeDisplay.innerText = newTheme;
-  //       saveTheme(newTheme);
-  //       if (newTheme === "css/style.css") {
-  //         msLogo.src = "images/musical-note-ver2.png";
-  //         msLogoOpen.src = "images/musical-note-logo-text-ver2.png";
-  //         msLogoFooter.src = "images/musical-note-logo-text-ver2.png";
-  //       } else {
-  //         msLogo.src = "images/musical-note-ver1.png";
-  //         msLogoOpen.src = "images/musical-note-logo-text-ver1.png";
-  //         msLogoFooter.src = "images/musical-note-logo-text-ver1.png";
-  //       }
-  //       theme = newTheme;
-  //     };
-  //   }, 100);
-  // },
   mixins: [clickaway, SearchServices, SongServices],
+  computed: {
+    ...mapGetters(["tokenAuth"]),
+  },
+  created() {
+    this.autoLogin();
+  },
   methods: {
-    ...mapMutations(["setAudio", "setOpenPlayer"]),
+    ...mapMutations(["setAudio", "setOpenPlayer", "setTokenAuth"]),
     away: function () {
       this.isHidden = true;
     },
@@ -255,12 +212,32 @@ export default {
       }
     },
 
+    autoLogin() {
+      this.setTokenAuth(this.$cookies.get("sessionId"));
+    },
+
     /**
-     * Phát sự kiện bấm mỏ form đăng kí user
+     * Phát sự kiện bấm mở form đăng kí user
      * By: Tran Phi Hung
      */
     openRegisterForm() {
-      this.$emit("open-form");
+      this.$emit("open-register-form");
+    },
+
+    /**
+     * Phát sự kiện bấm mở form đăng nhập
+     * By: Tran Thai Duong
+     */
+    openLoginForm() {
+      this.$emit("open-login-form");
+    },
+
+    /**
+     * Phát sự kiện bấm logout user
+     * By: Tran Thai Duong
+     */
+    logoutAction() {
+      this.setTokenAuth("");
     },
 
     /**
