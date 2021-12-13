@@ -72,6 +72,7 @@ export default {
         { path: "/Song", name: "Bài hát", x: -150, y: -28 },
         { path: "/Artist", name: "Nghệ sĩ", x: -60, y: 2 },
         { path: "/Album", name: "Album", x: -30, y: -28 },
+        { path: "/Playlist", name: "Playlist", x: -328, y: 2 },
       ],
     };
   },
