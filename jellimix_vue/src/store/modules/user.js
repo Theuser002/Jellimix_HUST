@@ -27,7 +27,7 @@ const user = {
             if (state.userId == null || state.userId.length == 0) {
                 Vue.$cookies.remove('userId');
             } else {
-                Vue.$cookies.set('userId' , state.tokenAuthentication, "1h")
+                Vue.$cookies.set('userId' , state.userId, "1h")
             }
         },
     },
