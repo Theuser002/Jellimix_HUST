@@ -162,7 +162,7 @@ export default {
     this.autoLogin();
   },
   methods: {
-    ...mapMutations(["setAudio", "setOpenPlayer", "setTokenAuth"]),
+    ...mapMutations(["setAudio", "setOpenPlayer", "setTokenAuth", "setUserId"]),
     away: function () {
       this.isHidden = true;
     },
@@ -207,6 +207,7 @@ export default {
 
     autoLogin() {
       this.setTokenAuth(this.$cookies.get("sessionId"))
+      this.setUserId(this.$cookies.get("userId"));
     },
 
     /**
@@ -231,6 +232,7 @@ export default {
      */
     logoutAction() {
       this.setTokenAuth("");
+      this.setUserId("");
     },
 
     /**
