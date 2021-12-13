@@ -7993,3 +7993,11 @@ h2.widget-title:after {
     margin: auto;
 
 }
+
+.slide_menu .ms_header {
+    padding-left: 160px !important
+}
+
+.slide_menu .router-view {
+    margin-left: 175px !important;
+}

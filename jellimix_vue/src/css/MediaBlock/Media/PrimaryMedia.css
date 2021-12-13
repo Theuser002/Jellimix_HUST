@@ -12,7 +12,7 @@
     transition-property: transform, -webkit-transform;
 }
 
-.ms_rcnt_box {
+/* .ms_rcnt_box {
     text-align: center;
 }
 
@@ -259,4 +259,4 @@ ul.more_option li a:hover .opt_icon .icon_share {
     color: #dedede;
     font-size: 14px;
     margin: 0px;
-}
+} */
