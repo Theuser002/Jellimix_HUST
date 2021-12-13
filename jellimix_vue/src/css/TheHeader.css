@@ -9,6 +9,10 @@
     max-height: 450px;
     overflow: auto;
     z-index: 0;
+    box-shadow: -4px 10px 29px -5px rgba(34, 186, 186, 0.69);
+    -webkit-box-shadow: -4px 10px 29px -5px rgba(34, 186, 186, 0.69);
+    -moz-box-shadow: -4px 10px 29px -5px rgba(34, 186, 186, 0.69);
+    color: #777777
 }
 
 .search-item-wrapper {
@@ -18,7 +22,7 @@
 .search-item-type {
     width: 100%;
     display: block;
-    padding: 4px 7px;
+    padding: 15px 15px 5px 15px;
     font-size: 25px;
     color: #15d8be;
 }
@@ -41,14 +45,14 @@
 
 /* width */
 
- ::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 6px;
 }
 
 
 /* Track */
 
- ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 10px;
 }
@@ -56,7 +60,7 @@
 
 /* Handle */
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: var(--primary-color);
     border-radius: 10px;
 }
@@ -64,6 +68,6 @@
 
 /* Handle on hover */
 
- ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: var(--nav-button-color);
 }

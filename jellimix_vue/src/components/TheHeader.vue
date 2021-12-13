@@ -76,12 +76,13 @@
     </div>
     <div class="ms_top_right">
       <!-- Theme toggle button -->
-      <!-- <label>
+      <label>
         <input
           class="toggle-checkbox"
           type="checkbox"
-          checked
+          :checked="isLightTheme ? 'checked' : ''"
           id="switch-theme-toggle-btn"
+          @click="switchTheme"
         />
         <div class="toggle-slot">
           <div class="sun-icon-wrapper">
@@ -102,13 +103,16 @@
             ></div>
           </div>
         </div>
-      </label> -->
+      </label>
 
       <!-- <div class="ms_top_lang">
                         <span data-toggle="modal" data-target="#lang_modal" style="margin-left: 15px">languages <img
                                 src="../assets/images/svg/lang.svg" alt=""></span>
                     </div> -->
-      <div class="ms_top_btn" v-if="this.tokenAuth == null || this.tokenAuth.length == 0">
+      <div
+        class="ms_top_btn"
+        v-if="this.tokenAuth == null || this.tokenAuth.length == 0"
+      >
         <a
           @click="openRegisterForm"
           href="javascript:;"
@@ -151,6 +155,9 @@ export default {
       timer: 500,
       timeout: null,
       isHidden: null,
+      lightTheme: true,
+      // msLogo: "musical-note-ver1.png",
+      // msLogoOpen: "musical-note-logo-text-ver1.png",
     };
   },
 
@@ -244,6 +251,48 @@ export default {
       song.song_url = this.getAudioLink(song.Id);
       this.setAudio(song);
       this.setOpenPlayer(true);
+    },
+
+    isLightTheme() {
+      return localStorage.getItem("lightTheme");
+    },
+
+    switchTheme() {
+      let body = document.querySelector("body");
+      // let msLogo = document.querySelector("#ms-img");
+      // let msLogoOpen = document.querySelector("#ms-img-open");
+      // let msLogoFooter = document.querySelector("#footer-logo");
+      this.lightTheme = !this.lightTheme;
+
+      if (!this.lightTheme) {
+        body.setAttribute("id", "theme--dark");
+        // this.msLogo = "musical-note-ver2.png";
+        // this.msLogoOpen = "musical-note-logo-text-ver2.png";
+        // msLogo.src = "../assets/images/musical-note-ver2.png";
+        // msLogoOpen.setAttribute(
+        //   "src",
+        //   "../assets/images/musical-note-logo-text-ver2.png"
+        // );
+        // msLogoFooter.setAttribute(
+        //   "src",
+        //   "../assets/images/musical-note-logo-text-ver2.png"
+        // );
+        // localStorage.setItem("lightTheme", false);
+      } else {
+        body.removeAttribute("id", "theme--dark");
+        // this.msLogo = "musical-note-ver1.png";
+        // this.msLogoOpen = "musical-note-logo-text-ver1.png";
+        // msLogo.src = "../assets/images/musical-note-ver1.png";
+        // msLogoOpen.setAttribute(
+        //   "src",
+        //   "../assets/images/musical-note-logo-text-ver1.png"
+        // );
+        // msLogoFooter.setAttribute(
+        //   "src",
+        //   "../assets/images/musical-note-logo-text-ver1.png"
+        // );
+        // localStorage.setItem("lightTheme", true);
+      }
     },
   },
 };
