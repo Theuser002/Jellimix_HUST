@@ -5,7 +5,7 @@
       open_menu: isOpenMenu,
     }"
   >
-    <div class="ms_nav_close" @click="isOpenMenu = !isOpenMenu">
+    <div class="ms_nav_close" @click="openMenu">
       <i class="fa fa-angle-right" aria-hidden="true"></i>
     </div>
     <!-- Nút đóng mở menu -->
@@ -20,10 +20,11 @@
           <!-- Icon khi đóng menu -->
           <router-link to="/Home">
             <img
-              src="../assets/images/musical-note-ver2.png"
+              src="../assets/images/musical-note-ver1.png"
               alt=""
               class="img-fluid"
               style="width: 60px; height: 60px"
+              id="ms-img"
             />
           </router-link>
         </div>
@@ -31,21 +32,18 @@
           <!-- Icon khi mở menu -->
           <router-link to="/Home">
             <img
-              src="../assets/images/musical-note-logo-text-ver2.png"
+              src="../assets/images/musical-note-logo-text-ver1.png"
               alt=""
               class="img-fluid"
               style="width: 120px; height: 120px"
+              id="ms-img-open"
             />
           </router-link>
         </div>
       </div>
       <div class="sidemenu-item_wrapper ms_nav_wrapper">
         <ul>
-          <li
-            v-for="(item, index) in menuItems"
-            :key="index"
-            @click="isOpenMenu = false"
-          >
+          <li v-for="(item, index) in menuItems" :key="index" @click="openPage">
             <!--Loop qua các lựa chọn trong menu-->
             <router-link
               :to="item.path"
@@ -78,10 +76,26 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    openMenu() {
+      let body = document.querySelector("body");
+
+      this.isOpenMenu = !this.isOpenMenu;
+      if (this.isOpenMenu) {
+        body.setAttribute("class", "slide_menu");
+      } else {
+        body.removeAttribute("class", "slide_menu");
+      }
+    },
+    openPage() {
+      let body = document.querySelector("body");
+      this.isOpenMenu = false;
+      body.removeAttribute("class", "slide_menu");
+    },
+  },
 };
 </script>
 
 <style scoped>
-@import "../css/TheMenu.css";
+/* @import "../css/TheMenu.css"; */
 </style>

@@ -4,7 +4,7 @@
     <div class="ms_footer_logo">
       <a href="index.html"
         ><img
-          src="../assets/images/musical-note-logo-text-ver2.png"
+          src="../assets/images/musical-note-logo-text-ver1.png"
           style="width: 150px"
           alt=""
           id="footer-logo"

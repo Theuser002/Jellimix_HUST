@@ -28,7 +28,9 @@
             <span class="result-item">Không có kết quả</span>
           </div>
           <div v-else class="search-item-wrapper">
-            <div class="search-item-type" v-if="searchSongRes.length>0">Songs</div>
+            <div class="search-item-type" v-if="searchSongRes.length > 0">
+              Songs
+            </div>
             <a
               class="result-item"
               v-for="item in searchSongRes"
@@ -37,7 +39,9 @@
             >
               {{ item.Name }}
             </a>
-            <div class="search-item-type" v-if="searchAlbumRes.length>0">Albums</div>
+            <div class="search-item-type" v-if="searchAlbumRes.length > 0">
+              Albums
+            </div>
             <a
               class="result-item"
               v-for="item in searchAlbumRes"
@@ -46,7 +50,9 @@
             >
               {{ item.Name }}
             </a>
-            <div class="search-item-type" v-if="searchArtistRes.length>0">Artists</div>
+            <div class="search-item-type" v-if="searchArtistRes.length > 0">
+              Artists
+            </div>
             <a
               class="result-item"
               v-for="item in searchArtistRes"
@@ -70,12 +76,13 @@
     </div>
     <div class="ms_top_right">
       <!-- Theme toggle button -->
-      <!-- <label>
+      <label>
         <input
           class="toggle-checkbox"
           type="checkbox"
-          checked
+          :checked="isLightTheme ? 'checked' : ''"
           id="switch-theme-toggle-btn"
+          @click="switchTheme"
         />
         <div class="toggle-slot">
           <div class="sun-icon-wrapper">
@@ -96,7 +103,7 @@
             ></div>
           </div>
         </div>
-      </label> -->
+      </label>
 
       <!-- <div class="ms_top_lang">
                         <span data-toggle="modal" data-target="#lang_modal" style="margin-left: 15px">languages <img
@@ -139,10 +146,71 @@ export default {
       timer: 500,
       timeout: null,
       isHidden: null,
+      lightTheme: true,
+      // msLogo: "musical-note-ver1.png",
+      // msLogoOpen: "musical-note-logo-text-ver1.png",
     };
   },
 
-  mixins: [clickaway, SearchServices,SongServices],
+  // getTheme() {
+  //   return localStorage.getItem("theme") || "";
+  // },
+  // saveTheme(theme) {
+  //   localStorage.setItem("theme", theme);
+  // },
+
+  // applyTheme(theme) {
+  //   let body = document.querySelector("body");
+  //     this.lightTheme = !this.lightTheme;
+
+  //     if (!this.lightTheme) {
+  //       body.setAttribute("id", "theme--dark");
+  // },
+
+  // rotateTheme(theme) {
+  //   if (theme === "css/style.css") {
+  //     return "css/light-theme.css";
+  //   }
+  //   return "css/style.css";
+  // },
+
+  // Mimic heavy load done by other JS scripts
+
+  // created() {
+  //   setTimeout(() => {
+  //     let theme = getTheme();
+  //     applyTheme(theme);
+  //     if (theme === "css/style.css") {
+  //       btn.checked = true;
+  //       msLogo.src = "images/musical-note-ver2.png";
+  //       msLogoOpen.src = "images/musical-note-logo-text-ver2.png";
+  //       msLogoFooter.src = "images/musical-note-logo-text-ver2.png";
+  //     } else {
+  //       btn.checked = false;
+  //       msLogo.src = "images/musical-note-ver1.png";
+  //       msLogoOpen.src = "images/musical-note-logo-text-ver1.png";
+  //       msLogoFooter.src = "images/musical-note-logo-text-ver1.png";
+  //     }
+
+  //     btn.onchange = () => {
+  //       const newTheme = rotateTheme(theme);
+  //       applyTheme(newTheme);
+  //       // themeDisplay.innerText = newTheme;
+  //       saveTheme(newTheme);
+  //       if (newTheme === "css/style.css") {
+  //         msLogo.src = "images/musical-note-ver2.png";
+  //         msLogoOpen.src = "images/musical-note-logo-text-ver2.png";
+  //         msLogoFooter.src = "images/musical-note-logo-text-ver2.png";
+  //       } else {
+  //         msLogo.src = "images/musical-note-ver1.png";
+  //         msLogoOpen.src = "images/musical-note-logo-text-ver1.png";
+  //         msLogoFooter.src = "images/musical-note-logo-text-ver1.png";
+  //       }
+  //       theme = newTheme;
+  //     };
+  //   }, 100);
+  // },
+  mixins: [clickaway, SearchServices, SongServices],
   methods: {
     ...mapMutations(["setAudio", "setOpenPlayer"]),
     away: function () {
@@ -157,9 +225,9 @@ export default {
       clearTimeout(this.timeout);
       if (this.inputValue.trim().length > 0) {
         this.timeout = setTimeout(() => {
-          this.searchSongRes = []
-          this.searchAlbumRes = []
-          this.searchArtistRes = []
+          this.searchSongRes = [];
+          this.searchAlbumRes = [];
+          this.searchArtistRes = [];
           // search song, album
           this.searchItem(this.inputValue.trim())
             .then((res) => {
@@ -199,16 +267,58 @@ export default {
      * Xử lý hành động bấm chọn bài hát trong thanh search
      * By: Tran Phi Hung
      */
-    playSong(song){
+    playSong(song) {
       song.img_url = this.getImageLink(song);
-      song.song_url = this.getAudioLink(song.Id)
+      song.song_url = this.getAudioLink(song.Id);
       this.setAudio(song);
       this.setOpenPlayer(true);
-    }
+    },
+
+    isLightTheme() {
+      return localStorage.getItem("lightTheme");
+    },
+
+    switchTheme() {
+      let body = document.querySelector("body");
+      // let msLogo = document.querySelector("#ms-img");
+      // let msLogoOpen = document.querySelector("#ms-img-open");
+      // let msLogoFooter = document.querySelector("#footer-logo");
+      this.lightTheme = !this.lightTheme;
+
+      if (!this.lightTheme) {
+        body.setAttribute("id", "theme--dark");
+        // this.msLogo = "musical-note-ver2.png";
+        // this.msLogoOpen = "musical-note-logo-text-ver2.png";
+        // msLogo.src = "../assets/images/musical-note-ver2.png";
+        // msLogoOpen.setAttribute(
+        //   "src",
+        //   "../assets/images/musical-note-logo-text-ver2.png"
+        // );
+        // msLogoFooter.setAttribute(
+        //   "src",
+        //   "../assets/images/musical-note-logo-text-ver2.png"
+        // );
+        // localStorage.setItem("lightTheme", false);
+      } else {
+        body.removeAttribute("id", "theme--dark");
+        // this.msLogo = "musical-note-ver1.png";
+        // this.msLogoOpen = "musical-note-logo-text-ver1.png";
+        // msLogo.src = "../assets/images/musical-note-ver1.png";
+        // msLogoOpen.setAttribute(
+        //   "src",
+        //   "../assets/images/musical-note-logo-text-ver1.png"
+        // );
+        // msLogoFooter.setAttribute(
+        //   "src",
+        //   "../assets/images/musical-note-logo-text-ver1.png"
+        // );
+        // localStorage.setItem("lightTheme", true);
+      }
+    },
   },
 };
 </script>
 
 <style>
-@import '../css/TheHeader.css';
+@import "../css/TheHeader.css";
 </style>
