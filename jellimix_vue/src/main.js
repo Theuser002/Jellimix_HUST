@@ -12,9 +12,7 @@ import './css/custom-toast.css';
 import "./css/bootstrap.css";
 import './css/font-awesome.min.css';
 import './css/fonts.css';
-import './css/light-theme.css';
-// import './css/style.css';
-
+import './css/styles.css';
 import './css/switch-theme-toggle.css';
 
 Vue.config.productionTip = false

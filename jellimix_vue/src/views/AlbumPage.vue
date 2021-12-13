@@ -33,7 +33,6 @@
           @range-change="
             start = button.start;
             end = button.end;
-            mediaList = mediaList;
           "
         />
       </template>
@@ -58,6 +57,7 @@ export default {
 
   data() {
     return {
+      isOpenOption: false,
       mediaList: null,
       pageContent: [],
       loading: false,
@@ -65,6 +65,7 @@ export default {
       page: 0,
       start: 0,
       end: 0,
+      defaultImg: "album1.jpg",
     };
   },
 
@@ -91,9 +92,14 @@ export default {
       this.start = start;
       this.end = end;
       this.pageContent = this.mediaList.slice(start, end);
+      console.log(this.pageContent);
     },
 
     previousRoute() {
+      this.$router.back();
+    },
+
+    singleAlbum() {
       this.$router.back();
     },
   },
