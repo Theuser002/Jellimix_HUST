@@ -79,7 +79,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setTokenAuth"]),
+    ...mapMutations(["setTokenAuth", "setUserId"]),
     closeForm() {
       this.$emit("close-form");
     },
@@ -90,7 +90,10 @@ export default {
       }
       this.loginService([this.usernameInput, this.passwordInput])
       .then((res) => {
+        // store token authentication
         this.setTokenAuth(res.data.AccessToken);
+        // store user id
+        this.setUserId(res.data.SessionInfo.UserId);
         this.$toast.success("Welcome back, " + res.data.User.Name + "!");
         this.closeForm();
       })
