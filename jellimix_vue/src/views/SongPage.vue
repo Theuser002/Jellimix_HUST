@@ -1,109 +1,117 @@
 <template>
-  <div class="song">
-    <a @click="previousRoute">Back</a>
-    <div class="feature-album">
-      <div class="ms_rcnt_slider">
-        <div class="ms_heading">
-          <h1>Featured Album</h1>
-        </div>
-        <div
-          style="display: flex; flex-direction: row"
-          v-for="num in [0, 1, 2]"
-          :key="num"
-        >
-          <PrimaryMedia
-            v-for="(item, index) in mediaList.slice(num * 4, num * 4 + 4)"
-            :key="index"
-            :media_data="item"
-          />
-        </div>
-      </div>
+  <div class="album">
+    <div v-if="mediaList==null" class="wrap">
+      <img src="../assets/loader1.gif" alt="" />
     </div>
-    <div class="pagination">
-      <div class="page" v-for="index in getPaginationList" :key="index">
-        <div @click="changePage(index)">
-          {{ index }}
-        </div>
+    <div v-else>
+      <router-link to="/Home">Back</router-link>
+      <div class="content-block">
+        <ul class="media-list">
+          <li v-for="(media, index) in pageContent" :key="index">
+            <div class="col-md-3">
+              <PrimaryMedia :media_data="media" />
+            </div>
+          </li>
+        </ul>
       </div>
+      <vue-ads-pagination
+        :total-items="mediaList.length"
+        :items-per-page="itemPerPage"
+        :max-visible-pages="5"
+        :page="page"
+        :loading="loading"
+        @page-change="pageChange"
+        @range-change="rangeChange"
+      >
+        <template slot-scope="props">
+          <div class="vue-ads-pr-2 vue-ads-leading-loose">
+            Albums {{ props.start }} - {{ props.end }} of {{ props.total }}
+          </div>
+        </template>
+        <template slot="buttons" slot-scope="props">
+          <vue-ads-page-button
+            v-for="(button, key) in props.buttons"
+            :key="key"
+            v-bind="button"
+            @page-change="page = button.page"
+            @range-change="
+              start = button.start;
+              end = button.end;
+            "
+          />
+        </template>
+      </vue-ads-pagination>
     </div>
   </div>
 </template>
 
 <script>
-import SongServices from "../common/SongServices";
+import "../../node_modules/vue-ads-pagination/dist/vue-ads-pagination.css";
+import VueAdsPagination, { VueAdsPageButton } from "vue-ads-pagination";
+import SongServices from "../common/SongServices.js";
 
 export default {
+  name: "App",
+
+  components: {
+    VueAdsPagination,
+    VueAdsPageButton,
+  },
+
   mixins: [SongServices],
+
   data() {
     return {
-      mediaList: [],
-      currentPage: 1,
-      totalPage: 1,
+      isOpenOption: false,
+      mediaList: null,
+      pageContent: [],
+      loading: false,
+      itemPerPage: 12,
+      page: 0,
+      start: 0,
+      end: 0,
+      defaultImg: "album1.jpg",
     };
   },
+  watch: {
+    page() {
+      window.scrollTo(0, 0);
+    },
+  },
   created() {
-    this.getData();
-  },
-  computed: {
-    getPaginationList() {
-      let numberList = [];
-      let count = 0;
-      if (this.currentPage > 1 && this.currentPage < this.totalPage - 1) {
-        for (let i = this.currentPage - 1; i <= this.totalPage; i++) {
-          count++;
-          if (count > 4) {
-            break;
-          }
-          numberList.push(i);
-        }
-      } else if (this.currentPage == 1) {
-        for (let i = 1; i <= this.totalPage; i++) {
-          count++;
-          if (count > 4) {
-            break;
-          }
-          numberList.push(i);
-        }
-      } else if (this.currentPage >= this.totalPage - 1) {
-        for (let i = this.totalPage - 3; i <= this.totalPage; i++) {
-          count++;
-          if (count > 4) {
-            break;
-          }
-          if (i > 0) {
-            numberList.push(i);
-          }
-        }
-      }
-      return numberList;
-    },
-  },
-  methods: {
-    previousRoute() {
-      this.$router.back();
-    },
-    getData() {
-      this.getSongByPage(this.currentPage)
-        .then((res) => {
+    this.getAllSong()
+      .then((res) => {
+        setTimeout(() => {
           this.mediaList = res.data.Items;
-          this.totalPage = Math.floor(res.data.TotalRecordCount / 12) + 1;
-        })
-        .catch((res) => {
-          console.log(res);
-        });
+          this.pageContent = this.mediaList;
+        }, 500);
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  },
+
+  methods: {
+    pageChange(page) {
+      this.page = page;
     },
-    changePage(index) {
-      this.currentPage = index;
-      this.getData();
+
+    rangeChange(start, end) {
+      console.log(start, end);
+      this.start = start;
+      this.end = end;
+      this.pageContent = this.mediaList.slice(start, end);
+      console.log(this.pageContent);
     },
   },
 };
 </script>
 
 <style scoped>
-.page {
-  background-color: aqua;
-  width: 20px;
-  height: 20px;
+.album {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 </style>
