@@ -27,6 +27,7 @@
                   type="text"
                   placeholder="Enter Your Name"
                   class="form-control"
+                  v-model="usernameInput"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-user" aria-hidden="true"></i>
@@ -34,19 +35,10 @@
               </div>
               <div class="form-group">
                 <input
-                  type="text"
-                  placeholder="Enter Your Email"
-                  class="form-control"
-                />
-                <span class="form_icon">
-                  <i class="fa_icon form-envelope" aria-hidden="true"></i>
-                </span>
-              </div>
-              <div class="form-group">
-                <input
                   type="password"
                   placeholder="Enter Password"
                   class="form-control"
+                  v-model="passwordInput"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-lock" aria-hidden="true"></i>
@@ -57,18 +49,17 @@
                   type="password"
                   placeholder="Confirm Password"
                   class="form-control"
+                  v-model="passwordReInput"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-lock" aria-hidden="true"></i>
                 </span>
               </div>
-              <a href="#" class="ms_btn">register now</a>
+              <a class="ms_btn" @click="registerUser">register now</a>
               <p>
                 Already Have An Account?
                 <a
-                  href="#myModal1"
-                  data-toggle="modal"
-                  class="ms_modal hideCurrentModel"
+                @click="switchToLoginForm"
                   >login here</a
                 >
               </p>
@@ -80,15 +71,63 @@
 </template>
 
 <script>
+import AuthenticationServices from "../common/AuthenticationServices"
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
       isOpenModal: false,
+      usernameInput: "",
+      passwordInput: "",
+      passwordReInput: "",
     };
   },
+  mixins: [AuthenticationServices],
   methods: {
+    ...mapMutations(["setTokenAuth", "setUserId"]),
     closeForm() {
       this.$emit("close-form");
+    },
+    switchToLoginForm() {
+      this.closeForm();
+      this.$emit("switch-login");
+    },
+    registerUser() {
+      this.usernameInput = this.usernameInput.trim();
+      if (this.usernameInput.length == 0 || this.passwordInput.length == 0 || this.passwordReInput.length==0) {
+        this.$toast.error("empty username or password")
+        return
+      }
+      if (this.passwordInput !== this.passwordReInput) {
+        this.$toast.error("password does not match")
+        return 
+      }
+      this.registerService([this.usernameInput, this.passwordInput])
+      .then(() => {
+        // auto login for the user
+        this.loginService([this.usernameInput, this.passwordInput])
+        .then((resLogin) => {
+          // store token authentication
+          this.setTokenAuth(resLogin.data.AccessToken);
+          // store user id
+          this.setUserId(resLogin.data.SessionInfo.UserId);
+          this.$toast.success("Welcome my fren, " + resLogin.data.User.Name + "!");
+          this.closeForm();
+        })
+        .catch((err) => {
+          console.log("error when login: ", err.message)
+          this.$toast.error(err.message)
+          return 
+        });
+
+      })
+      .catch((err) => {
+        if (err.message.includes("Request failed with status code 400")) {
+            err.message = "username existed"
+          }
+        console.log("error when registering: ", err.message)
+        this.$toast.error(err.message)
+      });
     },
   },
 };
