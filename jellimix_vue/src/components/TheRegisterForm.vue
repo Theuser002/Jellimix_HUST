@@ -66,9 +66,7 @@
               <p>
                 Already Have An Account?
                 <a
-                  href="#myModal1"
-                  data-toggle="modal"
-                  class="ms_modal hideCurrentModel"
+                @click="switchToLoginForm"
                   >login here</a
                 >
               </p>
@@ -89,6 +87,10 @@ export default {
   methods: {
     closeForm() {
       this.$emit("close-form");
+    },
+    switchToLoginForm() {
+      this.closeForm();
+      this.$emit("switch-login");
     },
   },
 };
