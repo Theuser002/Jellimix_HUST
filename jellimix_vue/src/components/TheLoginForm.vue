@@ -53,9 +53,7 @@
               <p>
                 Don't Have An Account?
                 <a
-                  href="#myModal"
-                  data-toggle="modal"
-                  class="ms_modal1 hideCurrentModel"
+                  @click="switchToRegisterForm"
                   >register here</a
                 >
               </p>
@@ -82,6 +80,10 @@ export default {
     ...mapMutations(["setTokenAuth", "setUserId"]),
     closeForm() {
       this.$emit("close-form");
+    },
+    switchToRegisterForm() {
+      this.closeForm();
+      this.$emit("switch-register");
     },
     loginUser() {
       if (this.usernameInput.length == 0 || this.passwordInput.length == 0) {

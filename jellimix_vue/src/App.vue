@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <the-register-form id="register-form" v-if="isOpenRegisterModal" @close-form="toggleRegisterForm(false)"/>
-    <the-login-form id="login-form" v-if="isOpenLoginModal" @close-form="toggleLoginForm(false)"/>
+    <the-login-form id="login-form" v-if="isOpenLoginModal" @close-form="toggleLoginForm(false)" @switch-register="toggleRegisterForm(true)" />
     <the-menu></the-menu>
     <the-header @open-register-form="toggleRegisterForm(true)" @open-login-form="toggleLoginForm(true)"></the-header>
     <router-view class="router-view" @play-song="playAudio"></router-view>
