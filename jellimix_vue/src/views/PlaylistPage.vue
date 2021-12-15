@@ -19,7 +19,7 @@
             :title="item.Name"
             :duration="item.RunTimeTicks"
           />
-          <div class="col-lg-2">
+          <div class="col-lg-2" @click="isOpenCreateForm = true">
             <div class="ms_rcnt_box marger_bottom25">
               <div class="create_playlist">
                 <i class="ms_icon icon_playlist"></i>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="ms_upload_box">
+    <div class="ms_upload_box" v-if="isOpenCreateForm">
       <div class="ms_heading">
         <h1>Playlist Information</h1>
       </div>
@@ -48,7 +48,7 @@
         <div class="pro-form-btn text-center marger_top15">
           <div class="ms_upload_btn">
             <a href="#" class="ms_btn">Upload Now</a>
-            <a href="#" class="ms_btn">cancel</a>
+            <a href="#" class="ms_btn" @click="isOpenCreateForm=false">cancel</a>
           </div>
         </div>
       </div>
@@ -65,6 +65,7 @@ export default {
   data() {
     return {
       playlists: null,
+      isOpenCreateForm: false
     };
   },
   computed: {
