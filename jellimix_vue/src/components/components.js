@@ -27,6 +27,8 @@ const TheLoginForm = () =>
     import ('./TheLoginForm.vue')
 const TheGenres = () =>
     import ('./TheGenres.vue')
+const APlaylist = () =>
+    import ('./MediaBlock/Media/APlaylist.vue')
 
 //Global components
 Vue.component('TheMenu', TheMenu);
@@ -43,3 +45,4 @@ Vue.component('ThePlayer', ThePlayer);
 Vue.component('TheRegisterForm', TheRegisterForm);
 Vue.component('TheLoginForm', TheLoginForm);
 Vue.component('TheGenres', TheGenres);
+Vue.component('APlaylist', APlaylist);
