@@ -117,16 +117,12 @@
           @click="openRegisterForm"
           href="javascript:;"
           class="ms_btn reg_btn"
-          data-toggle="modal"
-          data-target="#myModal"
           ><span>register</span></a
         >
         <a
           @click="openLoginForm"
           href="javascript:;"
           class="ms_btn login_btn"
-          data-toggle="modal"
-          data-target="#myModal1"
           ><span>login</span></a
         >
       </div>
