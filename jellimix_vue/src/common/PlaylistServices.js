@@ -16,6 +16,9 @@ var PlaylistServices = {
                 }
             }
             return await axios.get(url, config);
+        },
+        async getPlaylistImg(playlist) {
+            return playlist
         }
     },
 }
