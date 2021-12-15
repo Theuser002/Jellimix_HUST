@@ -5287,11 +5287,15 @@ h2.widget-title:after {
     }
 
     .ms_header {
-        padding: 20px 30px 30px 45px;
+        padding: 20px 30px 20px 45px;
     }
 
     .ms_top_right .ms_top_lang {
         padding-right: 5px;
+    }
+
+    .ms_top_right label {
+        margin-bottom: 0px;
     }
 
     .ms_profile .ms_top_btn {
