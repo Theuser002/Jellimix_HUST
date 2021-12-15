@@ -100,7 +100,7 @@ export default {
         this.closeForm();
       })
       .catch((err) => {
-        console.log("error: ", err.message)
+        console.log("error when login: ", err.message)
         this.$toast.error(err.message)
       });
     }
