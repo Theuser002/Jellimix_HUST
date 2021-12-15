@@ -117,16 +117,12 @@
           @click="openRegisterForm"
           href="javascript:;"
           class="ms_btn reg_btn"
-          data-toggle="modal"
-          data-target="#myModal"
           ><span>register</span></a
         >
         <a
           @click="openLoginForm"
           href="javascript:;"
           class="ms_btn login_btn"
-          data-toggle="modal"
-          data-target="#myModal1"
           ><span>login</span></a
         >
       </div>
@@ -169,7 +165,7 @@ export default {
     this.autoLogin();
   },
   methods: {
-    ...mapMutations(["setAudio", "setOpenPlayer", "setTokenAuth"]),
+    ...mapMutations(["setAudio", "setOpenPlayer", "setTokenAuth", "setUserId"]),
     away: function () {
       this.isHidden = true;
     },
@@ -213,7 +209,8 @@ export default {
     },
 
     autoLogin() {
-      this.setTokenAuth(this.$cookies.get("sessionId"));
+      this.setTokenAuth(this.$cookies.get("sessionId"))
+      this.setUserId(this.$cookies.get("userId"));
     },
 
     /**
@@ -238,6 +235,7 @@ export default {
      */
     logoutAction() {
       this.setTokenAuth("");
+      this.setUserId("");
     },
 
     /**
