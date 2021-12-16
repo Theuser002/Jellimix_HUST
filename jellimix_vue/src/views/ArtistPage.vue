@@ -1,7 +1,7 @@
 <template>
    <div class="album_single_data">
                 <div class="album_single_img">
-                    <img src="images/featured/song1.jpg" alt="artist profile pic" class="img-fluid">
+                    <img src="../assets/images/default-singer.png" alt="artist profile pic" class="img-fluid">
                 </div>
                 <div class="album_single_text">
                     <h2> &lt;Artist name&gt; </h2>
@@ -35,6 +35,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+/* global styles */
+</style>
 
+<style scoped>
+/* local styles */
+@import "../../css/ArtistPage.css";
 </style>
