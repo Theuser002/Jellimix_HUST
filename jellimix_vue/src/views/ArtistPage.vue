@@ -77,7 +77,7 @@ export default {};
 /* local styles */
 @import "../css/ArtistPage.css";
 .album-single-image {
-    position: absolute;
+    position: relative;
 }
 .album-single-image img{
     height: 80%;
