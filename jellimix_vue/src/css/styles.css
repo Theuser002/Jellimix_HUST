@@ -99,6 +99,7 @@ Author: Kamleshyadav
     --border-color: var(--light-border-color);
     --footer-after-bg: var(--light-footer-after-bg);
     --footer-after-bg-color: var(--light-footer-after-bg-color);
+    --pagination-bg-color: var(--dark-media-small-text-color);
 }
 
 #theme--dark {
@@ -121,6 +122,8 @@ Author: Kamleshyadav
     --border-color: var(--dark-border-color);
     --footer-after-bg: var(--dark-footer-after-bg);
     --footer-after-bg-color: var(--dark-footer-after-bg-color);
+    --pagination-bg-color: var(--light-media-small-text-color);
+
 }
 
 body {
@@ -1195,11 +1198,17 @@ ul.ms_lang_box:after {
     position: relative;
     overflow: hidden;
     border-radius: 10px;
+    max-height: 240px;
 }
 
 .ms_rcnt_box_img img {
     width: 100%;
     border-radius: 10px;
+}
+
+.ms_rcnt_box_media_image {
+    width: 240px;
+    height: 240px;
 }
 
 .ms_rcnt_box_text {
@@ -1216,6 +1225,10 @@ ul.ms_lang_box:after {
 .ms_rcnt_box_text h3 a,
 .w_top_song .w_tp_song_name h3 a {
     color: var(--media-name-color) !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
 }
 
 .ms_rcnt_box_text p,
@@ -1982,7 +1995,7 @@ span.ovrly_text2 {
     background-size: cover;
     position: relative;
     z-index: 1;
-    margin-bottom: 75px;
+    margin-bottom: 0px;
     padding-top: 50px;
 }
 
@@ -8091,6 +8104,7 @@ h2.widget-title:after {
 .content-block ul li {
     display: inline-block;
     margin: auto;
+    padding-bottom: 15px
 }
 
 .slide_menu .ms_header {
@@ -8105,6 +8119,24 @@ h2.widget-title:after {
     padding-left: 160px !important;
 }
 
+/* Pagination */
+
+.vue-ads-text-xs {
+    font-size: 14px !important;
+    /* color: var(--light-media-small-text-color) !important; */
+}
+
+.vue-ads-bg-gray-200 {
+    background-color: var(--pagination-bg-color) !important;
+}
+
+.hover\:vue-ads-bg-gray-100:hover {
+    background-color: var(--pagination-bg-color) !important;
+}
+
+.open_player {
+    padding-bottom: 75px;
+}
 
 /* Dark theme */
 
