@@ -36,6 +36,7 @@
               v-for="item in searchSongRes"
               :key="item.Id"
               @click="playSong(item)"
+              :title="item.Name"
             >
               {{ item.Name }}
             </a>
@@ -46,6 +47,7 @@
               class="result-item"
               v-for="item in searchAlbumRes"
               :key="item.Id"
+              :title="item.Name"
               href="#"
             >
               {{ item.Name }}
@@ -57,6 +59,7 @@
               class="result-item"
               v-for="item in searchArtistRes"
               :key="item.Id"
+              :title="item.Name"
               href="#"
             >
               {{ item.Name }}
@@ -113,16 +116,10 @@
         class="ms_top_btn"
         v-if="this.tokenAuth == null || this.tokenAuth.length == 0"
       >
-        <a
-          @click="openRegisterForm"
-          href="javascript:;"
-          class="ms_btn reg_btn"
+        <a @click="openRegisterForm" href="javascript:;" class="ms_btn reg_btn"
           ><span>register</span></a
         >
-        <a
-          @click="openLoginForm"
-          href="javascript:;"
-          class="ms_btn login_btn"
+        <a @click="openLoginForm" href="javascript:;" class="ms_btn login_btn"
           ><span>login</span></a
         >
       </div>
@@ -209,7 +206,7 @@ export default {
     },
 
     autoLogin() {
-      this.setTokenAuth(this.$cookies.get("sessionId"))
+      this.setTokenAuth(this.$cookies.get("sessionId"));
       this.setUserId(this.$cookies.get("userId"));
     },
 

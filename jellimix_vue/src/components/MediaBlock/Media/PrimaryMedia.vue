@@ -3,6 +3,7 @@
     <div class="ms_rcnt_box">
       <div class="ms_rcnt_box_img">
         <img
+          class="ms_rcnt_box_media_image"
           :src="
             img_url || require(`../../../assets/images/album/${defaultImg}`)
           "
@@ -60,7 +61,7 @@
       </div>
       <div class="ms_rcnt_box_text">
         <h3 @click="playAudio">
-          <a>{{ media_data.Name }}</a>
+          <a :title="media_data.Name">{{ media_data.Name }}</a>
         </h3>
         <p>{{ media_data.AlbumArtist }}</p>
       </div>
@@ -71,7 +72,7 @@
 <script>
 import { mapMutations } from "vuex";
 import { saveAs } from "file-saver";
-import SongServices from '../../../common/SongServices.js'
+import SongServices from "../../../common/SongServices.js";
 
 export default {
   mixins: [SongServices],
@@ -92,24 +93,24 @@ export default {
     this.getSong();
     this.getImage();
   },
-  watch:{
-    media_data(){
+  watch: {
+    media_data() {
       console.log("prop thay đổi");
       this.getSong();
-    this.getImage();
-    }
+      this.getImage();
+    },
   },
   methods: {
     ...mapMutations(["setAudio", "setOpenPlayer"]),
     getImage() {
-      let url = this.getImageLink(this.media_data)
+      let url = this.getImageLink(this.media_data);
       this.img_url = url;
       this.media_data.img_url = url;
     },
-    getSong(){
-      let url = this.getAudioLink(this.media_data.Id)
+    getSong() {
+      let url = this.getAudioLink(this.media_data.Id);
       this.song_url = url;
-      this.media_data.song_url = url
+      this.media_data.song_url = url;
     },
     playAudio() {
       this.setAudio(this.media_data);

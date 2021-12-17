@@ -1,3 +1,8 @@
+.playlist_holder {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
 .not-login-playlist {
     width: 100%;
     height: 500px;

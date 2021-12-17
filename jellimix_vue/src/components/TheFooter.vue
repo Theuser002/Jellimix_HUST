@@ -1,6 +1,6 @@
 <!--TODO: Phúc-->
 <template>
-  <div class="ms_footer_wrapper">
+  <div class="ms_footer_wrapper" :class="{ open_player: isOpenPlayer }">
     <div class="ms_footer_logo">
       <a href="index.html"
         ><img
@@ -153,8 +153,13 @@
 
 <script>
 // import js file here
+import { mapGetters } from "vuex";
 
-export default {};
+export default {
+  computed: {
+    ...mapGetters(["audio", "isPlaying", "isOpenPlayer"]),
+  },
+};
 </script>
 
 <style scoped>
