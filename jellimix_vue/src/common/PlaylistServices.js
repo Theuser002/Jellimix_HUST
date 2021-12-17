@@ -17,8 +17,15 @@ var PlaylistServices = {
             }
             return await axios.get(url, config);
         },
-        async getPlaylistImg(playlist) {
-            return playlist
+        getPlaylistImg(playlist) {
+            if (Object.keys(playlist.ImageTags)[0] == 'Primary') {
+                let url = axios.defaults.baseURL +
+                    `Items/${playlist.Id}/Images/Primary?fillHeight=225&fillWidth=225&quality=96`
+                return url;
+            } else {
+                return null;
+            }
+
         }
     },
 }

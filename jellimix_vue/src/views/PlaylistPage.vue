@@ -18,6 +18,7 @@
             :key="item.Id"
             :title="item.Name"
             :duration="item.RunTimeTicks"
+            :img_url="item.img_url"
           />
           <div class="col-lg-2" @click="isOpenCreateForm = true">
             <div class="ms_rcnt_box marger_bottom25">
@@ -48,7 +49,9 @@
         <div class="pro-form-btn text-center marger_top15">
           <div class="ms_upload_btn">
             <a href="#" class="ms_btn">Upload Now</a>
-            <a href="#" class="ms_btn" @click="isOpenCreateForm=false">cancel</a>
+            <a href="#" class="ms_btn" @click="isOpenCreateForm = false"
+              >cancel</a
+            >
           </div>
         </div>
       </div>
@@ -64,8 +67,8 @@ export default {
   // variables
   data() {
     return {
-      playlists: null,
-      isOpenCreateForm: false
+      playlists: [],
+      isOpenCreateForm: false,
     };
   },
   computed: {
@@ -88,8 +91,15 @@ export default {
       )
         .then((res) => {
           this.playlists = res.data.Items;
+          this.attachImage()
         })
         .catch();
+    },
+    attachImage() {
+      console.log("hihi");
+      this.playlists.forEach((playlist) => {
+        playlist.img_url = this.getPlaylistImg(playlist);
+      });
     },
   },
 };
