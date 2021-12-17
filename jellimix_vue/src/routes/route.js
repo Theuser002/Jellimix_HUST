@@ -12,6 +12,8 @@ const SingleArtistPage = () =>
     import ('../views/SingleArtistPage.vue')
 const AlbumPage = () =>
     import ('../views/AlbumPage.vue')
+const AlbumDetailPage = () =>
+    import ('../views/AlbumDetailPage.vue')
 const PlaylistPage = () =>
     import ('../views/PlaylistPage.vue')
 
@@ -22,6 +24,7 @@ const routes = [
     { path: '/Album', component: AlbumPage },
     { path: '/Playlist', component: PlaylistPage },
     { path: '/SingleArtist', component: SingleArtistPage},
+    { path: '/AlbumDetail', component: AlbumDetailPage},
     { path: '/', redirect: '/Home' }
 ]
 
