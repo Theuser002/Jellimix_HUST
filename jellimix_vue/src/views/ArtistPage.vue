@@ -5,7 +5,7 @@
       <ul class="media-list">
         <li v-for="(media, index) in pageContent" :key="index">
           <div class="col-md-3">
-            <PrimaryMedia :media_data="media" @play-song="playAudio" />
+            <AnArtist :media_data="media"/>
           </div>
         </li>
       </ul>
@@ -88,11 +88,9 @@ export default {
     },
 
     rangeChange(start, end) {
-      console.log(start, end);
       this.start = start;
       this.end = end;
       this.pageContent = this.mediaList.slice(start, end);
-      console.log(this.pageContent);
     },
 
     previousRoute() {

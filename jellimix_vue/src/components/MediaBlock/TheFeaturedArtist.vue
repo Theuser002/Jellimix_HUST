@@ -3,12 +3,12 @@
     <div class="ms_rcnt_slider">
       <div class="ms_heading">
         <h1>Featured Artist</h1>
-        <span class="veiw_all"><router-link to="/Artist">View more</router-link></span>
+        <span class="veiw_all"><router-link to="/Artists">View more</router-link></span>
       </div>
     </div>
     <swiper v-if="mediaList" class="swiper" ref="swiper" :options="swiperOption">
       <swiper-slide v-for="(media, index) in mediaList" :key="index"
-        ><PrimaryMedia :media_data="media"
+        ><AnArtist :media_data="media"
       /></swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>

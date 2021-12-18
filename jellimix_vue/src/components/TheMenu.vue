@@ -70,7 +70,7 @@ export default {
       menuItems: [
         { path: "/Home", name: "Trang chủ", icon: "icon_discover" }, //đường dẫn router, tên lựa chọn, tọa độ x-y của icon trong ảnh svg
         { path: "/Song", name: "Bài hát", icon: "icon_music" },
-        { path: "/Artist", name: "Nghệ sĩ", icon: "icon_artists" },
+        { path: "/Artists", name: "Nghệ sĩ", icon: "icon_artists" },
         { path: "/Album", name: "Album", icon: "icon_albums" },
         { path: "/Playlist", name: "Playlist", icon: "icon_fe_playlist" },
       ],
