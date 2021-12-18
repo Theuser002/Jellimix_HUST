@@ -33,7 +33,11 @@
         </div>
       </div>
     </div>
-    <div class="ms_upload_box" v-if="isOpenCreateForm">
+    <div
+      id="create-playlist-modal"
+      class="modal centered-modal ms_upload_box"
+      v-if="isOpenCreateForm"
+    >
       <div class="ms_heading">
         <h1>Playlist Information</h1>
       </div>
@@ -44,11 +48,12 @@
             type="text"
             placeholder="Dream Your Moments"
             class="form-control"
+            v-model="playlistName"
           />
         </div>
         <div class="pro-form-btn text-center marger_top15">
           <div class="ms_upload_btn">
-            <a href="#" class="ms_btn">Upload Now</a>
+            <a href="#" class="ms_btn" @click="uploadPlaylist">Upload Now</a>
             <a href="#" class="ms_btn" @click="isOpenCreateForm = false"
               >cancel</a
             >
@@ -68,6 +73,7 @@ export default {
   data() {
     return {
       playlists: [],
+      playlistName: "",
       isOpenCreateForm: false,
     };
   },
@@ -91,15 +97,25 @@ export default {
       )
         .then((res) => {
           this.playlists = res.data.Items;
-          this.attachImage()
+          this.attachImage();
         })
         .catch();
     },
     attachImage() {
-      console.log("hihi");
       this.playlists.forEach((playlist) => {
         playlist.img_url = this.getPlaylistImg(playlist);
       });
+    },
+    uploadPlaylist() {
+      if (this.playlistName == "") {
+        this.$toast.error("Tên playlist không được để trống");
+      } else {
+        this.addNewPlaylist(this.playlistName, this.userId, this.tokenAuth)
+          .then(() => {
+            this.$toast.success("Tạo playlist thành công");
+          })
+          .catch();
+      }
     },
   },
 };

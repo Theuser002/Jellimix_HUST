@@ -25,7 +25,18 @@ var PlaylistServices = {
             } else {
                 return null;
             }
-
+        },
+        async addNewPlaylist(name, userId, tokenAuth) {
+            let url = axios.defaults.baseURL +
+                `Playlists?Name=${name}&userId=${userId}`
+            const config = {
+                headers: {
+                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
+                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
+                        `Token="${tokenAuth}"`
+                }
+            }
+            return await axios.post(url, config);
         }
     },
 }
