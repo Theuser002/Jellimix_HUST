@@ -28,6 +28,7 @@
                   placeholder="Enter Your Name"
                   class="form-control"
                   v-model="usernameInput"
+                  @keyup.enter="registerUser"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-user" aria-hidden="true"></i>
@@ -39,6 +40,7 @@
                   placeholder="Enter Password"
                   class="form-control"
                   v-model="passwordInput"
+                  @keyup.enter="registerUser"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-lock" aria-hidden="true"></i>
@@ -50,6 +52,7 @@
                   placeholder="Confirm Password"
                   class="form-control"
                   v-model="passwordReInput"
+                  @keyup.enter="registerUser"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-lock" aria-hidden="true"></i>
