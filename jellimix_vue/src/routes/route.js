@@ -24,13 +24,8 @@ const routes = [
     { path: '/Artists/:id', component: SingleArtistPage },
     { path: '/Album', component: AlbumPage },
     { path: '/Playlist', component: PlaylistPage },
-<<<<<<< HEAD
     { path: '/SingleArtist', component: SingleArtistPage },
     { path: '/AlbumDetail', component: AlbumDetailPage },
-=======
-    { path: '/SingleArtist', component: SingleArtistPage},
-    { path: '/AlbumDetail', component: AlbumDetailPage},
->>>>>>> 7e27c6a41ee6af0127b44110dee7a88f37cd0abe
     { path: '/', redirect: '/Home' }
 ]
 
