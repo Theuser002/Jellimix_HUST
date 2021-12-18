@@ -4,7 +4,7 @@
       <img src="../assets/loader1.gif" alt="" />
     </div>
     <div v-else>
-      <router-link to="/Home">Back</router-link>
+      <router-link to="/Home">Back to home</router-link>
       <div class="content-block">
         <ul class="media-list">
           <li v-for="(media, index) in pageContent" :key="index">
