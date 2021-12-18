@@ -18,10 +18,10 @@ const PlaylistPage = () =>
 const routes = [
     { path: '/Home', component: Home },
     { path: '/Song', component: SongPage },
-    { path: '/Artist', component: ArtistPage },
+    { path: '/Artists', component: ArtistPage },
+    { path: '/Artists/:id', component: SingleArtistPage },
     { path: '/Album', component: AlbumPage },
     { path: '/Playlist', component: PlaylistPage },
-    { path: '/SingleArtist', component: SingleArtistPage},
     { path: '/', redirect: '/Home' }
 ]
 

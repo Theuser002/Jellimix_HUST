@@ -1,11 +1,12 @@
 <template>
         <div class="ms_album_single_wrapper ms_artist_single">
+            <div @click="routeBack">Back</div>
             <div class="album_single_data">
                 <div class="album_single_img">
                     <img src="../assets/images/default-singer.png" alt="artist profile pic" class="img-fluid">
                 </div>
                 <div class="album_single_text">
-                    <h2>The Artist</h2>
+                    <h2>{{$route.params.id}}</h2>
                     <p class="singer_name">Singer, New York</p>
                     <div class="about_artist">
                         The Artist (Real name Wingardium Leviosa) seems to be a great person so he is loved by many people but all is just the big, shiny, flashy friendly facade he puts on. &lt;The artist&gt; is in fact a psychopath and was convited of serial m.u.r.d.e.r of 13 victims and is now waiting on death row in Volatile prison. His music is good, he is not. Here are some...<a href="#">Read More</a>
@@ -66,7 +67,13 @@
 <script>
 // import axios from axios
 
-export default {};
+export default {
+    methods: {
+        routeBack(){
+            this.$router.push('/Artists')
+        }
+    },
+};
 </script>
 
 <style>
