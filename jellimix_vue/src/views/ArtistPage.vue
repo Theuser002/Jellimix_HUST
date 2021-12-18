@@ -5,11 +5,7 @@
       <ul class="media-list">
         <li v-for="(media, index) in pageContent" :key="index">
           <div class="col-md-3">
-<<<<<<< HEAD
             <AnArtist :media_data="media"/>
-=======
-            <PrimaryMedia :media_data="media" @play-song="playAudio" />
->>>>>>> aa74b7fcd275f648c7de2c14cd26c61478090a86
           </div>
         </li>
       </ul>
@@ -115,8 +111,4 @@ export default {
   margin-left: 50px;
   margin-right: 50px;
 }
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> aa74b7fcd275f648c7de2c14cd26c61478090a86
