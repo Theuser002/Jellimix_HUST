@@ -16,9 +16,7 @@
           <APlaylist
             v-for="item in playlists"
             :key="item.Id"
-            :title="item.Name"
-            :duration="item.RunTimeTicks"
-            :img_url="item.img_url"
+            :playlist_data="item"
           />
           <div class="col-lg-2" @click="isOpenCreateForm = true">
             <div class="ms_rcnt_box marger_bottom25">

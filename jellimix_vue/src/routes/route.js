@@ -16,14 +16,17 @@ const AlbumDetailPage = () =>
     import ('../views/AlbumDetailPage.vue')
 const PlaylistPage = () =>
     import ('../views/PlaylistPage.vue')
+const SinglePlaylistPage = () =>
+    import ('../views/SinglePlaylistPage.vue')
 
 const routes = [
     { path: '/Home', component: Home },
-    { path: '/Song', component: SongPage },
+    { path: '/Songs', component: SongPage },
     { path: '/Artists', component: ArtistPage },
     { path: '/Artists/:id', component: SingleArtistPage },
-    { path: '/Album', component: AlbumPage },
-    { path: '/Playlist', component: PlaylistPage },
+    { path: '/Albums', component: AlbumPage },
+    { path: '/Playlists', component: PlaylistPage },
+    { path: '/Playlists/:id', component: SinglePlaylistPage },
     { path: '/SingleArtist', component: SingleArtistPage },
     { path: '/AlbumDetail', component: AlbumDetailPage },
     { path: '/', redirect: '/Home' }
