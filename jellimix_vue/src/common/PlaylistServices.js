@@ -17,6 +17,32 @@ var PlaylistServices = {
             }
             return await axios.get(url, config);
         },
+        async getSinglePlaylist(id, userId, tokenAuth) {
+            let url = axios.defaults.baseURL +
+                `Users/${userId}/Items/${id}`
+            const config = {
+                headers: {
+                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
+                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
+                        `Token="${tokenAuth}"`
+                }
+            }
+            return await axios.get(url, config)
+        },
+        async getSinglePlaylistSong(id, userId, tokenAuth) {
+            let url = axios.defaults.baseURL +
+                `Playlists/${id}/Items?Fields=PrimaryImageAspectRatio&` +
+                `EnableImageTypes=Primary%2CBackdrop%2CBanner%2CThumb&` +
+                `UserId=${userId}`
+            const config = {
+                headers: {
+                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
+                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
+                        `Token="${tokenAuth}"`
+                }
+            }
+            return await axios.get(url, config)
+        },
         getPlaylistImg(playlist) {
             if (Object.keys(playlist.ImageTags)[0] == 'Primary') {
                 let url = axios.defaults.baseURL +
@@ -25,7 +51,18 @@ var PlaylistServices = {
             } else {
                 return null;
             }
-
+        },
+        async addNewPlaylist(name, userId, tokenAuth) {
+            let url = axios.defaults.baseURL +
+                `Playlists?Name=${name}&userId=${userId}`
+            const config = {
+                headers: {
+                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
+                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
+                        `Token="${tokenAuth}"`
+                }
+            }
+            return await axios.post(url, config);
         }
     },
 }

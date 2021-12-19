@@ -4,22 +4,22 @@
       <div class="ms_rcnt_box_img">
         <img
           :src="
-            img_url || require(`../../../assets/images/album/${defaultImg}`)
+            playlist_data.img_url || require(`../../../assets/images/album/${defaultImg}`)
           "
           class="img-fluid"
         />
         <div class="ms_main_overlay">
           <div class="ms_box_overlay"></div>
-          <div class="ms_play_icon">
+          <div class="ms_play_icon" @click="displaySinglePlaylist">
             <img src="../../../assets/images/svg/play.svg" alt="" />
           </div>
         </div>
       </div>
       <div class="ms_rcnt_box_text">
         <h3>
-          <a href="#">{{ title }}</a>
+          <a href="#">{{ playlist_data.Name }}</a>
         </h3>
-        <p>{{ duration | convertTickToTime }}</p>
+        <p>{{ playlist_data.RunTimeTicks | convertTickToTime }}</p>
       </div>
     </div>
   </div>
@@ -28,19 +28,18 @@
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-    },
-    duration: {
-      type: Number,
-    },
-    img_url: {
-      type: String
+    playlist_data: {
+      type: Object
     }
   },
   data() {
     return {
       defaultImg: "album1.jpg"
+    }
+  },
+  methods: {
+    displaySinglePlaylist(){
+      this.$router.push(`/Playlists/${this.playlist_data.Id}`)
     }
   },
   filters: {
