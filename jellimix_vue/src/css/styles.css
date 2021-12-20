@@ -51,7 +51,7 @@ Author: Kamleshyadav
     --light-overlay-on-color: #46888a;
     --light-media-name-color: black;
     --light-media-small-text-color: #777777;
-    --light-text: #202020;
+    --light-text-color: #202020;
     --light-player-bg-color: rgba(219, 219, 219, 0.3);
     --light-player-close-color: #45abca;
     --light-border-color: #ededed;
@@ -71,7 +71,7 @@ Author: Kamleshyadav
     --dark-overlay-on-color: #46888a;
     --dark-media-name-color: white;
     --dark-media-small-text-color: #dedede;
-    --dark-text: #d2ffff;
+    --dark-text-color: white;
     --dark-player-bg-color: rgba(27, 32, 57, 0.6);
     --dark-player-close-color: #1e3c5a;
     --dark-border-color: #254d47;
@@ -1455,7 +1455,7 @@ ul.more_option li {
 
 ul.more_option li a {
     text-align: left !important;
-    color: var(--media-small-text-color);
+    color: var(--light-media-small-text-color);
     padding-bottom: 10px;
     display: block;
     font-size: 13px;
@@ -3366,7 +3366,7 @@ a.ms_btn.play_btn.btn_pause span.play_all {
 }
 
 .album_list_wrapper>ul>li>a {
-    color: #777;
+    color: var(--media-small-text-color);
     margin-top: 10px;
     display: inline-block;
     position: relative;
@@ -3391,7 +3391,7 @@ ul.album_list_name:after {
     border: 0;
     height: 1px;
     background: rgba(59, 200, 231, 0.61);
-    background-image: -webkit-linear-gradient(left, rgb(255, 72, 101), var(--primary-color), #fff);
+    /* background-image: -webkit-linear-gradient(left, rgb(255, 72, 101), var(--primary-color), #fff); */
     /* background-image: -o-linear-gradient(left, #60a7d0, #92e3fb, #56d4b7); */
 }
 

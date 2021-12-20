@@ -11,6 +11,7 @@ import './css/swiper.css'
 import './components/components'
 import './css/custom-toast.css';
 import "./css/bootstrap.css";
+import './css/fontawesome-free/css/all.min.css';
 import './css/font-awesome.min.css';
 import './css/fonts.css';
 import './css/styles.css';
