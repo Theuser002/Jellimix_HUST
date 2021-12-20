@@ -4,6 +4,8 @@
       class="modal centered-modal show"
       role="dialog"
       style="padding-right: 16px; display: block"
+      @keyup.enter="registerUser"
+      @keyup.esc="closeForm"
     >
       <div class="modal-dialog register_dialog">
         <!-- Modal content-->
@@ -24,11 +26,11 @@
               <h2>Register</h2>
               <div class="form-group">
                 <input
+                  ref="username_input"
                   type="text"
                   placeholder="Enter Your Name"
                   class="form-control"
                   v-model="usernameInput"
-                  @keyup.enter="registerUser"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-user" aria-hidden="true"></i>
@@ -40,7 +42,6 @@
                   placeholder="Enter Password"
                   class="form-control"
                   v-model="passwordInput"
-                  @keyup.enter="registerUser"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-lock" aria-hidden="true"></i>
@@ -86,6 +87,10 @@ export default {
     };
   },
   mixins: [AuthenticationServices],
+  mounted() {
+    this.$refs.username_input.focus();
+    // console.log(this.$refs.username_input);
+  },
   methods: {
     ...mapMutations(["setTokenAuth", "setUserId"]),
     closeForm() {
