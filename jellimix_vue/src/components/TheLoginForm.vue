@@ -32,6 +32,7 @@
                   placeholder="Enter Password"
                   class="form-control"
                   v-model="passwordInput"
+                  @keyup.enter="loginUser"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-lock" aria-hidden="true"></i>
