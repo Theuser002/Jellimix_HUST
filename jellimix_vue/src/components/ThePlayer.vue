@@ -109,7 +109,9 @@
             </div>
           </div>
           <div class="jp-type-playlist" style="display: none">
-            <audio ref="audio" :src="audio.song_url" controls autoplay></audio>
+            <audio ref="audio" :src="audio.song_url" controls autoplay
+            @timeupdate="time = timeConverter($event.target.currentTime)"
+            ></audio>
           </div>
 
           <div class="jp-type-playlist">
@@ -128,7 +130,7 @@
               <div class="jp-progress-container flex-item">
                 <div class="jp-time-holder">
                   <span class="jp-current-time" role="timer" aria-label="time"
-                    >00:00</span
+                    >{{time}}</span
                   >
                   <span class="jp-duration" role="timer" aria-label="duration"
                     >04:27</span
@@ -208,6 +210,7 @@ export default {
   data() {
     return {
       isOpenOption: false,
+      time: 0,
       // isOpenPlayer: true,
       // isPlaying: true,
     };
@@ -228,6 +231,23 @@ export default {
     download() {
       saveAs(this.audio.song_url, `Jellimix-${this.audio.Name}.mp3`);
     },
+    timeConverter(seconds) {
+      seconds = Math.floor(seconds)
+      let min = parseInt(seconds / 60),
+      sec = parseInt(seconds % 60);
+      min = min < 10 ? "0" + min : min;
+      sec = sec < 10 ? "0" + sec : sec;
+      seconds = min + ":" + sec;
+      return seconds;
+    }
+
+  },
+  watch:{
+    time(time){
+      if (Math.abs(time - this.$refs.audio.currentTime) > 0.5) {
+        this.$refs.audio.currentTime = time;
+      }
+    }
   },
 };
 </script>
