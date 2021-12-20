@@ -1,0 +1,199 @@
+<template>
+  <div class="ms_album_single_wrapper ms_artist_single">
+    <div @click="routeBack">Back</div>
+    <div class="album_single_data">
+      <div class="album_single_img">
+        <img
+          src="../assets/images/default-genre.png"
+          alt="Genre default picture"
+          class="img-fluid"
+        />
+      </div>
+      <div class="genre_single_text">
+        <h2>Ten Genre</h2>
+        <p class="genre_name">Alternative rock</p>
+        <div class="about_genre">
+          Alternative rock (also called alternative music, alt-rock, or simply alternative) is 
+          a category of rock music that emerged from the independent music underground of 
+          the 1970s and became widely popular in the 1990s. 
+          "Alternative" refers to the genre's distinction from mainstream or commercial rock or 
+          pop music. The term's original meaning was broader, referring to a musicians influenced 
+          by the musical style or independent, DIY ethos of late 1970s punk rock.<a href="#">Read More</a>
+        </div>
+        <div class="album_btn">
+          <a href="#" class="ms_btn play_btn"
+            ><span class="play_all"
+              ><img src="images/svg/play_all.svg" alt="" />Play All</span
+            ><span class="pause_all"
+              ><img src="images/svg/pause_all.svg" alt="" />Pause</span
+            ></a
+          >
+          <a href="#" class="ms_btn"
+            ><span class="play_all"
+              ><img src="images/svg/add_q.svg" alt="" />Add To Queue</span
+            ></a
+          >
+        </div>
+      </div>
+      <div class="album_more_optn ms_more_icon">
+        <span><img src="images/svg/more.svg" alt="" /></span>
+      </div>
+      <ul class="more_option">
+        <li>
+          <a href="#"
+            ><span class="opt_icon"><span class="icon icon_fav"></span></span
+            >Add To Favourites</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="opt_icon"><span class="icon icon_queue"></span></span
+            >Add To Queue</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="opt_icon"><span class="icon icon_dwn"></span></span
+            >Download Now</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="opt_icon"
+              ><span class="icon icon_playlst"></span></span
+            >Add To Playlist</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="opt_icon"><span class="icon icon_share"></span></span
+            >Share</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="album_inner_list">
+      <div class="album_list_wrapper">
+        <ul class="album_list_name">
+          <li>#</li>
+          <li>Song Title</li>
+          <li>Artist</li>
+          <li class="text-center">Duration</li>
+          <li class="text-center">Add To Favourites</li>
+          <li class="text-center">More</li>
+        </ul>
+        <ul v-for="(item,index) in playlist_data" :key="index">
+          <li>
+            <a href="#"
+              ><span class="play_no">{{index+1}}</span><span class="play_hover"></span
+            ></a>
+          </li>
+          <li><a href="#">{{item.Name}}</a></li>
+          <li><a href="#">{{item.AlbumArtist}}</a></li>
+          <li class="text-center"><a href="#">{{item.RunTimeTicks | convertTickToTime}}</a></li>
+          <li class="text-center">
+            <a href="#"><span class="ms_icon1 ms_fav_icon"></span></a>
+          </li>
+          <li class="text-center ms_more_icon">
+            <a href="javascript:;"
+              ><span class="ms_icon1 ms_active_icon"></span
+            ></a>
+            <ul class="more_option">
+              <li>
+                <a href="#"
+                  ><span class="opt_icon"
+                    ><span class="icon icon_fav"></span></span
+                  >Add To Favourites</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><span class="opt_icon"
+                    ><span class="icon icon_queue"></span></span
+                  >Add To Queue</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><span class="opt_icon"
+                    ><span class="icon icon_dwn"></span></span
+                  >Download Now</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><span class="opt_icon"
+                    ><span class="icon icon_playlst"></span></span
+                  >Add To Playlist</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><span class="opt_icon"
+                    ><span class="icon icon_share"></span></span
+                  >Share</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <!-- Next song here -->
+        </ul>
+      </div>
+    </div>
+    <div class="ms_view_more padder_bottom20">
+      <a href="#" class="ms_btn"> &gt; View more &lt;</a>
+    </div>
+  </div>
+</template>
+
+<script>
+import GenreServices from '../common/GenreServices'
+import { mapGetters } from "vuex";
+
+export default {
+    mixins: [GenreServices],
+    data() {
+        return {
+            genre: null,
+            playlist_data: null
+        }
+    },
+    computed: {
+        ...mapGetters(["tokenAuth", "userId"]),
+    },
+    created() {
+        this.getSingleGenre(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
+            this.playlist = res.data
+        })
+        this.getSingleGenreSong(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
+            this.playlist_data = res.data.Items
+        })
+    },
+    methods: {
+        routeBack(){
+            this.$router.push('/Genres')
+        }
+    },
+    filters: {
+    convertTickToTime(ticks) {
+      var seconds = Math.floor(ticks / 10000000);
+      var hour = Math.floor(seconds / 3600);
+      var minute = Math.floor((seconds / 60) % 60);
+      var second = seconds % 60;
+
+      var result =
+        String(hour).padStart(2, "0") +
+        ":" +
+        String(minute).padStart(2, "0") +
+        ":" +
+        String(second).padStart(2, "0");
+      return result;
+    },
+  },
+};
+</script>
+
+<style scoped>
+</style>

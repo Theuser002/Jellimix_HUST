@@ -18,6 +18,8 @@ const PlaylistPage = () =>
     import ('../views/PlaylistPage.vue')
 const SinglePlaylistPage = () =>
     import ('../views/SinglePlaylistPage.vue')
+const SingleGenrePage = () =>
+    import ('../views/SingleGenrePage.vue')
 
 const routes = [
     { path: '/Home', component: Home },
