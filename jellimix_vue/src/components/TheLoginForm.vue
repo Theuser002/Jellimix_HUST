@@ -1,7 +1,10 @@
 <template>
     <!----Login Popup Start---->
     <div id="LoginModal" class="modal centered-modal" role="dialog"
-    style="padding-right: 16px; display: block">
+    style="padding-right: 16px; display: block"
+    @keyup.enter="loginUser"
+    @keyup.esc="closeForm"
+    >
       <div class="modal-dialog login_dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -17,6 +20,7 @@
               <h2>Login</h2>
               <div class="form-group">
                 <input
+                  ref="username_input"
                   type="text"
                   placeholder="Enter Your Username"
                   class="form-control"
@@ -32,7 +36,6 @@
                   placeholder="Enter Password"
                   class="form-control"
                   v-model="passwordInput"
-                  @keyup.enter="loginUser"
                 />
                 <span class="form_icon">
                   <i class="fa_icon form-lock" aria-hidden="true"></i>
@@ -76,6 +79,10 @@ export default {
       usernameInput: "",
       passwordInput: "",
     };
+  },
+  mounted() {
+    this.$refs.username_input.focus();
+    // console.log(this.$refs.username_input);
   },
   methods: {
     ...mapMutations(["setTokenAuth", "setUserId"]),
