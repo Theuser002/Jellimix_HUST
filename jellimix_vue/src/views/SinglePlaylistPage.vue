@@ -10,7 +10,7 @@
         />
       </div>
       <div class="album_single_text">
-        <h2>{{ artist_data.Name }}</h2>
+        <h2>{{ playlist.Name }}</h2>
         <p class="singer_name">Singer, New York</p>
         <div class="about_artist">
           The Artist (Real name Wingardium Leviosa) seems to be a great person
@@ -82,20 +82,22 @@
           <li class="text-center">Add To Favourites</li>
           <li class="text-center">More</li>
         </ul>
-        <ul>
+        <ul v-for="(item,index) in playlist_data" :key="index">
           <li>
             <a href="#"
-              ><span class="play_no">01</span><span class="play_hover"></span
+              ><span class="play_no">{{index+1}}</span><span class="play_hover"></span
             ></a>
           </li>
-          <li><a href="#">I am innocent</a></li>
-          <li><a href="#">The artist</a></li>
-          <li class="text-center"><a href="#">5:26</a></li>
+          <li><a href="#">{{item.Name}}</a></li>
+          <li><a href="#">{{item.AlbumArtist}}</a></li>
+          <li class="text-center"><a href="#">{{item.RunTimeTicks | convertTickToTime}}</a></li>
           <li class="text-center">
-            <a href="#"><i class="far fa-heart"></i></a>
+            <a href="#"><span class="ms_icon1 ms_fav_icon"></span></a>
           </li>
           <li class="text-center ms_more_icon">
-            <a href="javascript:;"><i class="fas fa-ellipsis-h"></i> </a>
+            <a href="javascript:;"
+              ><span class="ms_icon1 ms_active_icon"></span
+            ></a>
             <ul class="more_option">
               <li>
                 <a href="#"
@@ -147,34 +149,51 @@
 </template>
 
 <script>
-import ArtistServices from "../common/ArtistServices";
+import PlaylistServices from '../common/PlaylistServices'
+import { mapGetters } from "vuex";
 
 export default {
-  mixins: [ArtistServices],
-  data() {
-    return {
-      artist_data: null,
-    };
-  },
-  created() {
-    console.log("hihi");
-    this.getSingleArtist(this.$route.params.id).then((res) => {
-      this.artist_data = res.data;
-    });
-  },
-  methods: {
-    routeBack() {
-      this.$router.push("/Artists");
+    mixins: [PlaylistServices],
+    data() {
+        return {
+            playlist: null,
+            playlist_data: null
+        }
+    },
+    computed: {
+        ...mapGetters(["tokenAuth", "userId"]),
+    },
+    created() {
+        this.getSinglePlaylist(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
+            this.playlist = res.data
+        })
+        this.getSinglePlaylistSong(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
+            this.playlist_data = res.data.Items
+        })
+    },
+    methods: {
+        routeBack(){
+            this.$router.push('/Playlists')
+        }
+    },
+    filters: {
+    convertTickToTime(ticks) {
+      var seconds = Math.floor(ticks / 10000000);
+      var hour = Math.floor(seconds / 3600);
+      var minute = Math.floor((seconds / 60) % 60);
+      var second = seconds % 60;
+
+      var result =
+        String(hour).padStart(2, "0") +
+        ":" +
+        String(minute).padStart(2, "0") +
+        ":" +
+        String(second).padStart(2, "0");
+      return result;
     },
   },
 };
 </script>
 
-<style>
-/* global styles */
-</style>
-
 <style scoped>
-/* local styles */
-@import "../css/ArtistPage.css";
 </style>
