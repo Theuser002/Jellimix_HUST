@@ -1,6 +1,6 @@
 <template>
   <div class="album">
-    <div v-if="mediaList==null" class="wrap">
+    <div v-if="mediaList == null" class="wrap">
       <img src="../assets/loader1.gif" alt="" />
     </div>
     <div v-else>
@@ -25,7 +25,7 @@
       >
         <template slot-scope="props">
           <div class="vue-ads-pr-2 vue-ads-leading-loose">
-            Albums {{ props.start }} - {{ props.end }} of {{ props.total }}
+            Songs {{ props.start }} - {{ props.end }} of {{ props.total }}
           </div>
         </template>
         <template slot="buttons" slot-scope="props">

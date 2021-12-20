@@ -3,14 +3,14 @@
     <div class="album_single_data">
       <div class="album_single_img">
         <img
-          src="../assets/images/album/single_album.jpg"
+          :src="img_url || require(`../assets/images/album/${defaultImg}`)"
           alt="album pic"
           class="img-fluid"
         />
       </div>
       <div class="album_single_text">
-        <h2>Album</h2>
-        <p class="singer_name">Singer, Year</p>
+        <h2>{{ album_data.Name }}</h2>
+        <p class="singer_name">{{ album_data.AlbumArtist }}</p>
         <div class="about_album">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -172,9 +172,40 @@
 </template>
 
 <script>
-// import axios from axios
+import AlbumServices from "../common/AlbumServices";
 
-export default {};
+export default {
+  mixins: [AlbumServices],
+  data() {
+    return {
+      album_data: null,
+      img_url: null,
+      defaultImg: "album1.jpg",
+    };
+  },
+  created() {
+    console.log("hihi");
+    this.getSingleAlbum(this.$route.params.id).then((res) => {
+      this.album_data = res.data;
+    });
+    this.getImage();
+  },
+  watch: {
+    album_data() {
+      this.getImage();
+    },
+  },
+  methods: {
+    getImage() {
+      let url = this.getImageLink(this.album_data);
+      this.img_url = url;
+      console.log(this.img_url);
+    },
+    routeBack() {
+      this.$router.push("/Albums");
+    },
+  },
+};
 </script>
 
 <style>

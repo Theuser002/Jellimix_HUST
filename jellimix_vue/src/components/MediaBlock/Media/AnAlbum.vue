@@ -8,7 +8,7 @@
         />
         <div
           class="ms_main_overlay"
-          @click="displaySingleArtist"
+          @click="displaySingleAlbum"
           style="cursor: pointer"
         >
           <div class="ms_box_overlay"></div>
@@ -56,13 +56,13 @@
               >
             </li>
           </ul> -->
-          <!-- <div class="ms_play_icon" @click="displaySingleArtist">
+          <!-- <div class="ms_play_icon" >
             <img src="../../../assets/images/svg/search.svg" alt="" />
           </div> -->
         </div>
       </div>
       <div class="ms_rcnt_box_text">
-        <h3 @click="displaySingleArtist" style="cursor: pointer">
+        <h3 @click="displaySingleAlbum" style="cursor: pointer">
           <a :title="media_data.Name">{{ media_data.Name }}</a>
         </h3>
         <p>{{ media_data.AlbumArtist }}</p>
@@ -88,7 +88,7 @@ export default {
       isOpenOption: false,
       img_url: null,
       song_url: null,
-      defaultImg: "defaultartist.png",
+      defaultImg: "album1.jpg",
     };
   },
   created() {
@@ -113,10 +113,10 @@ export default {
       this.song_url = url;
       this.media_data.song_url = url;
     },
-    displaySingleArtist() {
+    displaySingleAlbum() {
       console.log("hihi");
       //   this.$router.go({name: `/SingleArtist/${this.media_data.Id}`})
-      this.$router.push(`/Artists/${this.media_data.Id}`);
+      this.$router.push(`/Albums/${this.media_data.Id}`);
     },
     download() {
       saveAs(this.song_url, `Jellimix-${this.media_data.Name}.mp3`);

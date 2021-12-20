@@ -25,7 +25,7 @@
       >
         <template slot-scope="props">
           <div class="vue-ads-pr-2 vue-ads-leading-loose">
-            Albums {{ props.start }} - {{ props.end }} of {{ props.total }}
+            Artists {{ props.start }} - {{ props.end }} of {{ props.total }}
           </div>
         </template>
         <template slot="buttons" slot-scope="props">

@@ -1,42 +1,47 @@
 <template>
   <div class="album">
-    <a @click="previousRoute">Back</a>
-    <div class="content-block">
-      <ul class="media-list">
-        <li v-for="(media, index) in pageContent" :key="index">
-          <div class="col-md-3">
-            <PrimaryMedia :media_data="media"/>
-          </div>
-        </li>
-      </ul>
+    <div v-if="mediaList == null" class="wrap">
+      <img src="../assets/loader1.gif" alt="" />
     </div>
-    <vue-ads-pagination
-      :total-items="mediaList.length"
-      :items-per-page="itemPerPage"
-      :max-visible-pages="5"
-      :page="page"
-      :loading="loading"
-      @page-change="pageChange"
-      @range-change="rangeChange"
-    >
-      <template slot-scope="props">
-        <div class="vue-ads-pr-2 vue-ads-leading-loose">
-          Albums {{ props.start }} - {{ props.end }} of {{ props.total }}
-        </div>
-      </template>
-      <template slot="buttons" slot-scope="props">
-        <vue-ads-page-button
-          v-for="(button, key) in props.buttons"
-          :key="key"
-          v-bind="button"
-          @page-change="page = button.page"
-          @range-change="
-            start = button.start;
-            end = button.end;
-          "
-        />
-      </template>
-    </vue-ads-pagination>
+    <div v-else>
+      <div class="content-block">
+        <router-link to="/Home">Back to home</router-link>
+        <ul class="media-list">
+          <li v-for="(media, index) in pageContent" :key="index">
+            <div class="col-md-3">
+              <AnAlbum :media_data="media" />
+            </div>
+          </li>
+        </ul>
+      </div>
+      <vue-ads-pagination
+        :total-items="mediaList.length"
+        :items-per-page="itemPerPage"
+        :max-visible-pages="5"
+        :page="page"
+        :loading="loading"
+        @page-change="pageChange"
+        @range-change="rangeChange"
+      >
+        <template slot-scope="props">
+          <div class="vue-ads-pr-2 vue-ads-leading-loose">
+            Albums {{ props.start }} - {{ props.end }} of {{ props.total }}
+          </div>
+        </template>
+        <template slot="buttons" slot-scope="props">
+          <vue-ads-page-button
+            v-for="(button, key) in props.buttons"
+            :key="key"
+            v-bind="button"
+            @page-change="page = button.page"
+            @range-change="
+              start = button.start;
+              end = button.end;
+            "
+          />
+        </template>
+      </vue-ads-pagination>
+    </div>
   </div>
 </template>
 
