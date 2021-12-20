@@ -100,12 +100,6 @@ export default {
       this.getSong();
       this.getImage();
     },
-    $route(to, from) {
-      // react to route changes...
-      if (to !== from) {
-        location.reload();
-      }
-    },
   },
   methods: {
     ...mapMutations(["setAudio", "setOpenPlayer"]),
