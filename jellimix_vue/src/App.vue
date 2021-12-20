@@ -1,10 +1,24 @@
 <template>
   <div id="app">
-    <the-register-form id="register-form" v-if="isOpenRegisterModal" @close-form="toggleRegisterForm(false)" @switch-login="toggleLoginForm(true)"/>
-    <the-login-form id="login-form" v-if="isOpenLoginModal" @close-form="toggleLoginForm(false)" @switch-register="toggleRegisterForm(true)" />
+    <the-register-form
+      id="register-form"
+      v-if="isOpenRegisterModal"
+      @close-form="toggleRegisterForm(false)"
+      @switch-login="toggleLoginForm(true)"
+    />
+    <the-login-form
+      id="login-form"
+      v-if="isOpenLoginModal"
+      @close-form="toggleLoginForm(false)"
+      @switch-register="toggleRegisterForm(true)"
+    />
+    <add-to-playlist id="add-form" v-if="isAddFormOpen" :playlists="playlists"/>
     <the-menu></the-menu>
-    <the-header @open-register-form="toggleRegisterForm(true)" @open-login-form="toggleLoginForm(true)"></the-header>
-    <router-view class="router-view" @play-song="playAudio"></router-view>
+    <the-header
+      @open-register-form="toggleRegisterForm(true)"
+      @open-login-form="toggleLoginForm(true)"
+    ></the-header>
+    <router-view class="router-view"></router-view>
     <the-footer></the-footer>
     <!-- <div style="z-index: 20000; position: sticky; bottom: 0" v-if="audio_src!=null">
     <Aplayer   
@@ -19,16 +33,19 @@
     />
     <button style="z-index: 2; position: absolute; top: 0; right: 0" @click="audio_src=null">Close</button>
     </div> -->
-    <ThePlayer/>
+    <ThePlayer />
   </div>
 </template>
 
 <script>
 // import Aplayer from "vue-aplayer";
+import { mapGetters, mapMutations } from "vuex";
+import PlaylistServices from './common/PlaylistServices'
 
 export default {
   name: "App",
   // components:{Aplayer},
+  mixins:[PlaylistServices],
   data() {
     return {
       audio_src: null,
@@ -36,33 +53,46 @@ export default {
       audio_artist: null,
       audio_img: null,
       isOpenRegisterModal: false,
-      isOpenLoginModal: false
+      isOpenLoginModal: false,
+      playlists: []
+    };
+  },
+  computed: {
+    ...mapGetters(["userId", "tokenAuth", "isAddFormOpen"]),
+  },
+  watch:{
+    userId(){
+      this.getAllPlaylist(this.userId, this.tokenAuth).then((res)=>{
+        this.playlists =res.data.Items
+      })
     }
   },
   methods: {
-    playAudio(e){
-      this.audio_src = null;
-      this.audio_title = null;
-      this.audio_artist = null;
-      this.$nextTick(()=>{
-        this.audio_src = e[0];
-        this.audio_title = e[1];
-        this.audio_artist = e[2];
-        this.audio_img = e[3];
-      })
-    },
+    ...mapMutations(['setListToAdd']),
     toggleRegisterForm(isOpen) {
-      this.isOpenRegisterModal = isOpen
+      this.isOpenRegisterModal = isOpen;
     },
     toggleLoginForm(isOpen) {
-      this.isOpenLoginModal = isOpen
-    }
+      this.isOpenLoginModal = isOpen;
+    },
   },
 };
 </script>
 
 <style>
-#login-form{
+#login-form {
+  z-index: 12;
+  padding-top: 100px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#add-form {
   z-index: 12;
   padding-top: 100px;
   position: fixed;

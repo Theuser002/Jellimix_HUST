@@ -40,7 +40,7 @@
               >
             </li>
             <li>
-              <a href="#"
+              <a href="#" @click="setAddForm(true)"
                 ><span class="opt_icon"
                   ><span class="icon icon_playlst"></span></span
                 >Add To Playlist</a
@@ -95,13 +95,12 @@ export default {
   },
   watch: {
     media_data() {
-      console.log("prop thay đổi");
       this.getSong();
       this.getImage();
     },
   },
   methods: {
-    ...mapMutations(["setAudio", "setOpenPlayer"]),
+    ...mapMutations(["setAudio", "setOpenPlayer", "setAddForm"]),
     getImage() {
       let url = this.getImageLink(this.media_data);
       this.img_url = url;
