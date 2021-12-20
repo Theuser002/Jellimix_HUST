@@ -12,13 +12,17 @@
       @close-form="toggleLoginForm(false)"
       @switch-register="toggleRegisterForm(true)"
     />
-    <add-to-playlist id="add-form" v-if="isAddFormOpen" :playlists="playlists"/>
+    <add-to-playlist
+      id="add-form"
+      v-if="isAddFormOpen"
+      :playlists="playlists"
+    />
     <the-menu></the-menu>
     <the-header
       @open-register-form="toggleRegisterForm(true)"
       @open-login-form="toggleLoginForm(true)"
     ></the-header>
-    <router-view class="router-view"></router-view>
+    <router-view class="router-view" :key="$route.path"></router-view>
     <the-footer></the-footer>
     <!-- <div style="z-index: 20000; position: sticky; bottom: 0" v-if="audio_src!=null">
     <Aplayer   
@@ -40,12 +44,12 @@
 <script>
 // import Aplayer from "vue-aplayer";
 import { mapGetters, mapMutations } from "vuex";
-import PlaylistServices from './common/PlaylistServices'
+import PlaylistServices from "./common/PlaylistServices";
 
 export default {
   name: "App",
   // components:{Aplayer},
-  mixins:[PlaylistServices],
+  mixins: [PlaylistServices],
   data() {
     return {
       audio_src: null,
@@ -54,21 +58,21 @@ export default {
       audio_img: null,
       isOpenRegisterModal: false,
       isOpenLoginModal: false,
-      playlists: []
+      playlists: [],
     };
   },
   computed: {
     ...mapGetters(["userId", "tokenAuth", "isAddFormOpen"]),
   },
-  watch:{
-    userId(){
-      this.getAllPlaylist(this.userId, this.tokenAuth).then((res)=>{
-        this.playlists =res.data.Items
-      })
-    }
+  watch: {
+    userId() {
+      this.getAllPlaylist(this.userId, this.tokenAuth).then((res) => {
+        this.playlists = res.data.Items;
+      });
+    },
   },
   methods: {
-    ...mapMutations(['setListToAdd']),
+    ...mapMutations(["setListToAdd"]),
     toggleRegisterForm(isOpen) {
       this.isOpenRegisterModal = isOpen;
     },
