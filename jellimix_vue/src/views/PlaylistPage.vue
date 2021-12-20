@@ -109,7 +109,8 @@ export default {
         this.$toast.error("Tên playlist không được để trống");
       } else {
         this.addNewPlaylist(this.playlistName, this.userId, this.tokenAuth)
-          .then(() => {
+          .then((res) => {
+            this.$router.push(`/Playlists/${res.data.Id}`)
             this.$toast.success("Tạo playlist thành công");
           })
           .catch();

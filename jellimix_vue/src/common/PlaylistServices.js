@@ -54,7 +54,12 @@ var PlaylistServices = {
         },
         async addNewPlaylist(name, userId, tokenAuth) {
             let url = axios.defaults.baseURL +
-                `Playlists?Name=${name}&userId=${userId}`
+                `Playlists`
+            const data = {
+                "Name": name,
+                "UserId": userId,
+                "MediaType": "Playlist"
+            }
             const config = {
                 headers: {
                     "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
@@ -62,7 +67,7 @@ var PlaylistServices = {
                         `Token="${tokenAuth}"`
                 }
             }
-            return await axios.post(url, config);
+            return await axios.post(url, data, config);
         }
     },
 }
