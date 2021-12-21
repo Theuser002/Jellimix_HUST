@@ -110,7 +110,7 @@
           </div>
           <div class="jp-type-playlist" style="display: none">
             <audio ref="audio" :src="audio.song_url" controls autoplay
-            @timeupdate="time = timeConverter($event.target.currentTime)"
+            @timeupdate="time = $event.target.currentTime"
             ></audio>
           </div>
 
@@ -130,15 +130,16 @@
               <div class="jp-progress-container flex-item">
                 <div class="jp-time-holder">
                   <span class="jp-current-time" role="timer" aria-label="time"
-                    >{{time}}</span
+                    >{{timeConverter(time)}}</span
                   >
                   <span class="jp-duration" role="timer" aria-label="duration"
-                    >04:27</span
+                    >{{audio.RunTimeTicks | convertTickToTime}}</span
                   >
                 </div>
                 <div class="jp-progress">
-                  <div class="jp-seek-bar" style="width: 100%">
-                    <div class="jp-play-bar" style="width: 0%">
+                  <div class="jp-seek-bar" style="width: 100%"
+                  @mousedown="updateProgressPercentage">
+                    <div class="jp-play-bar" :style="{width: progressPercentage}">
                       <div class="bullet"></div>
                     </div>
                   </div>
@@ -211,8 +212,7 @@ export default {
     return {
       isOpenOption: false,
       time: 0,
-      // isOpenPlayer: true,
-      // isPlaying: true,
+      progressPercentage: "0%",
     };
   },
   computed: {
@@ -239,14 +239,39 @@ export default {
       sec = sec < 10 ? "0" + sec : sec;
       seconds = min + ":" + sec;
       return seconds;
+    },
+    convertTickToSecond(ticks) {
+      var seconds = Math.floor(ticks / 10000000);
+      return seconds;
+    },
+    updateProgressPercentage(event) {
+      let currentProgress = event.clientX - event.target.getBoundingClientRect().left,
+      currentProgressPercentage = Math.floor(currentProgress / event.target.offsetWidth * 100, 5)
+      // update progress bar
+      this.progressPercentage = currentProgressPercentage + "%"
+      this.$refs.audio.currentTime = currentProgressPercentage / 100 * this.convertTickToSecond(this.audio.RunTimeTicks)
     }
+  },
+  filters: {
+    convertTickToTime(ticks) {
+      var seconds = Math.floor(ticks / 10000000);
+      var minute = Math.floor((seconds / 60) % 60);
+      var second = seconds % 60;
 
+      var result =
+        String(minute).padStart(2, "0") +
+        ":" +
+        String(second).padStart(2, "0");
+      return result;
+    },
   },
   watch:{
-    time(time){
-      if (Math.abs(time - this.$refs.audio.currentTime) > 0.5) {
-        this.$refs.audio.currentTime = time;
-      }
+    time(){
+      // if (Math.abs(time - this.$refs.audio.currentTime) > 0.5) {
+      //   this.$refs.audio.currentTime = time;
+      // }
+      let progressPer = this.time / this.convertTickToSecond(this.audio.RunTimeTicks) * 100
+      this.progressPercentage = progressPer + "%"
     }
   },
 };
