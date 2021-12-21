@@ -110,7 +110,7 @@
           </div>
           <div class="jp-type-playlist" style="display: none">
             <audio ref="audio" :src="audio.song_url" controls autoplay
-            @timeupdate="time = timeConverter($event.target.currentTime)"
+            @timeupdate="time = $event.target.currentTime"
             ></audio>
           </div>
 
@@ -130,7 +130,7 @@
               <div class="jp-progress-container flex-item">
                 <div class="jp-time-holder">
                   <span class="jp-current-time" role="timer" aria-label="time"
-                    >{{time}}</span
+                    >{{timeConverter(time)}}</span
                   >
                   <span class="jp-duration" role="timer" aria-label="duration"
                     >{{audio.RunTimeTicks | convertTickToTime}}</span
@@ -138,7 +138,7 @@
                 </div>
                 <div class="jp-progress">
                   <div class="jp-seek-bar" style="width: 100%">
-                    <div class="jp-play-bar" style="width: 0%">
+                    <div class="jp-play-bar" :style="{width: progressPercentage}">
                       <div class="bullet"></div>
                     </div>
                   </div>
@@ -210,15 +210,12 @@ export default {
   data() {
     return {
       isOpenOption: false,
-      time: "00:00",
-      // isOpenPlayer: true,
-      // isPlaying: true,
+      time: 0,
+      progressPercentage: "0%",
     };
   },
   computed: {
     ...mapGetters(["audio","isPlaying","isOpenPlayer"]),
-  },
-  mounted() {
   },
   methods: {
     ...mapMutations(["setPlaying","setOpenPlayer"]),
@@ -241,7 +238,11 @@ export default {
       sec = sec < 10 ? "0" + sec : sec;
       seconds = min + ":" + sec;
       return seconds;
-    }
+    },
+    convertTickToSecond(ticks) {
+      var seconds = Math.floor(ticks / 10000000);
+      return seconds;
+    },
   },
   filters: {
     convertTickToTime(ticks) {
@@ -256,13 +257,15 @@ export default {
       return result;
     },
   },
-  // watch:{
-  //   time(){
+  watch:{
+    time(){
       // if (Math.abs(time - this.$refs.audio.currentTime) > 0.5) {
       //   this.$refs.audio.currentTime = time;
       // }
-    // }
-  // },
+      let progressPer = this.time / this.convertTickToSecond(this.audio.RunTimeTicks) * 100
+      this.progressPercentage = progressPer + "%"
+    }
+  },
 };
 </script>
 
