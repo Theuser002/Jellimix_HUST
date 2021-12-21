@@ -100,7 +100,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(["setAudio", "setOpenPlayer", "setAddForm", "setPlaying"]),
+    ...mapMutations(["setAudio", "setOpenPlayer", "setAddForm"]),
     getImage() {
       let url = this.getImageLink(this.media_data);
       this.img_url = url;
@@ -114,7 +114,6 @@ export default {
     playAudio() {
       this.setAudio(this.media_data);
       this.setOpenPlayer(true);
-      this.setPlaying(true);
     },
     download() {
       saveAs(this.song_url, `Jellimix-${this.media_data.Name}.mp3`);
