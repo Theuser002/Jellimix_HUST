@@ -137,7 +137,8 @@
                   >
                 </div>
                 <div class="jp-progress">
-                  <div class="jp-seek-bar" style="width: 100%">
+                  <div class="jp-seek-bar" style="width: 100%"
+                  @mousedown="updateProgressPercentage">
                     <div class="jp-play-bar" :style="{width: progressPercentage}">
                       <div class="bullet"></div>
                     </div>
@@ -243,6 +244,13 @@ export default {
       var seconds = Math.floor(ticks / 10000000);
       return seconds;
     },
+    updateProgressPercentage(event) {
+      let currentProgress = event.clientX - event.target.getBoundingClientRect().left,
+      currentProgressPercentage = Math.floor(currentProgress / event.target.offsetWidth * 100, 5)
+      // update progress bar
+      this.progressPercentage = currentProgressPercentage + "%"
+      this.$refs.audio.currentTime = currentProgressPercentage / 100 * this.convertTickToSecond(this.audio.RunTimeTicks)
+    }
   },
   filters: {
     convertTickToTime(ticks) {
