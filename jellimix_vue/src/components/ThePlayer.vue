@@ -133,7 +133,7 @@
                     >{{time}}</span
                   >
                   <span class="jp-duration" role="timer" aria-label="duration"
-                    >04:27</span
+                    >{{audio.RunTimeTicks | convertTickToTime}}</span
                   >
                 </div>
                 <div class="jp-progress">
@@ -210,13 +210,15 @@ export default {
   data() {
     return {
       isOpenOption: false,
-      time: 0,
+      time: "00:00",
       // isOpenPlayer: true,
       // isPlaying: true,
     };
   },
   computed: {
     ...mapGetters(["audio","isPlaying","isOpenPlayer"]),
+  },
+  mounted() {
   },
   methods: {
     ...mapMutations(["setPlaying","setOpenPlayer"]),
@@ -240,15 +242,27 @@ export default {
       seconds = min + ":" + sec;
       return seconds;
     }
+  },
+  filters: {
+    convertTickToTime(ticks) {
+      var seconds = Math.floor(ticks / 10000000);
+      var minute = Math.floor((seconds / 60) % 60);
+      var second = seconds % 60;
 
+      var result =
+        String(minute).padStart(2, "0") +
+        ":" +
+        String(second).padStart(2, "0");
+      return result;
+    },
   },
-  watch:{
-    time(time){
-      if (Math.abs(time - this.$refs.audio.currentTime) > 0.5) {
-        this.$refs.audio.currentTime = time;
-      }
-    }
-  },
+  // watch:{
+  //   time(){
+      // if (Math.abs(time - this.$refs.audio.currentTime) > 0.5) {
+      //   this.$refs.audio.currentTime = time;
+      // }
+    // }
+  // },
 };
 </script>
 
