@@ -85,13 +85,19 @@ export default {
     // console.log(this.$refs.username_input);
   },
   methods: {
-    ...mapMutations(["setTokenAuth", "setUserId"]),
+    ...mapMutations(["setTokenAuth", "setUserId", "setAddLoginModal", "setAddRegisterModal"]),
     closeForm() {
+      // emit to parent
       this.$emit("close-form");
+      // if the parent cannot handle emit
+      this.setAddLoginModal(false);
     },
     switchToRegisterForm() {
       this.closeForm();
+      // emit to parent to switch register
       this.$emit("switch-register");
+      // if the parent cannot handle emit
+      this.switchToRegisterForm(true);
     },
     loginUser() {
       if (this.usernameInput.length == 0 || this.passwordInput.length == 0) {

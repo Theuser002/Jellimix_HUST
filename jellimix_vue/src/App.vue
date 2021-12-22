@@ -8,7 +8,7 @@
     />
     <the-login-form
       id="login-form"
-      v-if="isOpenLoginModal"
+      v-if="isOpenLoginModal || isOpenLoginModalVuex"
       @close-form="toggleLoginForm(false)"
       @switch-register="toggleRegisterForm(true)"
     />
@@ -62,7 +62,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["userId", "tokenAuth", "isAddFormOpen"]),
+    ...mapGetters(["userId", "tokenAuth", "isAddFormOpen", "isOpenLoginModalVuex"]),
   },
   watch: {
     userId() {

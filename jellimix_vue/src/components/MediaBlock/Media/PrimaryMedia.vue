@@ -40,7 +40,7 @@
               >
             </li>
             <li>
-              <a href="#" @click="setAddForm(true)"
+              <a href="#" @click="addMediaToPlaylist"
                 ><span class="opt_icon"
                   ><span class="icon icon_playlst"></span></span
                 >Add To Playlist</a
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import { saveAs } from "file-saver";
 import SongServices from "../../../common/SongServices.js";
 
@@ -89,6 +89,9 @@ export default {
       defaultImg: "album1.jpg",
     };
   },
+  computed: {
+    ...mapGetters(["tokenAuth", "isOpenLoginModalVuex"]),
+  },
   created() {
     this.getSong();
     this.getImage();
@@ -100,7 +103,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(["setAudio", "setOpenPlayer", "setAddForm"]),
+    ...mapMutations(["setAudio", "setOpenPlayer", "setAddForm", "setAddLoginModal"]),
     getImage() {
       let url = this.getImageLink(this.media_data);
       this.img_url = url;
@@ -118,6 +121,15 @@ export default {
     download() {
       saveAs(this.song_url, `Jellimix-${this.media_data.Name}.mp3`);
     },
+    addMediaToPlaylist() {
+      if (this.tokenAuth == null || this.tokenAuth.length == 0) {
+        if (!this.isOpenLoginModalVuex) {
+          this.setAddLoginModal(true);
+        }
+      } else {
+        this.setAddForm(true);
+      }
+    }
   },
 };
 </script>
