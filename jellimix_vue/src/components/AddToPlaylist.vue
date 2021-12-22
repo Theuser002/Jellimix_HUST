@@ -7,13 +7,13 @@
       <div class="ms_pro_form">
         <div class="form-group">
           <label>Select Album</label>
-          <select class="form-control">
+          <select ref="choseplaylist" class="form-control">
             <option v-for="item in playlists" :key="item.Id">{{item.Name}}</option>
           </select>
         </div>
         <div class="pro-form-btn text-center marger_top15">
           <div class="ms_upload_btn">
-            <a href="#" class="ms_btn">Add Now</a>
+            <a href="#" class="ms_btn" @click="addMediaToPlaylist">Add Now</a>
             <a href="#" class="ms_btn" @click="setAddForm(false)">cancle</a>
           </div>
         </div>
@@ -23,16 +23,31 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex';
+import PlaylistServices from "../common/PlaylistServices";
 
 export default {
+  mixins: [PlaylistServices],
   props:{
     playlists: {
       type: Array
     }
   },
+  computed: {
+    ...mapGetters(["userId", "tokenAuth"]),
+  },
   methods: {
-    ...mapMutations(['setAddForm'])
+    ...mapMutations(['setAddForm']),
+    addMediaToPlaylist() {
+      this.addNewPlaylist(this.$refs.choseplaylist.value, this.userId, this.tokenAuth)
+      .then(() => {
+        this.$toast.success("Add media to playlist successfully!");
+      })
+      .catch((err) => {
+        this.$toast.error(err.message)
+      });
+      this.setAddForm(false);
+    },
   },
 };
 </script>
