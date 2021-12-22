@@ -17,6 +17,8 @@ const TheFeaturedSong = () =>
     import('../components/MediaBlock/TheFeaturedSong.vue')
 const TheFeaturedAlbum = () =>
     import('../components/MediaBlock/TheFeaturedAlbum.vue')
+const TheFeaturedGenre = () =>
+    import('../components/MediaBlock/TheFeaturedGenre.vue')
 const TheFeaturedArtist = () =>
     import('../components/MediaBlock/TheFeaturedArtist.vue')
 const ThePlayer = () =>
@@ -33,6 +35,8 @@ const AnArtist = () =>
     import('./MediaBlock/Media/AnArtist.vue')
 const AnAlbum = () =>
     import('./MediaBlock/Media/AnAlbum.vue')
+const AGenre = () =>
+    import('./MediaBlock/Media/AGenre.vue')
 const AddToPlaylist = () =>
     import('./AddToPlaylist.vue')
 
@@ -46,6 +50,7 @@ Vue.component('PrimaryMedia', PrimaryMedia);
 Vue.component('MiniMedia', MiniMedia);
 Vue.component('TheFeaturedSong', TheFeaturedSong);
 Vue.component('TheFeaturedAlbum', TheFeaturedAlbum);
+Vue.component('TheFeaturedGenre', TheFeaturedGenre);
 Vue.component('TheFeaturedArtist', TheFeaturedArtist);
 Vue.component('ThePlayer', ThePlayer);
 Vue.component('TheRegisterForm', TheRegisterForm);
@@ -53,5 +58,6 @@ Vue.component('TheLoginForm', TheLoginForm);
 Vue.component('TheGenres', TheGenres);
 Vue.component('APlaylist', APlaylist);
 Vue.component('AnArtist', AnArtist);
+Vue.component('AGenre', AGenre);
 Vue.component('AnAlbum', AnAlbum);
 Vue.component('AddToPlaylist', AddToPlaylist);
