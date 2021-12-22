@@ -109,7 +109,9 @@
             </div>
           </div>
           <div class="jp-type-playlist" style="display: none">
-            <audio ref="audio" :src="audio.song_url" controls autoplay></audio>
+            <audio ref="audio" :src="audio.song_url" controls autoplay
+            @timeupdate="time = $event.target.currentTime"
+            ></audio>
           </div>
 
           <div class="jp-type-playlist">
@@ -128,15 +130,16 @@
               <div class="jp-progress-container flex-item">
                 <div class="jp-time-holder">
                   <span class="jp-current-time" role="timer" aria-label="time"
-                    >00:00</span
+                    >{{timeConverter(time)}}</span
                   >
                   <span class="jp-duration" role="timer" aria-label="duration"
-                    >04:27</span
+                    >{{audio.RunTimeTicks | convertTickToTime}}</span
                   >
                 </div>
                 <div class="jp-progress">
-                  <div class="jp-seek-bar" style="width: 100%">
-                    <div class="jp-play-bar" style="width: 0%">
+                  <div ref="seekbar" class="jp-seek-bar" style="width: 100%"
+                  @mousedown="updateProgressPercentage">
+                    <div class="jp-play-bar" :style="{width: progressPercentage}">
                       <div class="bullet"></div>
                     </div>
                   </div>
@@ -208,8 +211,8 @@ export default {
   data() {
     return {
       isOpenOption: false,
-      // isOpenPlayer: true,
-      // isPlaying: true,
+      time: 0,
+      progressPercentage: "0%",
     };
   },
   computed: {
@@ -228,6 +231,56 @@ export default {
     download() {
       saveAs(this.audio.song_url, `Jellimix-${this.audio.Name}.mp3`);
     },
+    timeConverter(seconds) {
+      seconds = Math.floor(seconds)
+      let min = parseInt(seconds / 60),
+      sec = parseInt(seconds % 60);
+      min = min < 10 ? "0" + min : min;
+      sec = sec < 10 ? "0" + sec : sec;
+      seconds = min + ":" + sec;
+      return seconds;
+    },
+    convertTickToSecond(ticks) {
+      var seconds = Math.floor(ticks / 10000000);
+      return seconds;
+    },
+    updateProgressPercentage(event) {
+      // jp-play-bar changes relative position when we update, we should getBoundingClientRect() from jp-seek-bar
+      let currentProgress = event.clientX - this.$refs.seekbar.getBoundingClientRect().left,
+
+      // because we can click in jp-seek-bar or jp-play-bar, we should get the width of jp-seek-bar, not the target of click event
+      currentProgressPercentage = Math.floor(currentProgress / this.$refs.seekbar.offsetWidth * 100, 5);
+      this.progressPercentage = currentProgressPercentage + "%";
+      if (this.audio.song_url != null) {
+        this.$refs.audio.currentTime = currentProgressPercentage / 100 * this.convertTickToSecond(this.audio.RunTimeTicks);
+      }
+    }
+  },
+  filters: {
+    convertTickToTime(ticks) {
+      if (ticks != null) {
+        var seconds = Math.floor(ticks / 10000000);
+        var minute = Math.floor((seconds / 60) % 60);
+        var second = seconds % 60;
+  
+        var result =
+          String(minute).padStart(2, "0") +
+          ":" +
+          String(second).padStart(2, "0");
+        return result;
+      } else {
+        return "no source"
+      }
+    },
+  },
+  watch:{
+    time(){
+      // if (Math.abs(time - this.$refs.audio.currentTime) > 0.5) {
+      //   this.$refs.audio.currentTime = time;
+      // }
+      let progressPer = this.time / this.convertTickToSecond(this.audio.RunTimeTicks) * 100
+      this.progressPercentage = progressPer + "%"
+    }
   },
 };
 </script>

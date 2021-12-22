@@ -30,7 +30,7 @@ const routes = [
     { path: '/Playlists', component: PlaylistPage },
     { path: '/Playlists/:id', component: SinglePlaylistPage },
     { path: '/SingleArtist', component: SingleArtistPage },
-    { path: '/AlbumDetail', component: AlbumDetailPage },
+    { path: '/Albums/:id', component: AlbumDetailPage },
     { path: '/', redirect: '/Home' }
 ]
 

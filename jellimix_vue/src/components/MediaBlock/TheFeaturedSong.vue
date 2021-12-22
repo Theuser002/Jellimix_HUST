@@ -3,10 +3,17 @@
     <div class="ms_rcnt_slider">
       <div class="ms_heading">
         <h1>Featured Song</h1>
-        <span class="veiw_all"><router-link to="/Song">View more</router-link></span>
+        <span class="veiw_all"
+          ><router-link to="/Songs">View more</router-link></span
+        >
       </div>
     </div>
-    <swiper v-if="mediaList" class="swiper" ref="swiper" :options="swiperOption">
+    <swiper
+      v-if="mediaList"
+      class="swiper"
+      ref="swiper"
+      :options="swiperOption"
+    >
       <swiper-slide v-for="(media, index) in mediaList" :key="index"
         ><PrimaryMedia :media_data="media"
       /></swiper-slide>
@@ -34,11 +41,22 @@ export default {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
-        on: {
-          resize: () => {
-            this.$refs.swiper.$swiper.changeDirection(
-              window.innerWidth <= 960 ? "vertical" : "horizontal"
-            );
+        breakpoints: {
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
           },
         },
       },
@@ -53,10 +71,9 @@ export default {
         }, 500);
       })
       .catch((err) => {
-        this.$toast.error(err.message)
+        this.$toast.error(err.message);
       });
   },
-
 };
 </script>
 

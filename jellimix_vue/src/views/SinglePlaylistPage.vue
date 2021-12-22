@@ -82,22 +82,27 @@
           <li class="text-center">Add To Favourites</li>
           <li class="text-center">More</li>
         </ul>
-        <ul v-for="(item,index) in playlist_data" :key="index">
+        <ul v-for="(item, index) in playlist_data" :key="index">
           <li>
             <a href="#"
-              ><span class="play_no">{{index+1}}</span><span class="play_hover"></span
+              ><span class="play_no">{{ index + 1 }}</span
+              ><span class="play_hover"></span
             ></a>
           </li>
-          <li><a href="#">{{item.Name}}</a></li>
-          <li><a href="#">{{item.AlbumArtist}}</a></li>
-          <li class="text-center"><a href="#">{{item.RunTimeTicks | convertTickToTime}}</a></li>
+          <li>
+            <a href="#">{{ item.Name }}</a>
+          </li>
+          <li>
+            <a href="#">{{ item.AlbumArtist }}</a>
+          </li>
           <li class="text-center">
-            <a href="#"><span class="ms_icon1 ms_fav_icon"></span></a>
+            <a href="#">{{ item.RunTimeTicks | convertTickToTime }}</a>
+          </li>
+          <li class="text-center">
+            <a href="#"><i class="far fa-heart"></i></a>
           </li>
           <li class="text-center ms_more_icon">
-            <a href="javascript:;"
-              ><span class="ms_icon1 ms_active_icon"></span
-            ></a>
+            <a href="javascript:;"><i class="fas fa-ellipsis-h"></i> </a>
             <ul class="more_option">
               <li>
                 <a href="#"
@@ -149,34 +154,42 @@
 </template>
 
 <script>
-import PlaylistServices from '../common/PlaylistServices'
+import PlaylistServices from "../common/PlaylistServices";
 import { mapGetters } from "vuex";
 
 export default {
-    mixins: [PlaylistServices],
-    data() {
-        return {
-            playlist: null,
-            playlist_data: null
-        }
+  mixins: [PlaylistServices],
+  data() {
+    return {
+      playlist: null,
+      playlist_data: null,
+    };
+  },
+  computed: {
+    ...mapGetters(["tokenAuth", "userId"]),
+  },
+  created() {
+    this.getSinglePlaylist(
+      this.$route.params.id,
+      this.userId,
+      this.tokenAuth
+    ).then((res) => {
+      this.playlist = res.data;
+    });
+    this.getSinglePlaylistSong(
+      this.$route.params.id,
+      this.userId,
+      this.tokenAuth
+    ).then((res) => {
+      this.playlist_data = res.data.Items;
+    });
+  },
+  methods: {
+    routeBack() {
+      this.$router.push("/Playlists");
     },
-    computed: {
-        ...mapGetters(["tokenAuth", "userId"]),
-    },
-    created() {
-        this.getSinglePlaylist(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
-            this.playlist = res.data
-        })
-        this.getSinglePlaylistSong(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
-            this.playlist_data = res.data.Items
-        })
-    },
-    methods: {
-        routeBack(){
-            this.$router.push('/Playlists')
-        }
-    },
-    filters: {
+  },
+  filters: {
     convertTickToTime(ticks) {
       var seconds = Math.floor(ticks / 10000000);
       var hour = Math.floor(seconds / 3600);

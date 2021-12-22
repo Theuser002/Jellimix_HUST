@@ -12,15 +12,14 @@
       </div>
     </div>
     <the-featured-album />
-    <the-genres />
+    <the-featured-genre/>
     <the-featured-artist />
   </div>
 </template>
 
 <script>
-import TheGenres from "../components/TheGenres.vue";
+
 export default {
-  components: { TheGenres },
 };
 </script>
 

@@ -48,7 +48,7 @@
               v-for="item in searchAlbumRes"
               :key="item.Id"
               :title="item.Name"
-              href="#"
+              @click="displaySingleAlbum(item.Id)"
             >
               {{ item.Name }}
             </a>
@@ -60,7 +60,7 @@
               v-for="item in searchArtistRes"
               :key="item.Id"
               :title="item.Name"
-              href="#"
+              @click="displaySingleArtist(item.Id)"
             >
               {{ item.Name }}
             </a>
@@ -286,6 +286,12 @@ export default {
         // );
         // localStorage.setItem("lightTheme", true);
       }
+    },
+    displaySingleArtist(id) {
+      this.$router.push(`/Artists/${id}`);
+    },
+    displaySingleAlbum(id) {
+      this.$router.push(`/Albums/${id}`);
     },
   },
 };

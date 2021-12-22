@@ -23,6 +23,7 @@ const player = {
     mutations: {
         setAudio(state, newAudio) {
             state.audio = newAudio
+            state.isPlaying = true
         },
         setOpenPlayer(state, newOpenPlayer) {
             state.isOpenPlayer = newOpenPlayer

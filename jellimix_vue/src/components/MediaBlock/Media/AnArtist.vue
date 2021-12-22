@@ -4,11 +4,13 @@
       <div class="ms_rcnt_box_img">
         <img
           class="ms_rcnt_box_media_image"
-          :src="
-            img_url || require(`../../../assets/images/${defaultImg}`)
-          "
+          :src="img_url || require(`../../../assets/images/${defaultImg}`)"
         />
-        <div class="ms_main_overlay">
+        <div
+          class="ms_main_overlay"
+          @click="displaySingleArtist"
+          style="cursor: pointer"
+        >
           <div class="ms_box_overlay"></div>
           <!-- <div class="ms_more_icon" @click="isOpenOption = !isOpenOption">
             <img src="../../../assets/images/svg/more.svg" alt="" />
@@ -54,13 +56,13 @@
               >
             </li>
           </ul> -->
-          <div class="ms_play_icon" @click="displaySingleArtist">
+          <!-- <div class="ms_play_icon" @click="displaySingleArtist">
             <img src="../../../assets/images/svg/search.svg" alt="" />
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="ms_rcnt_box_text">
-        <h3 @click="displaySingleArtist">
+        <h3 @click="displaySingleArtist" style="cursor: pointer">
           <a :title="media_data.Name">{{ media_data.Name }}</a>
         </h3>
         <p>{{ media_data.AlbumArtist }}</p>
@@ -112,9 +114,9 @@ export default {
       this.media_data.song_url = url;
     },
     displaySingleArtist() {
-        console.log("hihi");
-    //   this.$router.go({name: `/SingleArtist/${this.media_data.Id}`})
-    this.$router.push(`/Artists/${this.media_data.Id}`)
+      console.log("hihi");
+      //   this.$router.go({name: `/SingleArtist/${this.media_data.Id}`})
+      this.$router.push(`/Artists/${this.media_data.Id}`);
     },
     download() {
       saveAs(this.song_url, `Jellimix-${this.media_data.Name}.mp3`);
