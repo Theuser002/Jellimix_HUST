@@ -85,12 +85,16 @@ export default {
     // console.log(this.$refs.username_input);
   },
   methods: {
-    ...mapMutations(["setTokenAuth", "setUserId"]),
+    ...mapMutations(["setTokenAuth", "setUserId", "setAddLoginModal", "setAddRegisterModal"]),
     closeForm() {
+      // emit to parent
       this.$emit("close-form");
+      // edit vuex variable
+      this.setAddLoginModal(false);
     },
     switchToRegisterForm() {
       this.closeForm();
+      // emit to parent to switch register
       this.$emit("switch-register");
     },
     loginUser() {

@@ -64,6 +64,7 @@
                 </li>
                 <li>
                   <a
+                  @click="addMediaToPlaylist"
                     ><span class="song_optn_icon"
                       ><i class="ms_icon icon_playlist"></i></span
                     >Add To Playlist</a
@@ -216,10 +217,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["audio","isPlaying","isOpenPlayer"]),
+    ...mapGetters(["audio","isPlaying","isOpenPlayer", "isOpenLoginModalVuex", "tokenAuth"]),
   },
   methods: {
-    ...mapMutations(["setPlaying","setOpenPlayer"]),
+    ...mapMutations(["setPlaying","setOpenPlayer", "setAddLoginModal", "setListToAdd", "setAddForm"]),
     testPause() {
       if (this.isPlaying === true) {
         this.$refs.audio.pause();
@@ -253,6 +254,20 @@ export default {
       this.progressPercentage = currentProgressPercentage + "%";
       if (this.audio.song_url != null) {
         this.$refs.audio.currentTime = currentProgressPercentage / 100 * this.convertTickToSecond(this.audio.RunTimeTicks);
+      }
+    },
+    addMediaToPlaylist() {
+      if (this.tokenAuth == null || this.tokenAuth.length == 0) {
+        if (!this.isOpenLoginModalVuex) {
+          this.setAddLoginModal(true);
+        }
+      } else {
+        if (this.audio.Id == null || this.audio.Id.length == 0) {
+          this.$toast.error("Audio is not available!");
+          return 
+        }
+        this.setListToAdd([this.audio.Id])
+        this.setAddForm(true);
       }
     }
   },

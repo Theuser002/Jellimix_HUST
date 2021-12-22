@@ -7,13 +7,13 @@
       <div class="ms_pro_form">
         <div class="form-group">
           <label>Select Album</label>
-          <select class="form-control">
+          <select ref="choseplaylist" class="form-control">
             <option v-for="item in playlists" :key="item.Id">{{item.Name}}</option>
           </select>
         </div>
         <div class="pro-form-btn text-center marger_top15">
           <div class="ms_upload_btn">
-            <a href="#" class="ms_btn">Add Now</a>
+            <a href="#" class="ms_btn" @click="addMediaToPlaylist">Add Now</a>
             <a href="#" class="ms_btn" @click="setAddForm(false)">cancle</a>
           </div>
         </div>
@@ -23,16 +23,47 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex';
+import PlaylistServices from "../common/PlaylistServices";
 
 export default {
+  mixins: [PlaylistServices],
   props:{
     playlists: {
       type: Array
-    }
+    },
+  },
+  computed: {
+    ...mapGetters(["userId", "tokenAuth", "listToAdd"]),
   },
   methods: {
-    ...mapMutations(['setAddForm'])
+    ...mapMutations(['setAddForm']),
+    addMediaToPlaylist() {
+      if (this.listToAdd.length < 0 ) {
+        return
+      }
+      let playlistId = this.getPlaylistIdByName(this.$refs.choseplaylist.value)
+      if (playlistId.length <= 0) {
+        this.$toast.error("invalid playlist")
+        return 
+      }
+      this.addMediaToPlaylistService(this.listToAdd[0], playlistId, this.userId, this.tokenAuth)
+      .then(() => {
+        this.$toast.success("Add media to playlist successfully!");
+      })
+      .catch((err) => {
+        this.$toast.error(err.message)
+      });
+      this.setAddForm(false);
+    },
+    getPlaylistIdByName(playlistName) {
+      for (let i = 0; i < this.playlists.length; i++) {
+        if (this.playlists[i].Name == playlistName) {
+          return this.playlists[i].Id;
+        }
+      }
+      return ""
+    }
   },
 };
 </script>

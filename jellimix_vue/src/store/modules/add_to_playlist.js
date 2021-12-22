@@ -2,7 +2,7 @@ const add_to_playlist = {
     state() {
         return {
             isAddFormOpen: false,
-            listToAdd: []
+            listToAdd: [],
         }
     },
 

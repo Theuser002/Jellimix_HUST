@@ -68,6 +68,23 @@ var PlaylistServices = {
                 }
             }
             return await axios.post(url, data, config);
+        },
+        // support multiple mediaIds in the future 
+        async addMediaToPlaylistService(mediaId, playlistId, userId, tokenAuth) {
+            let url = axios.defaults.baseURL +
+                `Playlists/` + playlistId + `/Items`
+            const config = {
+                headers: {
+                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
+                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
+                        `Token="${tokenAuth}"`
+                },
+                params: {
+                    "ids": mediaId,
+                    "userId": userId,
+                },
+            }
+            return await axios.post(url, {}, config);
         }
     },
 }

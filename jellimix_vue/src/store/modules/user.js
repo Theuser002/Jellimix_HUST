@@ -4,6 +4,8 @@ const user = {
         return {
             tokenAuthentication: "",
             userId: "",
+            isOpenLoginModalVuex: false,
+            isOpenRegisterModalVuex: false,
         }
     },
 
@@ -11,6 +13,8 @@ const user = {
     getters: {
         tokenAuth: state => state.tokenAuthentication,
         userId: state => state.userId,
+        isOpenLoginModalVuex: state => state.isOpenLoginModalVuex,
+        isOpenRegisterModalVuex: state => state.isOpenRegisterModalVuex,
     },
 
     mutations: {
@@ -29,6 +33,12 @@ const user = {
             } else {
                 Vue.$cookies.set('userId' , state.userId, "1h")
             }
+        },
+        setAddLoginModal(state, isOpen) {
+            state.isOpenLoginModalVuex = isOpen
+        },
+        setAddRegisterModal(state, isOpen) {
+            state.isOpenRegisterModalVuex = isOpen
         },
     },
 }
