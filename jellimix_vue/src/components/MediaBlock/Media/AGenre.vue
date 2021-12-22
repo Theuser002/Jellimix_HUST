@@ -1,45 +1,99 @@
 <template>
-  <div class="col-lg-2 col-md-6">
-    <div class="ms_rcnt_box marger_bottom25">
+  <div class="swiper-slide" style="width: 240px; margin-right: 10px">
+    <div class="ms_rcnt_box">
       <div class="ms_rcnt_box_img">
         <img
-          :src="
-            playlist_data.img_url || require(`../../../assets/images/album/${defaultImg}`)
-          "
-          class="img-fluid"
+          class="ms_rcnt_box_media_image"
+          :src="img_url || require(`../../../assets/images/${defaultImg}`)"
         />
-        <div class="ms_main_overlay">
+        <div
+          class="ms_main_overlay"
+          style="cursor: pointer"
+        >
           <div class="ms_box_overlay"></div>
-          <div class="ms_play_icon" @click="displaySinglePlaylist">
-            <img src="../../../assets/images/svg/play.svg" alt="" />
-          </div>
+          <!-- <div class="ms_more_icon" @click="isOpenOption = !isOpenOption">
+            <img src="../../../assets/images/svg/more.svg" alt="" />
+          </div> -->
+          <!-- <ul
+            class="more_option"
+            :class="{ open_option: isOpenOption }"
+            v-if="isOpenOption"
+          >
+            <li>
+              <a href="#"
+                ><span class="opt_icon"
+                  ><span class="icon icon_fav"></span></span
+                >Add To Favourites</a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><span class="opt_icon"
+                  ><span class="icon icon_queue"></span></span
+                >Add To Queue</a
+              >
+            </li>
+            <li>
+              <a href="#" @click="download"
+                ><span class="opt_icon"
+                  ><span class="icon icon_dwn"></span></span
+                >Download Now</a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><span class="opt_icon"
+                  ><span class="icon icon_playlst"></span></span
+                >Add To Playlist</a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><span class="opt_icon"
+                  ><span class="icon icon_share"></span></span
+                >Share</a
+              >
+            </li>
+          </ul> -->
+          <!-- <div class="ms_play_icon" @click="displaySingleArtist">
+            <img src="../../../assets/images/svg/search.svg" alt="" />
+          </div> -->
         </div>
       </div>
       <div class="ms_rcnt_box_text">
-        <h3>
-          <a href="#">{{ playlist_data.Name }}</a>
+        <h3 style="cursor: pointer">
+          <a :title="genre_data.Name">{{ genre_data.Name }}</a>
         </h3>
-        <p>{{ playlist_data.RunTimeTicks | convertTickToTime }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import GenreServices from "../../../common/GenreServices.js";
+
 export default {
+  mixins: [GenreServices],
   props: {
-    playlist_data: {
+    genre_data: {
       type: Object
     }
   },
   data() {
     return {
-      defaultImg: "album1.jpg"
+      img_url: null,
+      defaultImg: "default-genre.png"
     }
+  },
+  created() {
+    this.getImage();
   },
   methods: {
     displaySinglePlaylist(){
-      this.$router.push(`/Playlists/${this.playlist_data.Id}`)
+      this.$router.push(`/Playlists/${this.genre_data.Id}`)
+    },
+    getImage(){
+      this.img_url = this.getImageLink(this.genre_data)
     }
   },
   filters: {
@@ -62,4 +116,6 @@ export default {
 </script>
 
 <style scoped>
+@import "../../../css/MediaBlock/Media/PrimaryMedia.css";
+
 </style>

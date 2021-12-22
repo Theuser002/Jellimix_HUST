@@ -1,74 +1,40 @@
 import axios from 'axios'
+import { api_key, user } from './enums'
 
 var GenreServices = {
     methods: {
-        async getAllGenre(userId, tokenAuth) {
-            let url = axios.defaults.baseURL +
-                `Users/${userId}/Items?Fields=PrimaryImageAspectRatio%2CSortName%2CPath%2C` +
-                `PrimaryImageAspectRatio&ImageTypeLimit=1&` +
-                `ParentId=f5eff6e0822ab58b88d7f68185e1f895&` +
-                `SortBy=IsFolder%2CSortName&SortOrder=Ascending`;
-            const config = {
-                headers: {
-                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
-                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
-                        `Token="${tokenAuth}"`
-                }
-            }
-            return await axios.get(url, config);
+        async getAllGenre() {
+            let url =
+                axios.defaults.baseURL +
+                `Genres?SortBy=SortName&SortOrder=Ascending&` +
+                `Recursive=true&Fields=PrimaryImageAspectRatio%2CItemCounts&` +
+                `StartIndex=0&ParentId=7e64e319657a9516ec78490da03edccb&` +
+                `userId=${user}&api_key=${api_key}`;
+            return axios.get(url);
         },
-        async getSingleGenre(id, userId, tokenAuth) {
-            let url = axios.defaults.baseURL +
-                `Users/${userId}/Items/${id}`
-            const config = {
-                headers: {
-                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
-                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
-                        `Token="${tokenAuth}"`
-                }
-            }
-            return await axios.get(url, config)
-        },
-        async getSingleGenreSong(id, userId, tokenAuth) {
-            let url = axios.defaults.baseURL +
-                `Playlists/${id}/Items?Fields=PrimaryImageAspectRatio&` +
-                `EnableImageTypes=Primary%2CBackdrop%2CBanner%2CThumb&` +
-                `UserId=${userId}`
-            const config = {
-                headers: {
-                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
-                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
-                        `Token="${tokenAuth}"`
-                }
-            }
-            return await axios.get(url, config)
-        },
-        getGenreImg(genreList) {
-            if (Object.keys(genreList.ImageTags)[0] == 'Primary') {
-                let url = axios.defaults.baseURL +
-                    `Items/${genreList.Id}/Images/Primary?fillHeight=225&fillWidth=225&quality=96`
-                return url;
+        getImageLink(genre_data) {
+            var url;
+            if (Object.keys(genre_data.ImageTags)[0] != undefined) {
+                url =
+                    axios.defaults.baseURL +
+                    `Items/${genre_data.Id}/Images/${
+                    Object.keys(genre_data.ImageTags)[0]
+                  }?fillWidth=240&fillHeight=240&quality=100`;
+            } else if (genre_data.ParentBackdropItemId != undefined) {
+                url =
+                    axios.defaults.baseURL +
+                    `Items/${genre_data.ParentBackdropItemId}/Images/Backdrop?fillWidth=240&fillHeight=240&quality=100`;
+            } else if (genre_data.AlbumId != undefined) {
+                url =
+                    axios.defaults.baseURL +
+                    `Items/${genre_data.AlbumId}/Images/${
+                    Object.keys(genre_data.ImageBlurHashes)[0]
+                  }?fillWidth=240&fillHeight=240&quality=100`;
             } else {
-                return null;
+                url = null
             }
-        } //,
-        // async addNewPlaylist(name, userId, tokenAuth) {
-        //     let url = axios.defaults.baseURL +
-        //         `Playlists`
-        //     const data = {
-        //         "Name": name,
-        //         "UserId": userId,
-        //         "MediaType": "Playlist"
-        //     }
-        //     const config = {
-        //         headers: {
-        //             "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
-        //                 `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
-        //                 `Token="${tokenAuth}"`
-        //         }
-        //     }
-        //     return await axios.post(url, data, config);
-        // }
+            return url;
+        },
     },
 }
 

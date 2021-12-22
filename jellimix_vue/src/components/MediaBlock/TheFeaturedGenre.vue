@@ -6,9 +6,9 @@
         <span class="veiw_all"><router-link to="/Genres">View more</router-link></span>
       </div>
     </div>
-    <swiper v-if="mediaList" class="swiper" ref="swiper" :options="swiperOption">
-      <swiper-slide v-for="(media, index) in mediaList" :key="index"
-        ><AGenre :media_data="media"
+    <swiper v-if="genreList" class="swiper" ref="swiper" :options="swiperOption">
+      <swiper-slide v-for="(genre, index) in genreList" :key="index"
+        ><AGenre :genre_data="genre"
       /></swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import AlbumServices from "../../common/AlbumServices.js";
+import GenreServices from "../../common/GenreServices.js";
 
 export default {
-  mixins: [AlbumServices],
+  mixins: [GenreServices],
   data() {
     return {
       swiperOption: {
@@ -53,19 +53,23 @@ export default {
           },
         },
       },
-      mediaList: null,
+      genreList: [],
     };
   },
   created() {
-    this.getAllAlbum()
+    this.getAllGenre()
       .then((res) => {
         setTimeout(() => {
-          this.mediaList = res.data.Items;
+          this.genreList = res.data.Items;
         }, 500);
+        this.genreList.forEach(genre => {
+          genre.img_url = this.getImageLink(genre)
+        });
       })
       .catch((res) => {
         console.log(res);
       });
+
   },
 
 };
