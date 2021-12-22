@@ -137,7 +137,7 @@
                   >
                 </div>
                 <div class="jp-progress">
-                  <div class="jp-seek-bar" style="width: 100%"
+                  <div ref="seekbar" class="jp-seek-bar" style="width: 100%"
                   @mousedown="updateProgressPercentage">
                     <div class="jp-play-bar" :style="{width: progressPercentage}">
                       <div class="bullet"></div>
@@ -245,24 +245,32 @@ export default {
       return seconds;
     },
     updateProgressPercentage(event) {
-      let currentProgress = event.clientX - event.target.getBoundingClientRect().left,
-      currentProgressPercentage = Math.floor(currentProgress / event.target.offsetWidth * 100, 5)
-      // update progress bar
-      this.progressPercentage = currentProgressPercentage + "%"
-      this.$refs.audio.currentTime = currentProgressPercentage / 100 * this.convertTickToSecond(this.audio.RunTimeTicks)
+      // jp-play-bar changes relative position when we update, we should getBoundingClientRect() from jp-seek-bar
+      let currentProgress = event.clientX - this.$refs.seekbar.getBoundingClientRect().left,
+
+      // because we can click in jp-seek-bar or jp-play-bar, we should get the width of jp-seek-bar, not the target of click event
+      currentProgressPercentage = Math.floor(currentProgress / this.$refs.seekbar.offsetWidth * 100, 5);
+      this.progressPercentage = currentProgressPercentage + "%";
+      if (this.audio.song_url != null) {
+        this.$refs.audio.currentTime = currentProgressPercentage / 100 * this.convertTickToSecond(this.audio.RunTimeTicks);
+      }
     }
   },
   filters: {
     convertTickToTime(ticks) {
-      var seconds = Math.floor(ticks / 10000000);
-      var minute = Math.floor((seconds / 60) % 60);
-      var second = seconds % 60;
-
-      var result =
-        String(minute).padStart(2, "0") +
-        ":" +
-        String(second).padStart(2, "0");
-      return result;
+      if (ticks != null) {
+        var seconds = Math.floor(ticks / 10000000);
+        var minute = Math.floor((seconds / 60) % 60);
+        var second = seconds % 60;
+  
+        var result =
+          String(minute).padStart(2, "0") +
+          ":" +
+          String(second).padStart(2, "0");
+        return result;
+      } else {
+        return "no source"
+      }
     },
   },
   watch:{
