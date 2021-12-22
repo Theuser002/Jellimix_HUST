@@ -47,10 +47,6 @@ export default {
         this.$toast.error("invalid playlist")
         return 
       }
-      // console.log(this.listToAdd[0])
-      // console.log(playlistId)
-      // console.log(this.userId);
-      // console.log(this.tokenAuth);
       this.addMediaToPlaylistService(this.listToAdd[0], playlistId, this.userId, this.tokenAuth)
       .then(() => {
         this.$toast.success("Add media to playlist successfully!");
