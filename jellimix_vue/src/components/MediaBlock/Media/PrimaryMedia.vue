@@ -103,7 +103,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(["setAudio", "setOpenPlayer", "setAddForm", "setAddLoginModal"]),
+    ...mapMutations(["setAudio", "setOpenPlayer", "setAddForm", "setAddLoginModal", "setListToAdd"]),
     getImage() {
       let url = this.getImageLink(this.media_data);
       this.img_url = url;
@@ -127,6 +127,7 @@ export default {
           this.setAddLoginModal(true);
         }
       } else {
+        this.setListToAdd([this.media_data.Id])
         this.setAddForm(true);
       }
     }

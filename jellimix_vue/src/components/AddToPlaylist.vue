@@ -31,15 +31,27 @@ export default {
   props:{
     playlists: {
       type: Array
-    }
+    },
   },
   computed: {
-    ...mapGetters(["userId", "tokenAuth"]),
+    ...mapGetters(["userId", "tokenAuth", "listToAdd"]),
   },
   methods: {
     ...mapMutations(['setAddForm']),
     addMediaToPlaylist() {
-      this.addNewPlaylist(this.$refs.choseplaylist.value, this.userId, this.tokenAuth)
+      if (this.listToAdd.length < 0 ) {
+        return
+      }
+      let playlistId = this.getPlaylistIdByName(this.$refs.choseplaylist.value)
+      if (playlistId.length <= 0) {
+        this.$toast.error("invalid playlist")
+        return 
+      }
+      // console.log(this.listToAdd[0])
+      // console.log(playlistId)
+      // console.log(this.userId);
+      // console.log(this.tokenAuth);
+      this.addMediaToPlaylistService(this.listToAdd[0], playlistId, this.userId, this.tokenAuth)
       .then(() => {
         this.$toast.success("Add media to playlist successfully!");
       })
@@ -48,6 +60,14 @@ export default {
       });
       this.setAddForm(false);
     },
+    getPlaylistIdByName(playlistName) {
+      for (let i = 0; i < this.playlists.length; i++) {
+        if (this.playlists[i].Name == playlistName) {
+          return this.playlists[i].Id;
+        }
+      }
+      return ""
+    }
   },
 };
 </script>
