@@ -83,6 +83,7 @@ export default {
   },
   watch: {
     tokenAuth() {
+      this.playlists = []
       this.getData();
     },
   },
