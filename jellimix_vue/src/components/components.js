@@ -27,8 +27,6 @@ const TheRegisterForm = () =>
     import('./TheRegisterForm.vue')
 const TheLoginForm = () =>
     import('./TheLoginForm.vue')
-const TheGenres = () =>
-    import('./TheGenres.vue')
 const APlaylist = () =>
     import('./MediaBlock/Media/APlaylist.vue')
 const AnArtist = () =>
@@ -55,7 +53,6 @@ Vue.component('TheFeaturedArtist', TheFeaturedArtist);
 Vue.component('ThePlayer', ThePlayer);
 Vue.component('TheRegisterForm', TheRegisterForm);
 Vue.component('TheLoginForm', TheLoginForm);
-Vue.component('TheGenres', TheGenres);
 Vue.component('APlaylist', APlaylist);
 Vue.component('AnArtist', AnArtist);
 Vue.component('AGenre', AGenre);

@@ -62,9 +62,9 @@ export default {
         setTimeout(() => {
           this.genreList = res.data.Items;
         }, 500);
-        this.genreList.forEach(genre => {
-          genre.img_url = this.getImageLink(genre)
-        });
+        // this.genreList.forEach(genre => {
+        //   genre.img_url = this.getImageLink(genre)
+        // });
       })
       .catch((res) => {
         console.log(res);
