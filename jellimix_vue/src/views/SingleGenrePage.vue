@@ -4,7 +4,7 @@
     <div class="album_single_data">
       <div class="album_single_img">
         <img
-          :src="img_url || require(`../assets/images/album/${defaultImg}`)"
+          :src="img_url || require(`../assets/images/genrs/${default_img}`)"
           alt="genre pic"
           class="img-fluid"
         />
@@ -76,7 +76,7 @@
         <ul class="album_list_name">
           <li>#</li>
           <li>Song Title</li>
-          <li>Artist</li>
+          <li>Album</li>
           <li class="text-center">Duration</li>
           <li class="text-center">Add To Favourites</li>
           <li class="text-center">More</li>
@@ -84,12 +84,12 @@
         <ul v-for="(item,index) in genre_data" :key="index">
           <li>
             <a href="#"
-              ><span class="play_no">{{index+1}}</span><span class="play_hover"></span
-            ></a>
+              ><span class="play_no">{{index+1}}</span><span class="play_hover"></span>
+            </a>
           </li>
           <li><a href="#">{{item.Name}}</a></li>
           <li><a href="#">{{item.Album}}</a></li>
-          <!-- <li class="text-center"><a href="#">{{item.RunTimeTicks | convertTickToTime}}</a></li> -->
+          <li class="text-center"><a href="#">{{item.RunTimeTicks | convertTickToTime}}</a></li>
           <li class="text-center">
             <a href="#"><span class="ms_icon1 ms_fav_icon"></span></a>
           </li>
@@ -148,35 +148,41 @@
 </template>
 
 <script>
-import GenreServices from '../common/GenreServices'
+import GenreServices from '../common/GenreServices';
 import { mapGetters } from "vuex";
 
 export default {
-    mixins: [GenreServices],
-    data() {
-        return {
-            genre: null,
-            genre_data: null,
-            default_image:"../assets/images/genrs/default_genre.png"
-        }
+  mixins: [GenreServices],
+  data() {
+      return {
+          genre: null,
+          genre_data: null,
+          img_url: null,
+          default_img:"default-genre.png"
+      }
+  },
+  computed: {
+      ...mapGetters(["tokenAuth", "userId"]),
+  },
+  created() {
+      this.getSingleGenre(this.$route.params.id).then((res)=>{
+          this.genre = res.data
+        this.getImage();
+      });
+      this.getSingleGenreSongs(this.$route.params.id).then((res)=>{
+          this.genre_data = res.data.Items
+      });
+  },
+  methods: {
+    routeBack(){
+      this.$router.push('/Genres')
     },
-    computed: {
-        ...mapGetters(["tokenAuth", "userId"]),
+    getImage() {
+      this.img_url = this.getImageLink(this.genre);
+      console.log(this.img_url);
     },
-    created() {
-        this.getSingleGenre(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
-            this.genre = res.data
-        })
-        this.getSingleGenreSongs(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
-            this.genre_data = res.data.Items
-        })
-    },
-    methods: {
-        routeBack(){
-            this.$router.push('/Genres')
-        }
-    },
-    filters: {
+  },
+  filters: {
     convertTickToTime(ticks) {
       var seconds = Math.floor(ticks / 10000000);
       var hour = Math.floor(seconds / 3600);
