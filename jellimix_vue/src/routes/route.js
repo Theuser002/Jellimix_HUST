@@ -3,21 +3,23 @@ import VueRouter from 'vue-router'
 
 //thực hiện import các component áp dụng lazy loading, đọc tài liệu để hiểu
 const Home = () =>
-    import('../views/Home.vue')
+    import ('../views/Home.vue')
 const SongPage = () =>
-    import('../views/SongPage.vue')
+    import ('../views/SongPage.vue')
 const ArtistPage = () =>
-    import('../views/ArtistPage.vue')
+    import ('../views/ArtistPage.vue')
 const SingleArtistPage = () =>
-    import('../views/SingleArtistPage.vue')
+    import ('../views/SingleArtistPage.vue')
 const AlbumPage = () =>
-    import('../views/AlbumPage.vue')
+    import ('../views/AlbumPage.vue')
 const AlbumDetailPage = () =>
-    import('../views/AlbumDetailPage.vue')
+    import ('../views/AlbumDetailPage.vue')
 const PlaylistPage = () =>
-    import('../views/PlaylistPage.vue')
+    import ('../views/PlaylistPage.vue')
 const SinglePlaylistPage = () =>
-    import('../views/SinglePlaylistPage.vue')
+    import ('../views/SinglePlaylistPage.vue')
+const SingleGenrePage = () =>
+        import ('../views/SingleGenrePage.vue')
 
 const routes = [
     { path: '/Home', component: Home },
@@ -29,6 +31,7 @@ const routes = [
     { path: '/Playlists/:id', component: SinglePlaylistPage },
     { path: '/SingleArtist', component: SingleArtistPage },
     { path: '/Albums/:id', component: AlbumDetailPage },
+    { path: '/Genres/:id', component: SingleGenrePage },
     { path: '/', redirect: '/Home' }
 ]
 

@@ -4,7 +4,7 @@
       <div class="ms_heading">
         <h1>Featured Song</h1>
         <span class="veiw_all"
-          ><router-link to="/Song">View more</router-link></span
+          ><router-link to="/Songs">View more</router-link></span
         >
       </div>
     </div>
