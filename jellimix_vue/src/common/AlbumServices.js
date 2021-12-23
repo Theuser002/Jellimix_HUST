@@ -17,10 +17,22 @@ var AlbumServices = {
         },
         getImageLink(media_data) {
             var url;
-
-            url =
-                axios.defaults.baseURL +
-                `Items/${media_data.Id}/Images/Primary?fillWidth=240&fillHeight=240&quality=100`;
+            if (Object.keys(media_data.ImageTags)[0] != undefined) {
+                url =
+                    axios.defaults.baseURL +
+                    `Items/${media_data.Id}/Images/${Object.keys(media_data.ImageTags)[0]
+                    }?fillWidth=240&fillHeight=240&quality=100`;
+            } else if (media_data.ParentBackdropItemId != undefined) {
+                url =
+                    axios.defaults.baseURL +
+                    `Items/${media_data.ParentBackdropItemId}/Images/Backdrop?fillWidth=240&fillHeight=240&quality=100`;
+            } else if (media_data.AlbumId != undefined) {
+                url =
+                    axios.defaults.baseURL +
+                    `Items/${media_data.AlbumId}/Images/${Object.keys(media_data.ImageBlurHashes)[0]
+                    }?fillWidth=240&fillHeight=240&quality=100`;
+            }
+            console.log(media_data)
 
             return url;
         },

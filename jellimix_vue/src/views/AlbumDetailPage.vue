@@ -3,7 +3,9 @@
     <div class="album_single_data">
       <div class="album_single_img">
         <img
-          :src="img_url || require(`../assets/images/album/${defaultImg}`)"
+          :src="
+            img_url || require(`../assets/../assets/images/album/${defaultImg}`)
+          "
           alt="album pic"
           class="img-fluid"
         />
@@ -11,28 +13,40 @@
       <div class="album_single_text">
         <h2>{{ album_data.Name }}</h2>
         <p class="singer_name">{{ album_data.AlbumArtist }}</p>
-        <div class="about_album">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation...<a href="#">Read More</a>
+        <div class="album_feature">
+          <span href="#" class="album_date"
+            >{{ album_data.ChildCount }} songs |
+            {{ album_data.RunTimeTicks | convertTickToTime }}</span
+          >
+          <span href="#" class="album_date"
+            >Released: {{ album_data.ProductionYear }}</span
+          >
+          <span href="#" class="album_date"
+            >Genres: {{ album_data.Genres.join(", ") }}</span
+          >
         </div>
         <div class="album_btn">
           <a href="#" class="ms_btn play_btn"
             ><span class="play_all"
-              ><img src="images/svg/play_all.svg" alt="" />Play All</span
+              ><img src="../assets/images/svg/play_all.svg" alt="" />Play
+              All</span
             ><span class="pause_all"
-              ><img src="images/svg/pause_all.svg" alt="" />Pause</span
+              ><img
+                src="../assets/images/svg/pause_all.svg"
+                alt=""
+              />Pause</span
             ></a
           >
           <a href="#" class="ms_btn"
             ><span class="play_all"
-              ><img src="images/svg/add_q.svg" alt="" />Add To Queue</span
+              ><img src="../assets/images/svg/add_q.svg" alt="" />Add To
+              Queue</span
             ></a
           >
         </div>
       </div>
       <!-- <div class="album_more_optn ms_more_icon">
-                    <span><img src="images/svg/more.svg" alt=""></span>
+                    <span><img src="../assets/images/svg/more.svg" alt=""></span>
                 </div>
                 <ul class="more_option">
                     <li><a href="#"><span class="opt_icon"><span class="icon icon_fav"></span></span>Add To Favourites</a></li>
@@ -139,6 +153,23 @@ export default {
   watch: {
     album_data() {
       this.getImage();
+    },
+  },
+  filters: {
+    convertTickToTime(ticks) {
+      if (ticks != null) {
+        var seconds = Math.floor(ticks / 10000000);
+        var minute = Math.floor((seconds / 60) % 60);
+        var second = seconds % 60;
+
+        var result =
+          String(minute).padStart(2, "0") +
+          ":" +
+          String(second).padStart(2, "0");
+        return result;
+      } else {
+        return "no source";
+      }
     },
   },
   methods: {
