@@ -4,22 +4,21 @@
     <div class="album_single_data">
       <div class="album_single_img">
         <img
-          src="../assets/images/default-genre.png"
-          alt="Genre default picture"
+          :src="img_url || require(`../assets/images/album/${defaultImg}`)"
+          alt="genre pic"
           class="img-fluid"
         />
       </div>
-      <div class="genre_single_text">
-        <h2>Ten Genre</h2>
-        <p class="genre_name">Alternative rock</p>
-        <div class="about_genre">
+      <div class="album_single_text">
+        <h2>{{genre.Name}}</h2>
+        <!-- <div class="about_genre">
           Alternative rock (also called alternative music, alt-rock, or simply alternative) is 
           a category of rock music that emerged from the independent music underground of 
           the 1970s and became widely popular in the 1990s. 
           "Alternative" refers to the genre's distinction from mainstream or commercial rock or 
           pop music. The term's original meaning was broader, referring to a musicians influenced 
           by the musical style or independent, DIY ethos of late 1970s punk rock.<a href="#">Read More</a>
-        </div>
+        </div> -->
         <div class="album_btn">
           <a href="#" class="ms_btn play_btn"
             ><span class="play_all"
@@ -82,15 +81,15 @@
           <li class="text-center">Add To Favourites</li>
           <li class="text-center">More</li>
         </ul>
-        <ul v-for="(item,index) in playlist_data" :key="index">
+        <ul v-for="(item,index) in genre_data" :key="index">
           <li>
             <a href="#"
               ><span class="play_no">{{index+1}}</span><span class="play_hover"></span
             ></a>
           </li>
           <li><a href="#">{{item.Name}}</a></li>
-          <li><a href="#">{{item.AlbumArtist}}</a></li>
-          <li class="text-center"><a href="#">{{item.RunTimeTicks | convertTickToTime}}</a></li>
+          <li><a href="#">{{item.Album}}</a></li>
+          <!-- <li class="text-center"><a href="#">{{item.RunTimeTicks | convertTickToTime}}</a></li> -->
           <li class="text-center">
             <a href="#"><span class="ms_icon1 ms_fav_icon"></span></a>
           </li>
@@ -157,7 +156,8 @@ export default {
     data() {
         return {
             genre: null,
-            playlist_data: null
+            genre_data: null,
+            default_image:"../assets/images/genrs/default_genre.png"
         }
     },
     computed: {
@@ -165,10 +165,10 @@ export default {
     },
     created() {
         this.getSingleGenre(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
-            this.playlist = res.data
+            this.genre = res.data
         })
-        this.getSingleGenreSong(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
-            this.playlist_data = res.data.Items
+        this.getSingleGenreSongs(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
+            this.genre_data = res.data.Items
         })
     },
     methods: {

@@ -8,6 +8,7 @@
         />
         <div
           class="ms_main_overlay"
+          @click="displaySingleGenre"
           style="cursor: pointer"
         >
           <div class="ms_box_overlay"></div>
@@ -61,8 +62,9 @@
         </div>
       </div>
       <div class="ms_rcnt_box_text">
-        <h3 style="cursor: pointer">
+        <h3 @click="displaySingleGenre" style="cursor: pointer">
           <a :title="genre_data.Name">{{ genre_data.Name }}</a>
+          <img src="../../../assets/images/svg/play.svg" alt="" />
         </h3>
       </div>
     </div>
@@ -89,8 +91,10 @@ export default {
     this.getImage();
   },
   methods: {
-    displaySinglePlaylist(){
-      this.$router.push(`/Playlists/${this.genre_data.Id}`)
+    displaySingleGenre(){
+      console.log("into display single genre")
+      console.log(this.genre_data.Id)
+      this.$router.push(`/Genres/${this.genre_data.Id}`)
     },
     getImage(){
       this.img_url = this.getImageLink(this.genre_data)

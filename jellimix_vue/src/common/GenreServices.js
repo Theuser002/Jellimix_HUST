@@ -35,6 +35,43 @@ var GenreServices = {
             }
             return url;
         },
+        async getSingleGenre(id, userId, tokenAuth) {
+            let url = axios.defaults.baseURL +
+                `Users/${userId}/Items/${id}`
+            const config = {
+                headers: {
+                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
+                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
+                        `Token="${tokenAuth}"`
+                }
+            }
+            return await axios.get(url, config)
+        },
+        async getSingleGenreSongs(id, userId, tokenAuth) {
+            let url = axios.defaults.baseURL +
+                `Users/${userId}/Items?GenreIds=${id}` +
+                `&Filters=IsNotFolder&Recursive=true&` + 
+                `SortBy=SortName&MediaTypes=Audio&Limit=300&` + 
+                `Fields=Chapters&ExcludeLocationTypes=Virtual&`+
+                `EnableTotalRecordCount=false&CollapseBoxSetItems=false`
+            const config = {
+                headers: {
+                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
+                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
+                        `Token="${tokenAuth}"`
+                }
+            }
+            return await axios.get(url, config)
+        },
+        async getGGenreImg(genre) {
+            if (Object.keys(genre.ImageTags)[0] == 'Primary') {
+                let url = axios.defaults.baseURL +
+                    `Items/${genre.Id}/Images/Primary?fillHeight=225&fillWidth=225&quality=96`
+                return url;
+            } else {
+                return null;
+            }
+        }
     },
 }
 

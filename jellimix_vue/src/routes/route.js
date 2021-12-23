@@ -18,8 +18,8 @@ const PlaylistPage = () =>
     import ('../views/PlaylistPage.vue')
 const SinglePlaylistPage = () =>
     import ('../views/SinglePlaylistPage.vue')
-    // const SingleGenrePage = () =>
-    //     import ('../views/SingleGenrePage.vue')
+const SingleGenrePage = () =>
+        import ('../views/SingleGenrePage.vue')
 
 const routes = [
     { path: '/Home', component: Home },
@@ -31,6 +31,7 @@ const routes = [
     { path: '/Playlists/:id', component: SinglePlaylistPage },
     { path: '/SingleArtist', component: SingleArtistPage },
     { path: '/Albums/:id', component: AlbumDetailPage },
+    { path: '/Genres/:id', component: SingleGenrePage },
     { path: '/', redirect: '/Home' }
 ]
 
