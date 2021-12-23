@@ -4,7 +4,7 @@
     <div class="album_single_data">
       <div class="album_single_img">
         <img
-          :src="img_url || require(`../assets/images/album/${defaultImg}`)"
+          :src="require(`../assets/images/genrs/${defaultImg}`)"
           alt="genre pic"
           class="img-fluid"
         />
@@ -157,17 +157,17 @@ export default {
         return {
             genre: null,
             genre_data: null,
-            default_image:"../assets/images/genrs/default_genre.png"
+            defaultImg:"default-genre.png"
         }
     },
     computed: {
         ...mapGetters(["tokenAuth", "userId"]),
     },
     created() {
-        this.getSingleGenre(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
+        this.getSingleGenre(this.$route.params.id).then((res)=>{
             this.genre = res.data
         })
-        this.getSingleGenreSongs(this.$route.params.id, this.userId, this.tokenAuth).then((res)=>{
+        this.getSingleGenreSongs(this.$route.params.id).then((res)=>{
             this.genre_data = res.data.Items
         })
     },

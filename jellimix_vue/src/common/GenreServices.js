@@ -35,33 +35,19 @@ var GenreServices = {
             }
             return url;
         },
-        async getSingleGenre(id, userId, tokenAuth) {
+        async getSingleGenre(id) {
             let url = axios.defaults.baseURL +
-                `Users/${userId}/Items/${id}`
-            const config = {
-                headers: {
-                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
-                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
-                        `Token="${tokenAuth}"`
-                }
-            }
-            return await axios.get(url, config)
+                `Users/${user}/Items/${id}?api_key=${api_key}`
+            return await axios.get(url)
         },
-        async getSingleGenreSongs(id, userId, tokenAuth) {
+        async getSingleGenreSongs(id) {
             let url = axios.defaults.baseURL +
-                `Users/${userId}/Items?GenreIds=${id}` +
-                `&Filters=IsNotFolder&Recursive=true&` + 
-                `SortBy=SortName&MediaTypes=Audio&Limit=300&` + 
-                `Fields=Chapters&ExcludeLocationTypes=Virtual&`+
-                `EnableTotalRecordCount=false&CollapseBoxSetItems=false`
-            const config = {
-                headers: {
-                    "x-emby-authorization": `MediaBrowser Client="Jellyfin Web", ` +
-                        `Device="Chrome", DeviceId="abc", Version="10.7.6", ` +
-                        `Token="${tokenAuth}"`
-                }
-            }
-            return await axios.get(url, config)
+                `Users/${user}/Items?GenreIds=${id}` +
+                `&Filters=IsNotFolder&Recursive=true&` +
+                `SortBy=SortName&MediaTypes=Audio&Limit=300&` +
+                `Fields=Chapters&ExcludeLocationTypes=Virtual&` +
+                `EnableTotalRecordCount=false&CollapseBoxSetItems=false&api_key=${api_key}`
+            return await axios.get(url)
         },
         async getGGenreImg(genre) {
             if (Object.keys(genre.ImageTags)[0] == 'Primary') {
