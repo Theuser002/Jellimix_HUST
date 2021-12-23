@@ -3,10 +3,17 @@
     <div class="ms_rcnt_slider">
       <div class="ms_heading">
         <h1>Featured Album</h1>
-        <span class="veiw_all"><router-link to="/Albums">View more</router-link></span>
+        <span class="veiw_all"
+          ><router-link to="/Album">View more</router-link></span
+        >
       </div>
     </div>
-    <swiper v-if="mediaList" class="swiper" ref="swiper" :options="swiperOption">
+    <swiper
+      v-if="mediaList"
+      class="swiper"
+      ref="swiper"
+      :options="swiperOption"
+    >
       <swiper-slide v-for="(media, index) in mediaList" :key="index"
         ><AnAlbum :media_data="media"
       /></swiper-slide>
@@ -67,7 +74,6 @@ export default {
         console.log(res);
       });
   },
-
 };
 </script>
 
