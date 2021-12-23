@@ -12,23 +12,27 @@ var GenreServices = {
                 `userId=${user}&api_key=${api_key}`;
             return axios.get(url);
         },
-        getImageLink(genre_data) {
+        getImageLink(genre) {
             var url;
-            if (Object.keys(genre_data.ImageTags)[0] != undefined) {
+            if (Object.keys(genre.ImageTags)[0] != undefined) {
                 url =
                     axios.defaults.baseURL +
-                    `Items/${genre_data.Id}/Images/${
-                    Object.keys(genre_data.ImageTags)[0]
+                    `Items/${genre.Id}/Images/${
+                    Object.keys(genre.ImageTags)[0]
                   }?fillWidth=240&fillHeight=240&quality=100`;
-            } else if (genre_data.ParentBackdropItemId != undefined) {
+            } else if (genre.ImageTags[0] == 'PRIMARY') {
                 url =
                     axios.defaults.baseURL +
-                    `Items/${genre_data.ParentBackdropItemId}/Images/Backdrop?fillWidth=240&fillHeight=240&quality=100`;
-            } else if (genre_data.AlbumId != undefined) {
+                    `Items/${genre.ImageTags}/Images/Primary?fillWidth=240&fillHeight=240&quality=100`;
+            } else if (genre.ParentBackdropItemId != undefined) {
                 url =
                     axios.defaults.baseURL +
-                    `Items/${genre_data.AlbumId}/Images/${
-                    Object.keys(genre_data.ImageBlurHashes)[0]
+                    `Items/${genre.ParentBackdropItemId}/Images/Backdrop?fillWidth=240&fillHeight=240&quality=100`;
+            } else if (genre.AlbumId != undefined) {
+                url =
+                    axios.defaults.baseURL +
+                    `Items/${genre.AlbumId}/Images/${
+                    Object.keys(genre.ImageBlurHashes)[0]
                   }?fillWidth=240&fillHeight=240&quality=100`;
             } else {
                 url = null
@@ -49,15 +53,6 @@ var GenreServices = {
                 `EnableTotalRecordCount=false&CollapseBoxSetItems=false&api_key=${api_key}`
             return await axios.get(url)
         },
-        async getGGenreImg(genre) {
-            if (Object.keys(genre.ImageTags)[0] == 'Primary') {
-                let url = axios.defaults.baseURL +
-                    `Items/${genre.Id}/Images/Primary?fillHeight=225&fillWidth=225&quality=96`
-                return url;
-            } else {
-                return null;
-            }
-        }
     },
 }
 
