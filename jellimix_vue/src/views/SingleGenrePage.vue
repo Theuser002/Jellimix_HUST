@@ -167,11 +167,11 @@ export default {
   created() {
       this.getSingleGenre(this.$route.params.id).then((res)=>{
           this.genre = res.data
+        this.getImage();
       });
       this.getSingleGenreSongs(this.$route.params.id).then((res)=>{
           this.genre_data = res.data.Items
       });
-      this.getImage();
   },
   methods: {
     routeBack(){
