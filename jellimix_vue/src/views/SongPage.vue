@@ -14,7 +14,9 @@
           </li>
         </ul>
       </div>
-      <vue-ads-pagination
+      
+    </div>
+    <vue-ads-pagination
         :total-items="mediaList.length"
         :items-per-page="itemPerPage"
         :max-visible-pages="5"
@@ -41,7 +43,6 @@
           />
         </template>
       </vue-ads-pagination>
-    </div>
   </div>
 </template>
 

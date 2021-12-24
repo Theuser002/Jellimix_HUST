@@ -14,7 +14,9 @@
           </li>
         </ul>
       </div>
-      <vue-ads-pagination
+      
+    </div>
+    <vue-ads-pagination
         :total-items="mediaList.length"
         :items-per-page="itemPerPage"
         :max-visible-pages="5"
@@ -41,7 +43,6 @@
           />
         </template>
       </vue-ads-pagination>
-    </div>
   </div>
 </template>
 
@@ -73,7 +74,11 @@ export default {
       defaultImg: "album1.jpg",
     };
   },
-
+  watch: {
+    page() {
+      window.scrollTo(0, 0);
+    },
+  },
   created() {
     this.getAllAlbum()
       .then((res) => {

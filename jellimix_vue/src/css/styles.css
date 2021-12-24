@@ -2202,7 +2202,7 @@ h1.footer_title:after {
 }
 
 .ms_copyright p a {
-    color: var(--primary-color);
+    color: var(--queue-button-color);
 }
 
 .footer_border {
@@ -3342,6 +3342,7 @@ a.ms_btn.play_btn.btn_pause span.play_all {
 
 .album_list_wrapper {
     width: 100%;
+    margin-bottom: 35px
 }
 
 .ms_album_single_wrapper .ms_view_more {
@@ -3352,13 +3353,13 @@ a.ms_btn.play_btn.btn_pause span.play_all {
     padding-top: 52px;
 }
 
-.album_list_wrapper>ul {
+.album_list_wrapper ul {
     padding: 0px;
-    margin: 0px;
+    /* margin: 0px; */
     list-style: none;
 }
 
-.album_list_wrapper>ul>li {
+.album_list_wrapper ul>li {
     display: inline-block;
     width: 16%;
     color: var(--text-color);
@@ -3366,17 +3367,55 @@ a.ms_btn.play_btn.btn_pause span.play_all {
     text-transform: capitalize;
     top: auto;
     right: auto;
+    text-align: center;
 }
 
-.album_list_wrapper>ul>li>a {
+.album_list_wrapper ul>li:first-child {
+    
+    width: 2%;
+    
+}
+
+.album_list_wrapper ul>li:first-child + li {
+    
+    width: 40%;
+    
+}
+
+.album_list_wrapper ul>li:first-child + li + li {
+    
+    width: 25%;
+    
+}
+
+.album_list_wrapper ul>li:first-child + li + li + li{
+    
+    width: 5%;
+    
+}
+
+.album_list_wrapper ul>li:first-child + li + li + li + li{
+    
+    width: 20%;
+    
+}
+
+.album_list_wrapper ul>li:last-child {
+    
+    width: 3%;
+    
+}
+
+.album_list_wrapper ul>li>a {
     color: var(--media-small-text-color);
     margin-top: 10px;
     display: inline-block;
     position: relative;
+    cursor: pointer
 }
 
-.album_list_wrapper>ul:hover>li>a {
-    color: var(--primary-color);
+.album_list_wrapper ul:hover>li>a {
+    color: var(--primary-color) !important;
 }
 
 ul.album_list_name {
@@ -3412,7 +3451,7 @@ ul.album_list_name:after {
     background-position: -552px 6px;
 }
 
-.album_list_wrapper>ul:hover .ms_icon1.ms_fav_icon,
+.album_list_wrapper ul:hover .ms_icon1.ms_fav_icon,
 ul.play_active_song .ms_icon1.ms_fav_icon {
     background-position: -592px 6px;
 }
@@ -3421,7 +3460,7 @@ ul.play_active_song .ms_icon1.ms_fav_icon {
     background-position: -632px 8px;
 }
 
-.album_list_wrapper>ul:hover .ms_icon1.ms_active_icon,
+.album_list_wrapper ul:hover .ms_icon1.ms_active_icon,
 ul.play_active_song .ms_icon1.ms_active_icon {
     background-position: -672px 8px;
 }
@@ -3460,13 +3499,13 @@ ul.play_active_song .ms_icon1.ms_active_icon {
     -o-transition: all 0.3s ease-in-out;
 }
 
-.album_list_wrapper>ul:hover .play_hover {
+.album_list_wrapper ul:hover  .play_hover {
     opacity: 1;
     top: 0;
     visibility: visible;
 }
 
-.album_list_wrapper>ul:hover .play_no {
+.album_list_wrapper ul:hover  .play_no {
     opacity: 0;
     visibility: hidden;
 }
@@ -3685,7 +3724,7 @@ span.ms_frequency {
     margin-top: -3px;
 }
 
-.ms_free_download .album_list_wrapper>ul>li {
+.ms_free_download .album_list_wrapper ul>li {
     width: 14%;
 }
 
@@ -3746,7 +3785,7 @@ span.ms_frequency {
     background: rgba(59, 200, 231, 0.61);
 }
 
-.ms_free_download.ms_purchase_wrapper .album_list_wrapper>ul>li {
+.ms_free_download.ms_purchase_wrapper .album_list_wrapper ul>li {
     width: 12%;
 }
 
@@ -5338,7 +5377,7 @@ h2.widget-title:after {
         padding-top: 50px;
     }
 
-    .ms_free_download .album_list_wrapper>ul>li {
+    .ms_free_download .album_list_wrapper ul>li {
         width: 13%;
     }
 
@@ -5459,7 +5498,7 @@ h2.widget-title:after {
         padding-left: 10px;
     }
 
-    .album_list_wrapper>ul>li>a {
+    .album_list_wrapper ul>li>a {
         font-size: 14px;
     }
 
@@ -5642,11 +5681,11 @@ h2.widget-title:after {
         max-width: 31%;
     }
 
-    .ms_free_download.ms_purchase_wrapper .album_list_wrapper>ul>li {
+    .ms_free_download.ms_purchase_wrapper .album_list_wrapper ul>li {
         font-size: 14px;
     }
 
-    .ms_free_download .album_list_wrapper>ul>li {
+    .ms_free_download .album_list_wrapper ul>li {
         width: 13%;
     }
 
@@ -5654,7 +5693,7 @@ h2.widget-title:after {
         padding-left: 160px;
     }
 
-    .album_list_wrapper>ul>li>a {
+    .album_list_wrapper ul>li>a {
         font-size: 13px;
     }
 
@@ -5735,7 +5774,7 @@ h2.widget-title:after {
         opacity: 0;
     }
 
-    .ms_free_download.ms_purchase_wrapper .album_list_wrapper>ul>li {
+    .ms_free_download.ms_purchase_wrapper .album_list_wrapper ul>li {
         width: 11%;
     }
 
@@ -6171,12 +6210,12 @@ h2.widget-title:after {
         width: 100%;
     }
 
-    .ms_free_download.ms_purchase_wrapper .album_list_wrapper>ul>li {
+    .ms_free_download.ms_purchase_wrapper .album_list_wrapper ul>li {
         width: 11%;
         font-size: 10px;
     }
 
-    .ms_free_download.ms_purchase_wrapper .album_list_wrapper>ul>li>a {
+    .ms_free_download.ms_purchase_wrapper .album_list_wrapper ul>li>a {
         font-size: 12px;
     }
 
@@ -6803,7 +6842,7 @@ h2.widget-title:after {
         width: 100%;
     }
 
-    .album_list_wrapper>ul>li {
+    .album_list_wrapper ul>li {
         margin-bottom: 10px;
     }
 
@@ -6826,7 +6865,7 @@ h2.widget-title:after {
         margin-right: 0px;
     }
 
-    .album_list_wrapper>ul li.text-center {
+    .album_list_wrapper ul li.text-center {
         text-align: left !important;
     }
 
@@ -7318,11 +7357,11 @@ h2.widget-title:after {
         margin-bottom: 10px;
     }
 
-    .album_list_wrapper>ul {
+    .album_list_wrapper ul {
         border-bottom: 1px solid #0d8479;
     }
 
-    .ms_free_download .album_list_wrapper>ul>li.text-center {
+    .ms_free_download .album_list_wrapper ul>li.text-center {
         text-align: left !important;
     }
 
@@ -7393,7 +7432,7 @@ h2.widget-title:after {
         padding-left: 40px;
     }
 
-    .album_list_wrapper>ul>li {
+    .album_list_wrapper ul>li {
         width: 15%;
     }
 
@@ -8097,7 +8136,10 @@ h2.widget-title:after {
         flex-basis: 190px;
     }
 }
-
+.content-block {
+    padding-bottom: 15px;
+    padding-top: 35px
+}
 .content-block ul {
     list-style-type: none;
     margin: auto;
