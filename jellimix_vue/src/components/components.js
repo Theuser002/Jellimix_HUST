@@ -35,6 +35,8 @@ const AnAlbum = () =>
     import('./MediaBlock/Media/AnAlbum.vue')
 const AddToPlaylist = () =>
     import('./AddToPlaylist.vue')
+const ASongListItem = () =>
+    import('./MediaBlock/Media/ASongListItem.vue')
 
 //Global components
 Vue.component('TheMenu', TheMenu);
@@ -55,3 +57,4 @@ Vue.component('APlaylist', APlaylist);
 Vue.component('AnArtist', AnArtist);
 Vue.component('AnAlbum', AnAlbum);
 Vue.component('AddToPlaylist', AddToPlaylist);
+Vue.component('ASongListItem', ASongListItem);
