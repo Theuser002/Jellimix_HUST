@@ -102,7 +102,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(["setAudio", "setOpenPlayer"]),
+    ...mapMutations(["setSingleAudio", "setOpenPlayer"]),
     getImage() {
       let url = this.getImageLink(this.media_data);
       this.img_url = url;

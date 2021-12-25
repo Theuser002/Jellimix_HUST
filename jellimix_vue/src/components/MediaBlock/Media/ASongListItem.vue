@@ -111,7 +111,7 @@ export default {
   },
   methods: {
     ...mapMutations([
-      "setAudio",
+      "setSingleAudio",
       "setOpenPlayer",
       "setAddForm",
       "setAddLoginModal",
@@ -124,7 +124,7 @@ export default {
       this.media_data.song_url = url;
     },
     playAudio() {
-      this.setAudio(this.media_data);
+      this.setSingleAudio(this.media_data);
       this.setOpenPlayer(true);
     },
     download() {
