@@ -113,7 +113,11 @@
                     dir="ltr"
                   >
                     <ul style="">
-                      <AQueueItem v-for="item in queue.slice(0,5)" :key="item.Id" :queue_data="item"/>
+                      <AQueueItem
+                        v-for="item in queue.slice(0, 5)"
+                        :key="item.Id"
+                        :queue_data="item"
+                      />
                     </ul>
                   </div>
                 </div>
@@ -303,6 +307,7 @@ export default {
     ...mapGetters([
       "audio",
       "queue",
+      "queueIndex",
       "isPlaying",
       "isOpenPlayer",
       "isOpenLoginModalVuex",
@@ -311,6 +316,8 @@ export default {
   },
   methods: {
     ...mapMutations([
+      "setSingleAudio",
+      "setQueueIndex",
       "setPlaying",
       "setOpenPlayer",
       "setAddLoginModal",
@@ -372,10 +379,18 @@ export default {
       }
     },
     toPreviousSong() {
-      console.log("previous song");
+      this.setQueueIndex(this.queueIndex - 1);
+      if (this.queueIndex < 0) {
+        this.setQueueIndex(this.queue.length - 1);
+      }
+      this.setSingleAudio(this.queue[this.queueIndex]);
     },
     toNextSong() {
-      console.log("next song");
+      this.setQueueIndex(this.queueIndex + 1);
+      if (this.queueIndex == this.queue.length) {
+        this.setQueueIndex(0);
+      }
+      this.setSingleAudio(this.queue[this.queueIndex]);
     },
   },
   filters: {
