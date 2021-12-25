@@ -220,13 +220,8 @@ export default {
     ...mapGetters(["audio","isPlaying","isOpenPlayer", "isOpenLoginModalVuex", "tokenAuth"]),
   },
   methods: {
-<<<<<<< HEAD
     ...mapMutations(["setPlaying","setOpenPlayer", "setAddLoginModal", "setListToAdd", "setAddForm"]),
     testPause() {
-=======
-    ...mapMutations(["setPlaying","setOpenPlayer"]),
-    switchPlayingState() {
->>>>>>> dc19718 (save progress)
       if (this.isPlaying === true) {
         this.$refs.audio.pause();
       } else {
@@ -261,7 +256,6 @@ export default {
         this.$refs.audio.currentTime = currentProgressPercentage / 100 * this.convertTickToSecond(this.audio.RunTimeTicks);
       }
     },
-<<<<<<< HEAD
     addMediaToPlaylist() {
       if (this.tokenAuth == null || this.tokenAuth.length == 0) {
         if (!this.isOpenLoginModalVuex) {
@@ -275,13 +269,6 @@ export default {
         this.setListToAdd([this.audio.Id])
         this.setAddForm(true);
       }
-=======
-    toPreviousSong(){
-      console.log("previous song");
-    },
-    toNextSong(){
-      console.log("next song");
->>>>>>> dc19718 (save progress)
     }
   },
   filters: {
