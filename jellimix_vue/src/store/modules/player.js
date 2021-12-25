@@ -2,6 +2,7 @@ const player = {
     state() {
         return {
             audio: [],
+            queue: [],
             isOpenPlayer: false,
             isPlaying: false
         }
@@ -10,6 +11,7 @@ const player = {
 
     getters: {
         audio: state => state.audio,
+        queue: state => state.queue,
         isOpenPlayer: state => state.isOpenPlayer,
         isPlaying: state => state.isPlaying
     },
@@ -21,8 +23,14 @@ const player = {
     // },
 
     mutations: {
-        setAudio(state, newAudio) {
+        setSingleAudio(state, newAudio) {
             state.audio = newAudio
+            state.isPlaying = true
+        },
+        setListAudio(state, newList) {
+            state.audio = newList[0]
+            state.queue = newList
+            state.isOpenPlayer = true
             state.isPlaying = true
         },
         setOpenPlayer(state, newOpenPlayer) {

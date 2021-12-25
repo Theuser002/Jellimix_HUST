@@ -63,8 +63,7 @@
                   >
                 </li>
                 <li>
-                  <a
-                  @click="addMediaToPlaylist"
+                  <a @click="addMediaToPlaylist"
                     ><span class="song_optn_icon"
                       ><i class="ms_icon icon_playlist"></i></span
                     >Add To Playlist</a
@@ -78,18 +77,76 @@
           </div>
           <!----Right Queue---->
           <div class="jp_queue_wrapper">
-            <span class="que_text" id="myPlaylistQueue"
+            <span
+              class="que_text"
+              id="myPlaylistQueue"
+              @click="isOpenQueue = true"
               ><i class="fa fa-angle-up" aria-hidden="true"></i> queue</span
             >
-            <div id="playlist-wrap" class="jp-playlist">
-              <div class="jp_queue_cls">
+            <div
+              id="playlist-wrap"
+              class="jp-playlist find_li"
+              v-show="isOpenQueue"
+            >
+              <div class="jp_queue_cls" @click="isOpenQueue = false">
                 <i class="fa fa-times" aria-hidden="true"></i>
               </div>
               <h2>queue</h2>
-              <div class="jp_queue_list_inner">
-                <ul>
-                  <li>&nbsp;</li>
-                </ul>
+              <div
+                class="jp_queue_list_inner mCustomScrollbar _mCS_2 mCS-autoHide"
+                style="height: 345px; position: relative; overflow: visible"
+              >
+                <div
+                  id="mCSB_2"
+                  class="
+                    mCustomScrollBox
+                    mCS-minimal
+                    mCSB_vertical mCSB_outside
+                  "
+                  tabindex="0"
+                  style="max-height: none"
+                >
+                  <div
+                    id="mCSB_2_container"
+                    class="mCSB_container"
+                    style="position: relative; top: 0; left: 0"
+                    dir="ltr"
+                  >
+                    <ul style="">
+                      <AQueueItem v-for="item in queue.slice(0,5)" :key="item.Id" :queue_data="item"/>
+                    </ul>
+                  </div>
+                </div>
+                <div
+                  id="mCSB_2_scrollbar_vertical"
+                  class="
+                    mCSB_scrollTools mCSB_2_scrollbar
+                    mCS-minimal
+                    mCSB_scrollTools_vertical
+                  "
+                  style="display: block"
+                >
+                  <div class="mCSB_draggerContainer">
+                    <div
+                      id="mCSB_2_dragger_vertical"
+                      class="mCSB_dragger"
+                      style="
+                        position: absolute;
+                        min-height: 50px;
+                        top: 0px;
+                        display: block;
+                        height: 122px;
+                        max-height: 311px;
+                      "
+                    >
+                      <div
+                        class="mCSB_dragger_bar"
+                        style="line-height: 50px"
+                      ></div>
+                    </div>
+                    <div class="mCSB_draggerRail"></div>
+                  </div>
+                </div>
               </div>
               <div class="jp_queue_btn">
                 <a
@@ -110,18 +167,30 @@
             </div>
           </div>
           <div class="jp-type-playlist" style="display: none">
-            <audio ref="audio" :src="audio.song_url" controls autoplay
-            @timeupdate="time = $event.target.currentTime"
+            <audio
+              ref="audio"
+              :src="audio.song_url"
+              controls
+              autoplay
+              @timeupdate="time = $event.target.currentTime"
             ></audio>
           </div>
 
           <div class="jp-type-playlist">
             <div class="jp-gui jp-interface flex-wrap">
               <div class="jp-controls flex-item">
-                <button class="jp-previous" tabindex="0" @click="toPreviousSong">
+                <button
+                  class="jp-previous"
+                  tabindex="0"
+                  @click="toPreviousSong"
+                >
                   <i class="ms_play_control"></i>
                 </button>
-                <button class="jp-play" tabindex="0" @click="switchPlayingState">
+                <button
+                  class="jp-play"
+                  tabindex="0"
+                  @click="switchPlayingState"
+                >
                   <i class="ms_play_control" :class="{ pause: isPlaying }"></i>
                 </button>
                 <button class="jp-next" tabindex="0" @click="toNextSong">
@@ -130,17 +199,30 @@
               </div>
               <div class="jp-progress-container flex-item">
                 <div class="jp-time-holder">
-                  <span class="jp-current-time" role="timer" aria-label="time"
-                    >{{timeConverter(time)}}</span
+                  <span
+                    class="jp-current-time"
+                    role="timer"
+                    aria-label="time"
+                    >{{ timeConverter(time) }}</span
                   >
-                  <span class="jp-duration" role="timer" aria-label="duration"
-                    >{{audio.RunTimeTicks | convertTickToTime}}</span
+                  <span
+                    class="jp-duration"
+                    role="timer"
+                    aria-label="duration"
+                    >{{ audio.RunTimeTicks | convertTickToTime }}</span
                   >
                 </div>
                 <div class="jp-progress">
-                  <div ref="seekbar" class="jp-seek-bar" style="width: 100%"
-                  @mousedown="updateProgressPercentage">
-                    <div class="jp-play-bar" :style="{width: progressPercentage}">
+                  <div
+                    ref="seekbar"
+                    class="jp-seek-bar"
+                    style="width: 100%"
+                    @mousedown="updateProgressPercentage"
+                  >
+                    <div
+                      class="jp-play-bar"
+                      :style="{ width: progressPercentage }"
+                    >
                       <div class="bullet"></div>
                     </div>
                   </div>
@@ -212,30 +294,44 @@ export default {
   data() {
     return {
       isOpenOption: false,
+      isOpenQueue: false,
       time: 0,
       progressPercentage: "0%",
     };
   },
   computed: {
-    ...mapGetters(["audio","isPlaying","isOpenPlayer", "isOpenLoginModalVuex", "tokenAuth"]),
+    ...mapGetters([
+      "audio",
+      "queue",
+      "isPlaying",
+      "isOpenPlayer",
+      "isOpenLoginModalVuex",
+      "tokenAuth",
+    ]),
   },
   methods: {
-    ...mapMutations(["setPlaying","setOpenPlayer", "setAddLoginModal", "setListToAdd", "setAddForm"]),
-    testPause() {
+    ...mapMutations([
+      "setPlaying",
+      "setOpenPlayer",
+      "setAddLoginModal",
+      "setListToAdd",
+      "setAddForm",
+    ]),
+    switchPlayingState() {
       if (this.isPlaying === true) {
         this.$refs.audio.pause();
       } else {
         this.$refs.audio.play();
       }
-      this.setPlaying(!this.isPlaying)
+      this.setPlaying(!this.isPlaying);
     },
     download() {
       saveAs(this.audio.song_url, `Jellimix-${this.audio.Name}.mp3`);
     },
     timeConverter(seconds) {
-      seconds = Math.floor(seconds)
+      seconds = Math.floor(seconds);
       let min = parseInt(seconds / 60),
-      sec = parseInt(seconds % 60);
+        sec = parseInt(seconds % 60);
       min = min < 10 ? "0" + min : min;
       sec = sec < 10 ? "0" + sec : sec;
       seconds = min + ":" + sec;
@@ -247,13 +343,18 @@ export default {
     },
     updateProgressPercentage(event) {
       // jp-play-bar changes relative position when we update, we should getBoundingClientRect() from jp-seek-bar
-      let currentProgress = event.clientX - this.$refs.seekbar.getBoundingClientRect().left,
-
-      // because we can click in jp-seek-bar or jp-play-bar, we should get the width of jp-seek-bar, not the target of click event
-      currentProgressPercentage = Math.floor(currentProgress / this.$refs.seekbar.offsetWidth * 100, 5);
+      let currentProgress =
+          event.clientX - this.$refs.seekbar.getBoundingClientRect().left,
+        // because we can click in jp-seek-bar or jp-play-bar, we should get the width of jp-seek-bar, not the target of click event
+        currentProgressPercentage = Math.floor(
+          (currentProgress / this.$refs.seekbar.offsetWidth) * 100,
+          5
+        );
       this.progressPercentage = currentProgressPercentage + "%";
       if (this.audio.song_url != null) {
-        this.$refs.audio.currentTime = currentProgressPercentage / 100 * this.convertTickToSecond(this.audio.RunTimeTicks);
+        this.$refs.audio.currentTime =
+          (currentProgressPercentage / 100) *
+          this.convertTickToSecond(this.audio.RunTimeTicks);
       }
     },
     addMediaToPlaylist() {
@@ -264,12 +365,18 @@ export default {
       } else {
         if (this.audio.Id == null || this.audio.Id.length == 0) {
           this.$toast.error("Audio is not available!");
-          return 
+          return;
         }
-        this.setListToAdd([this.audio.Id])
+        this.setListToAdd([this.audio.Id]);
         this.setAddForm(true);
       }
-    }
+    },
+    toPreviousSong() {
+      console.log("previous song");
+    },
+    toNextSong() {
+      console.log("next song");
+    },
   },
   filters: {
     convertTickToTime(ticks) {
@@ -277,35 +384,36 @@ export default {
         var seconds = Math.floor(ticks / 10000000);
         var minute = Math.floor((seconds / 60) % 60);
         var second = seconds % 60;
-  
+
         var result =
           String(minute).padStart(2, "0") +
           ":" +
           String(second).padStart(2, "0");
         return result;
       } else {
-        return "no source"
+        return "no source";
       }
     },
   },
-  watch:{
-    time(){
+  watch: {
+    time() {
       // if (Math.abs(time - this.$refs.audio.currentTime) > 0.5) {
       //   this.$refs.audio.currentTime = time;
       // }
-      let progressPer = this.time / this.convertTickToSecond(this.audio.RunTimeTicks) * 100
-      this.progressPercentage = progressPer + "%"
-    }
+      let progressPer =
+        (this.time / this.convertTickToSecond(this.audio.RunTimeTicks)) * 100;
+      this.progressPercentage = progressPer + "%";
+    },
   },
 };
 </script>
 
 <style scoped>
-a{
+a {
   color: #fff !important;
   cursor: pointer;
 }
 button.jp-play .ms_play_control.pause {
-    background-position: 1021px 0px !important;
+  background-position: 1021px 0px !important;
 }
 </style>

@@ -67,15 +67,9 @@
           </div>
         </div>
       </div>
-      <div class="ms_top_trend">
-        <span><a href="#" class="ms_color">Trending Songs :</a></span>
-        <span class="top_marquee"
-          ><a href="#"
-            >bla
-            blahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</a
-          ></span
-        >
-      </div>
+    </div>
+    <div class="ms_top_trend">
+      <h2>JelliMix</h2>
     </div>
     <div class="ms_top_right">
       <!-- Theme toggle button -->
@@ -162,7 +156,12 @@ export default {
     this.autoLogin();
   },
   methods: {
-    ...mapMutations(["setAudio", "setOpenPlayer", "setTokenAuth", "setUserId"]),
+    ...mapMutations([
+      "setSingleAudio",
+      "setOpenPlayer",
+      "setTokenAuth",
+      "setUserId",
+    ]),
     away: function () {
       this.isHidden = true;
     },
@@ -242,7 +241,7 @@ export default {
     playSong(song) {
       song.img_url = this.getImageLink(song);
       song.song_url = this.getAudioLink(song.Id);
-      this.setAudio(song);
+      this.setSingleAudio(song);
       this.setOpenPlayer(true);
     },
 
