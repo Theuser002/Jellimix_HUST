@@ -51,7 +51,7 @@ export default {
     this.playRandomSong();
   },
   methods: {
-    ...mapMutations(["setAudio", "setOpenPlayer"]),
+    ...mapMutations(["setSingleAudio", "setOpenPlayer"]),
     playRandomSong() {
       this.getRandomSong()
         .then((res) => {
@@ -64,7 +64,7 @@ export default {
     },
     playAudio() {
       this.playRandomSong();
-      this.setAudio(this.media_data);
+      this.setSingleAudio(this.media_data);
       this.setOpenPlayer(true);
     },
   },

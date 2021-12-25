@@ -103,7 +103,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(["setAudio", "setOpenPlayer", "setAddForm", "setAddLoginModal", "setListToAdd"]),
+    ...mapMutations(["setSingleAudio", "setOpenPlayer", "setAddForm", "setAddLoginModal", "setListToAdd"]),
     getImage() {
       let url = this.getImageLink(this.media_data);
       this.img_url = url;
@@ -115,7 +115,7 @@ export default {
       this.media_data.song_url = url;
     },
     playAudio() {
-      this.setAudio(this.media_data);
+      this.setSingleAudio(this.media_data);
       this.setOpenPlayer(true);
     },
     download() {
