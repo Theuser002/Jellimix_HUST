@@ -36,7 +36,7 @@
                           "
                       /></span>
                       <div class="que_data">
-                        {{ audio.Name }}
+                        <span :title="audio.Name"> {{ audio.Name }} </span>
                         <div class="jp-artist-name">
                           {{ audio.AlbumArtist }}
                         </div>
@@ -114,7 +114,7 @@
                   >
                     <ul style="">
                       <AQueueItem
-                        v-for="(item,index) in queue.slice(0, 5)"
+                        v-for="(item, index) in queue.slice(0, 5)"
                         :key="index"
                         :queue_data="item"
                         :selected="queueIndex === index"
@@ -319,8 +319,8 @@ export default {
   mounted() {
     let myAudio = document.getElementById("myAudio");
 
-    myAudio.addEventListener("ended", ()=> {
-      this.toNextSong()
+    myAudio.addEventListener("ended", () => {
+      this.toNextSong();
     });
   },
   methods: {
