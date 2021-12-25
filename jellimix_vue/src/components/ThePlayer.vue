@@ -118,13 +118,13 @@
           <div class="jp-type-playlist">
             <div class="jp-gui jp-interface flex-wrap">
               <div class="jp-controls flex-item">
-                <button class="jp-previous" tabindex="0">
+                <button class="jp-previous" tabindex="0" @click="toPreviousSong">
                   <i class="ms_play_control"></i>
                 </button>
-                <button class="jp-play" tabindex="0" @click="testPause">
+                <button class="jp-play" tabindex="0" @click="switchPlayingState">
                   <i class="ms_play_control" :class="{ pause: isPlaying }"></i>
                 </button>
-                <button class="jp-next" tabindex="0">
+                <button class="jp-next" tabindex="0" @click="toNextSong">
                   <i class="ms_play_control"></i>
                 </button>
               </div>
@@ -220,8 +220,13 @@ export default {
     ...mapGetters(["audio","isPlaying","isOpenPlayer", "isOpenLoginModalVuex", "tokenAuth"]),
   },
   methods: {
+<<<<<<< HEAD
     ...mapMutations(["setPlaying","setOpenPlayer", "setAddLoginModal", "setListToAdd", "setAddForm"]),
     testPause() {
+=======
+    ...mapMutations(["setPlaying","setOpenPlayer"]),
+    switchPlayingState() {
+>>>>>>> dc19718 (save progress)
       if (this.isPlaying === true) {
         this.$refs.audio.pause();
       } else {
@@ -256,6 +261,7 @@ export default {
         this.$refs.audio.currentTime = currentProgressPercentage / 100 * this.convertTickToSecond(this.audio.RunTimeTicks);
       }
     },
+<<<<<<< HEAD
     addMediaToPlaylist() {
       if (this.tokenAuth == null || this.tokenAuth.length == 0) {
         if (!this.isOpenLoginModalVuex) {
@@ -269,6 +275,13 @@ export default {
         this.setListToAdd([this.audio.Id])
         this.setAddForm(true);
       }
+=======
+    toPreviousSong(){
+      console.log("previous song");
+    },
+    toNextSong(){
+      console.log("next song");
+>>>>>>> dc19718 (save progress)
     }
   },
   filters: {
