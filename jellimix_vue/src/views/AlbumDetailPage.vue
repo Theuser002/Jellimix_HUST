@@ -12,7 +12,11 @@
       </div>
       <div class="album_single_text">
         <h2>{{ album_data.Name }}</h2>
-        <p class="singer_name">{{ album_data.AlbumArtist }}</p>
+        <p class="singer_name">
+          <router-link :to="`/Artists/${album_data.AlbumArtists[0].Id}`">{{
+            album_data.AlbumArtist
+          }}</router-link>
+        </p>
         <div class="album_feature">
           <span href="#" class="album_date"
             >{{ album_data.ChildCount }} songs |
@@ -22,7 +26,19 @@
             >Released: {{ album_data.ProductionYear }}</span
           >
           <span href="#" class="album_date"
-            >Genres: {{ album_data.Genres.join(", ") }}</span
+            >Genres:
+            <span v-for="(genre, index) in album_data.GenreItems" :key="index"
+              ><router-link :to="`/Genres/${genre.Id}`">{{
+                genre.Name
+              }}</router-link
+              ><span
+                v-if="
+                  album_data.GenreItems.length > 1 &&
+                  index != album_data.GenreItems.length - 1
+                "
+                >,
+              </span>
+            </span></span
           >
         </div>
         <div class="album_btn">
@@ -68,44 +84,39 @@
             <li class="text-center">More</li>
           </ul>
         </div>
-        
+
         <div v-for="(song, index) in pageContent" :key="index">
           <ASongListItem :media_data="song" />
-
         </div>
-
-      
-        
       </div>
       <vue-ads-pagination
-          :total-items="album_song.length"
-          :items-per-page="itemPerPage"
-          :max-visible-pages="5"
-          :page="page"
-          :loading="loading"
-          @page-change="pageChange"
-          @range-change="rangeChange"
-        >
-          <template slot-scope="props">
-            <div class="vue-ads-pr-2 vue-ads-leading-loose">
-              Songs {{ props.start }} - {{ props.end }} of {{ props.total }}
-            </div>
-          </template>
-          <template slot="buttons" slot-scope="props">
-            <vue-ads-page-button
-              v-for="(button, key) in props.buttons"
-              :key="key"
-              v-bind="button"
-              @page-change="page = button.page"
-              @range-change="
-                start = button.start;
-                end = button.end;
-              "
-            />
-          </template>
-        </vue-ads-pagination>
+        :total-items="album_song.length"
+        :items-per-page="itemPerPage"
+        :max-visible-pages="5"
+        :page="page"
+        :loading="loading"
+        @page-change="pageChange"
+        @range-change="rangeChange"
+      >
+        <template slot-scope="props">
+          <div class="vue-ads-pr-2 vue-ads-leading-loose">
+            Songs {{ props.start }} - {{ props.end }} of {{ props.total }}
+          </div>
+        </template>
+        <template slot="buttons" slot-scope="props">
+          <vue-ads-page-button
+            v-for="(button, key) in props.buttons"
+            :key="key"
+            v-bind="button"
+            @page-change="page = button.page"
+            @range-change="
+              start = button.start;
+              end = button.end;
+            "
+          />
+        </template>
+      </vue-ads-pagination>
     </div>
-    
   </div>
 </template>
 
@@ -113,7 +124,7 @@
 import AlbumServices from "../common/AlbumServices";
 import "../../node_modules/vue-ads-pagination/dist/vue-ads-pagination.css";
 import VueAdsPagination, { VueAdsPageButton } from "vue-ads-pagination";
-import { mapMutations } from 'vuex'
+import { mapMutations } from "vuex";
 
 export default {
   components: {
@@ -175,11 +186,13 @@ export default {
     convertTickToTime(ticks) {
       if (ticks != null) {
         var seconds = Math.floor(ticks / 10000000);
-        var minute = Math.floor((seconds / 60) % 60);
+        var minute = Math.floor(
+          seconds / 60 < 60 ? (seconds / 60) % 60 : seconds / 60
+        );
         var second = seconds % 60;
 
         var result =
-          String(minute).padStart(2, "0") +
+          String(minute).padStart(minute > 99 ? 3 : 2, "0") +
           ":" +
           String(second).padStart(2, "0");
         return result;
@@ -209,9 +222,9 @@ export default {
       this.pageContent = this.album_song.slice(start, end);
       console.log(this.pageContent);
     },
-    playAll(){
-      this.setListAudio(this.album_song)
-    }
+    playAll() {
+      this.setListAudio(this.album_song);
+    },
   },
 };
 </script>

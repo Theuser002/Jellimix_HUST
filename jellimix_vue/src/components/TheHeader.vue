@@ -43,27 +43,28 @@
             <div class="search-item-type" v-if="searchAlbumRes.length > 0">
               Albums
             </div>
-            <a
+            <router-link
               class="result-item"
               v-for="item in searchAlbumRes"
               :key="item.Id"
               :title="item.Name"
-              @click="displaySingleAlbum(item.Id)"
+              :to="`/Albums/${item.Id}`"
+              
             >
               {{ item.Name }}
-            </a>
+            </router-link>
             <div class="search-item-type" v-if="searchArtistRes.length > 0">
               Artists
             </div>
-            <a
+            <router-link
               class="result-item"
               v-for="item in searchArtistRes"
               :key="item.Id"
               :title="item.Name"
-              @click="displaySingleArtist(item.Id)"
+              :to="`/Artists/${item.Id}`"
             >
               {{ item.Name }}
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -286,12 +287,12 @@ export default {
         // localStorage.setItem("lightTheme", true);
       }
     },
-    displaySingleArtist(id) {
-      this.$router.push(`/Artists/${id}`);
-    },
-    displaySingleAlbum(id) {
-      this.$router.push(`/Albums/${id}`);
-    },
+    // displaySingleArtist(id) {
+    //   this.$router.push(`/Artists/${id}`);
+    // },
+    // displaySingleAlbum(id) {
+    //   this.$router.push(`/Albums/${id}`);
+    // },
   },
 };
 </script>
