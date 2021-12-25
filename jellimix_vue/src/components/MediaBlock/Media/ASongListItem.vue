@@ -12,7 +12,7 @@
       }}</a>
     </li>
     <li>
-      <a @click="displaySingleArtist(media_data.ArtistItems[0].Id)" >{{ media_data.Artists.join(", ") }}</a>
+      <router-link :to="`/Artists/${media_data.ArtistItems[0].Id}`"  >{{ media_data.Artists.join(", ") }}</router-link>
     </li>
     <li class="text-center">
       <a href="#">{{ media_data.RunTimeTicks | convertTickToTime }}</a>
@@ -74,9 +74,9 @@ export default {
   data() {
     return {
       isOpenOption: false,
-      img_url: null,
+      
       song_url: null,
-      defaultImg: "album1.jpg",
+      
     };
   },
   computed: {
@@ -84,12 +84,12 @@ export default {
   },
   created() {
     this.getSong();
-    this.getImage();
+ 
   },
   watch: {
     media_data() {
       this.getSong();
-      this.getImage();
+     
     },
   },
   filters: {
@@ -117,11 +117,7 @@ export default {
       "setAddLoginModal",
       "setListToAdd",
     ]),
-    getImage() {
-      let url = this.getImageLink(this.media_data);
-      this.img_url = url;
-      this.media_data.img_url = url;
-    },
+   
     getSong() {
       let url = this.getAudioLink(this.media_data.Id);
       this.song_url = url;
@@ -154,5 +150,5 @@ export default {
 </script>
 
 <style scoped>
-@import "../../../css/MediaBlock/Media/PrimaryMedia.css";
+
 </style>

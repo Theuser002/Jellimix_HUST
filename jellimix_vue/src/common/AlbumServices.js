@@ -16,22 +16,14 @@ var AlbumServices = {
             return await axios.get(url);
         },
         async getAlbumSong(albumId) {
-            console.log(albumId);
+            
             let url = axios.defaults.baseURL +
                 `Users/${user}/Items/?SortBy=IndexNumber&SortOrder=Ascending&` +
                 `IncludeItemTypes=Audio&Recursive=true&Fields=AudioInfo%2C` +
                 `ParentId&StartIndex=0&ImageTypeLimit=1&` +
                 `EnableImageTypes=Primary&Limit=1000&` +
                 `ParentId=${albumId}&` +
-                // `AlbumId=${albumId}&` +
                 `api_key=${api_key}`
-            console.log(url)
-            // let url = axios.defaults.baseURL +
-            //     `Users/${user}/Items?SortBy=Name&SortOrder=Ascending&` +
-            //     `IncludeItemTypes=Audio&Recursive=true&Fields=AudioInfo%2C` +
-            //     `ParentId&StartIndex=0&ImageTypeLimit=1&` +
-            //     `EnableImageTypes=Primary&Limit=1000&` +
-            //     `ParentId=7e64e319657a9516ec78490da03edccb&api_key=${api_key}`
 
             return await axios.get(url);
         },
