@@ -114,9 +114,10 @@
                   >
                     <ul style="">
                       <AQueueItem
-                        v-for="item in queue.slice(0, 5)"
-                        :key="item.Id"
+                        v-for="(item,index) in queue.slice(0, 5)"
+                        :key="index"
                         :queue_data="item"
+                        :selected="queueIndex === index"
                       />
                     </ul>
                   </div>
@@ -173,6 +174,7 @@
           <div class="jp-type-playlist" style="display: none">
             <audio
               ref="audio"
+              id="myAudio"
               :src="audio.song_url"
               controls
               autoplay
@@ -313,6 +315,13 @@ export default {
       "isOpenLoginModalVuex",
       "tokenAuth",
     ]),
+  },
+  mounted() {
+    let myAudio = document.getElementById("myAudio");
+
+    myAudio.addEventListener("ended", ()=> {
+      this.toNextSong()
+    });
   },
   methods: {
     ...mapMutations([

@@ -2803,6 +2803,12 @@ i.ms_icon.icon_share {
     background: var(--nav-button-color)
 }
 
+.jp-playlist li a.current-queue-item {
+    color: #fff;
+    text-decoration: none;
+    background: var(--nav-button-color)
+}
+
 .jp-playlist li a span.jp-artist {
     color: #dedede;
     width: 100%;

@@ -9,6 +9,7 @@
       ><a
         href="javascript:;"
         class="jp-playlist-item jp-playlist-current"
+        :class="selected==true ? 'current-queue-item':''"
         tabindex="0"
         ><span class="que_img"
           ><img style="width: 100%"
@@ -72,6 +73,9 @@ export default {
     queue_data: {
       type: Object,
     },
+    selected: {
+      type: Boolean
+    }
   },
   data() {
     return {

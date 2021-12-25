@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="ms_top_trend">
-      <h2>JelliMix</h2>
+      <h2>JelliMix - Project Management</h2>
     </div>
     <div class="ms_top_right">
       <!-- Theme toggle button -->
