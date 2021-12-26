@@ -37,7 +37,7 @@
 
 <script>
 // import js file here
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 import SongServices from "../../common/SongServices.js";
 
 export default {
@@ -52,6 +52,7 @@ export default {
   },
   methods: {
     ...mapMutations(["setSingleAudio", "setOpenPlayer"]),
+    ...mapActions(["handlePlaySingleSong"]),
     playRandomSong() {
       this.getRandomSong()
         .then((res) => {
@@ -64,7 +65,7 @@ export default {
     },
     playAudio() {
       this.playRandomSong();
-      this.setSingleAudio(this.media_data);
+      this.handlePlaySingleSong(this.media_data);
       this.setOpenPlayer(true);
     },
   },
