@@ -2801,7 +2801,7 @@ i.ms_icon.icon_share {
 .jp-playlist ul {
     padding: 0;
     margin: 0;
-    max-height: 345px;
+    height: 100%;
 }
 
 .jp-playlist li {
@@ -2870,6 +2870,11 @@ i.ms_icon.icon_share {
     cursor: pointer;
 }
 
+.jp_queue_list_inner {
+    height: 350px;
+    overflow: auto
+}
+
 .jp-type-playlist {
     padding-left: 390px;
     padding-right: 80px;
@@ -2934,7 +2939,7 @@ i.ms_icon.icon_share {
 }
 
 .jp-playlist .que_data {
-    width: calc(100% - 90px);
+    width: calc(100% - 50px);
     float: left;
     padding-left: 20px;
     line-height: 30px;
@@ -3002,8 +3007,8 @@ i.ms_icon.icon_share {
 
 .jp_queue_btn {
     text-align: center;
-    padding-top: 40px;
-    padding-bottom: 50px;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 div#playlist-wrap span#myPlaylistQueue {
@@ -5421,7 +5426,7 @@ h2.widget-title:after {
 @media(min-width:1400px) and (max-width:1800px) {
     ul.more_option {
         max-width: 135px;
-        padding: 10px 0px 10px 12px;
+        /* padding: 10px 0px 10px 12px; */
     }
 
     ul.more_option li a {

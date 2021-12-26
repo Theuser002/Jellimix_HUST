@@ -92,49 +92,22 @@
                 <i class="fa fa-times" aria-hidden="true"></i>
               </div>
               <h2>queue</h2>
-              <div
-                class="jp_queue_list_inner mCustomScrollbar _mCS_2 mCS-autoHide"
-                style="height: 345px; position: relative; overflow: visible"
-              >
-                <div
-                  id="mCSB_2"
-                  class="
-                    mCustomScrollBox
-                    mCS-minimal
-                    mCSB_vertical mCSB_outside
-                  "
-                  tabindex="0"
-                  style="max-height: none"
-                >
-                  <div
-                    id="mCSB_2_container"
-                    class="mCSB_container"
-                    style="position: relative; top: 0; left: 0"
-                    dir="ltr"
-                  >
-                    <ul style="">
-                      <AQueueItem
-                        v-for="(item, index) in queue.slice(0, 5)"
-                        :key="index"
-                        :queue_data="item"
-                        :selected="queueIndex === index"
-                      />
-                    </ul>
-                  </div>
-                </div>
-                <div
-                  id="mCSB_2_scrollbar_vertical"
-                  class="
-                    mCSB_scrollTools mCSB_2_scrollbar
-                    mCS-minimal
-                    mCSB_scrollTools_vertical
-                  "
-                  style="display: block"
-                >
-                  <div class="mCSB_draggerContainer">
+              <div class="jp_queue_list_inner">
+                <!-- <div tabindex="0"> -->
+                <!-- <div style="position: relative; top: 0; left: 0" dir="ltr"> -->
+                <ul style="">
+                  <AQueueItem
+                    v-for="(item, index) in queue.slice(0, 10)"
+                    :key="index"
+                    :queue_data="item"
+                    :selected="queueIndex === index"
+                  />
+                </ul>
+                <!-- </div> -->
+                <!-- </div> -->
+                <div style="display: block">
+                  <div>
                     <div
-                      id="mCSB_2_dragger_vertical"
-                      class="mCSB_dragger"
                       style="
                         position: absolute;
                         min-height: 50px;
@@ -144,12 +117,9 @@
                         max-height: 311px;
                       "
                     >
-                      <div
-                        class="mCSB_dragger_bar"
-                        style="line-height: 50px"
-                      ></div>
+                      <div style="line-height: 50px"></div>
                     </div>
-                    <div class="mCSB_draggerRail"></div>
+                    <div></div>
                   </div>
                 </div>
               </div>

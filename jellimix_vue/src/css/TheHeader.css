@@ -16,7 +16,7 @@
 }
 
 .search-item-wrapper {
-    max-height: calc(100vh - 100px);
+    max-height: calc(100vh - 150px);
 }
 
 .search-item-type {
