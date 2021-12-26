@@ -56,13 +56,6 @@
                   >
                 </li>
                 <li>
-                  <a
-                    ><span class="song_optn_icon"
-                      ><i class="ms_icon icon_fav"></i></span
-                    >Add To Favourites</a
-                  >
-                </li>
-                <li>
                   <a @click="addMediaToPlaylist"
                     ><span class="song_optn_icon"
                       ><i class="ms_icon icon_playlist"></i></span
@@ -147,6 +140,7 @@
               id="myAudio"
               :src="audio.song_url"
               controls
+              :loop="isLoop"
               autoplay
               @timeupdate="time = $event.target.currentTime"
             ></audio>
@@ -208,19 +202,37 @@
                 <div class="widget knob-container">
                   <div class="knob-wrapper-outer">
                     <div class="knob-wrapper">
-                      <div class="knob-mask">
-                        <div class="knob d3" style="transform: rotateZ(270deg)">
-                          <span></span>
-                        </div>
-                        <div
-                          class="handle"
-                          style="transform: rotateZ(270deg)"
-                        ></div>
+                      <div
+                        class="knob-mask"
+                        style="
+                          display: flex;
+                          flex-direction: row;
+                          align-item: center;
+                        "
+                      >
                         <div class="round">
-                          <img src="images/svg/volume.svg" alt="" />
+                          <img src="../assets/images/svg/volume.svg" alt="" />
+                        </div>
+                        <div data-v-8c84849c="" class="jp-progress">
+                          <div
+                            ref="volume"
+                            data-v-8c84849c=""
+                            class="jp-seek-bar"
+                            style="width: 100px"
+                            @mousedown="updateVolume"
+                          >
+                            <div
+                              data-v-8c84849c=""
+                              class="jp-play-bar"
+                              :style="{ width: volPercentage }"
+                            >
+                              <div data-v-8c84849c="" class="bullet"></div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <!-- <input></input> -->
                   </div>
                 </div>
               </div>
@@ -228,30 +240,17 @@
                 <button class="jp-shuffle" tabindex="0" title="Shuffle">
                   <i class="ms_play_control"></i>
                 </button>
-                <button class="jp-repeat" tabindex="0" title="Repeat">
-                  <i class="ms_play_control"></i>
+                <button
+                  class="jp-repeat"
+                  tabindex="0"
+                  title="Repeat"
+                  @click="isLoop = !isLoop"
+                >
+                  <i
+                    class="ms_play_control"
+                    :class="{ 'is-repeat': isLoop }"
+                  ></i>
                 </button>
-              </div>
-              <div class="jp_quality_optn custom_select">
-                <select style="display: none">
-                  <option>quality</option>
-                  <option value="1">HD</option>
-                  <option value="2">High</option>
-                  <option value="3">medium</option>
-                  <option value="4">low</option>
-                </select>
-                <div class="nice-select" tabindex="0">
-                  <span class="current">quality</span>
-                  <ul class="list">
-                    <li data-value="quality" class="option selected">
-                      quality
-                    </li>
-                    <li data-value="1" class="option">HD</li>
-                    <li data-value="2" class="option">High</li>
-                    <li data-value="3" class="option">medium</li>
-                    <li data-value="4" class="option">low</li>
-                  </ul>
-                </div>
               </div>
             </div>
           </div>
@@ -273,6 +272,8 @@ export default {
       isOpenQueue: false,
       time: 0,
       progressPercentage: "0%",
+      volPercentage: "100%",
+      isLoop: false,
     };
   },
   computed: {
@@ -343,6 +344,20 @@ export default {
           this.convertTickToSecond(this.audio.RunTimeTicks);
       }
     },
+    updateVolume(event) {
+      // jp-play-bar changes relative position when we update, we should getBoundingClientRect() from jp-seek-bar
+      let currentVol =
+          event.clientX - this.$refs.volume.getBoundingClientRect().left,
+        // because we can click in jp-seek-bar or jp-play-bar, we should get the width of jp-seek-bar, not the target of click event
+        currentVolPercentage = Math.floor(
+          (currentVol / this.$refs.volume.offsetWidth) * 100,
+          5
+        );
+      this.volPercentage = currentVolPercentage + "%";
+      if (this.audio.song_url != null) {
+        this.$refs.audio.volume = currentVolPercentage / 100;
+      }
+    },
     addMediaToPlaylist() {
       if (this.tokenAuth == null || this.tokenAuth.length == 0) {
         if (!this.isOpenLoginModalVuex) {
@@ -394,6 +409,9 @@ export default {
     },
   },
   watch: {
+    audio() {
+      this.volPercentage = "100%";
+    },
     time() {
       // if (Math.abs(time - this.$refs.audio.currentTime) > 0.5) {
       //   this.$refs.audio.currentTime = time;
@@ -413,5 +431,10 @@ a {
 }
 button.jp-play .ms_play_control.pause {
   background-position: 1021px 0px !important;
+}
+
+.ms_play_control.is-repeat {
+  background-position: 20px 0px !important;
+  background-color: #fff !important;
 }
 </style>
