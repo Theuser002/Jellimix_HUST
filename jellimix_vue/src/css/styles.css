@@ -2872,7 +2872,8 @@ i.ms_icon.icon_share {
 
 .jp_queue_list_inner {
     height: 350px;
-    overflow: auto
+    overflow: auto;
+    max-height: calc(100vh - 269px)
 }
 
 .jp-type-playlist {
