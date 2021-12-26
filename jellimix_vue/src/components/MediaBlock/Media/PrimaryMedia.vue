@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import { saveAs } from "file-saver";
 import SongServices from "../../../common/SongServices.js";
 
@@ -104,6 +104,7 @@ export default {
   },
   methods: {
     ...mapMutations(["setSingleAudio", "setOpenPlayer", "setAddForm", "setAddLoginModal", "setListToAdd"]),
+    ...mapActions(["handlePlaySingleSong"]),
     getImage() {
       let url = this.getImageLink(this.media_data);
       this.img_url = url;
@@ -115,7 +116,7 @@ export default {
       this.media_data.song_url = url;
     },
     playAudio() {
-      this.setSingleAudio(this.media_data);
+      this.handlePlaySingleSong(this.media_data);
       this.setOpenPlayer(true);
     },
     download() {

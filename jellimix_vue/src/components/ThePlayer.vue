@@ -388,18 +388,22 @@ export default {
       }
     },
     toPreviousSong() {
-      this.setQueueIndex(this.queueIndex - 1);
-      if (this.queueIndex < 0) {
-        this.setQueueIndex(this.queue.length - 1);
+      if (this.queue.length > 0) {
+        this.setQueueIndex(this.queueIndex - 1);
+        if (this.queueIndex < 0) {
+          this.setQueueIndex(this.queue.length - 1);
+        }
+        this.setSingleAudio(this.queue[this.queueIndex]);
       }
-      this.setSingleAudio(this.queue[this.queueIndex]);
     },
     toNextSong() {
-      this.setQueueIndex(this.queueIndex + 1);
-      if (this.queueIndex == this.queue.length) {
-        this.setQueueIndex(0);
+      if (this.queue.length > 0) {
+        this.setQueueIndex(this.queueIndex + 1);
+        if (this.queueIndex == this.queue.length) {
+          this.setQueueIndex(0);
+        }
+        this.setSingleAudio(this.queue[this.queueIndex]);
       }
-      this.setSingleAudio(this.queue[this.queueIndex]);
     },
   },
   filters: {
