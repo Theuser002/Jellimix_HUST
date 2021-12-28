@@ -45,7 +45,7 @@ Author: Kamleshyadav
     --light-header-sidebar-color: #fff;
     --light-nav-button-color: #1bcfc9;
     --light-secondary-color: #254d47;
-    --light-queue-button-color: #1a9090;
+    --light-queue-button-color: #15c4ac;
     --light-gradient-2: #28e7a5;
     --light-gradient-1: #20a7c4;
     --light-overlay-on-color: #46888a;
@@ -109,7 +109,7 @@ Author: Kamleshyadav
     --queue-section-color: var(--light-queue-section-color);
     --queue-song-color: var(--light-queue-song-color);
     --queue-active-song-color: var(--light-queue-active-song-color);
-
+    --copyright-color: #0b9885;
 
 }
 
@@ -137,9 +137,7 @@ Author: Kamleshyadav
     --queue-section-color: var(--dark-queue-section-color);
     --queue-song-color: var(--dark-queue-song-color);
     --queue-active-song-color: var(--dark-queue-active-song-color);
-
-
-
+    --copyright-color: var(--dark-queue-button-color)
 }
 
 body {
@@ -2218,7 +2216,7 @@ h1.footer_title:after {
 }
 
 .ms_copyright p a {
-    color: var(--queue-button-color);
+    color: var(--copyright-color);
 }
 
 .footer_border {
@@ -2984,7 +2982,7 @@ i.ms_icon.icon_share {
     /* background-color: var(--secondary-color); */
 }
 
-.jp-playlist li .action:hover .que_close {
+.jp-playlist li .action .que_close:hover {
     background-color: var(--primary-color)
 }
 
@@ -3303,7 +3301,7 @@ button.jp-shuffle .ms_play_control:hover {
 }
 
 .album_single_text a:hover {
-    color: var(--nav-button-color)
+    color: white
 }
 
 .album_feature .album_date {
@@ -3474,6 +3472,11 @@ ul.album_list_name:after {
     background: rgba(59, 200, 231, 0.61);
     /* background-image: -webkit-linear-gradient(left, rgb(255, 72, 101), var(--primary-color), #fff); */
     /* background-image: -o-linear-gradient(left, #60a7d0, #92e3fb, #56d4b7); */
+}
+
+.add_fav .far:hover {
+    font-weight: 900;
+    color: #f85f5f
 }
 
 .ms_icon1 {

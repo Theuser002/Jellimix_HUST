@@ -7,18 +7,18 @@
       ></a>
     </li>
     <li>
-      <a  class="album-song-name" @click="playAudio">{{
-        media_data.Name
-      }}</a>
+      <a class="album-song-name" @click="playAudio">{{ media_data.Name }}</a>
     </li>
     <li>
-      <router-link :to="`/Artists/${media_data.ArtistItems[0].Id}`"  >{{ media_data.Artists.join(", ") }}</router-link>
+      <router-link :to="`/Artists/${media_data.ArtistItems[0].Id}`">{{
+        media_data.Artists.join(", ")
+      }}</router-link>
     </li>
     <li class="text-center">
       <a href="#">{{ media_data.RunTimeTicks | convertTickToTime }}</a>
     </li>
     <li class="text-center">
-      <a href="#"><i class="far fa-heart"></i></a>
+      <a class="add_fav" href="#"><i class="far fa-heart"></i></a>
     </li>
     <li class="text-center ms_more_icon">
       <a href="javascript:;"><i class="fas fa-ellipsis-h"></i> </a>
@@ -76,7 +76,6 @@ export default {
       isOpenOption: false,
       img_url: null,
       song_url: null,
-      
     };
   },
   computed: {
@@ -88,8 +87,8 @@ export default {
   },
   watch: {
     media_data() {
-    this.getSong();
-    this.getImage();
+      this.getSong();
+      this.getImage();
     },
   },
   filters: {
@@ -117,7 +116,7 @@ export default {
       "setAddLoginModal",
       "setListToAdd",
     ]),
-   getImage() {
+    getImage() {
       let url = this.getImageLink(this.media_data);
       this.img_url = url;
       this.media_data.img_url = url;
@@ -154,5 +153,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
