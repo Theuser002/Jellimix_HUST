@@ -2951,7 +2951,7 @@ i.ms_icon.icon_share {
     white-space: nowrap;
 }
 
-.jp-playlist li.jp-playlist-current {
+.jp-playlist li {
     background-color: var(--queue-song-color);
 }
 
@@ -2978,12 +2978,12 @@ i.ms_icon.icon_share {
     opacity: 1;
 }
 
-.jp-playlist li:hover .action .que_close {
-    /* background-color: var(--secondary-color); */
-}
+/* .jp-playlist li:hover .action .que_close {
+    background-color: var(--secondary-color);
+} */
 
 .jp-playlist li .action .que_close:hover {
-    background-color: var(--primary-color)
+    background-color: var(--secondary-color)
 }
 
 .que_more {
@@ -3004,7 +3004,7 @@ i.ms_icon.icon_share {
 .que_close {
     width: 20px;
     height: 20px;
-    /* background-color: var(--primary-color); */
+    background-color: var(--primary-color);
     display: inline-block;
     text-align: center;
     border-radius: 100%;

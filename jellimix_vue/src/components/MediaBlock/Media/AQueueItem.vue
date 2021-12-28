@@ -1,5 +1,5 @@
 <template>
-  <li class="jp-playlist-current">
+  <li :class="selected == true ? 'jp-playlist-current' : ''">
     <div>
       <a
         href="javascript:;"
@@ -8,11 +8,12 @@
         >X</a
       ><a
         href="javascript:;"
-        class="jp-playlist-item jp-playlist-current"
-        :class="selected==true ? 'current-queue-item':''"
+        class="jp-playlist-item"
+        :class="selected == true ? 'current-queue-item' : ''"
         tabindex="0"
         ><span class="que_img"
-          ><img style="width: 100%"
+          ><img
+            style="width: 100%"
             :src="
               img_url || require(`../../../assets/images/album/${defaultImg}`)
             "
@@ -74,8 +75,8 @@ export default {
       type: Object,
     },
     selected: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -84,7 +85,7 @@ export default {
     };
   },
   created() {
-      this.getImage()
+    this.getImage();
   },
   methods: {
     getImage() {
