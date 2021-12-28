@@ -90,7 +90,7 @@
                 <!-- <div style="position: relative; top: 0; left: 0" dir="ltr"> -->
                 <ul style="">
                   <AQueueItem
-                    v-for="(item, index) in queue.slice(0, 10)"
+                    v-for="(item, index) in queue"
                     :key="index"
                     :queue_data="item"
                     :selected="queueIndex === index"
@@ -123,13 +123,6 @@
                   data-toggle="modal"
                   data-target="#clear_modal"
                   >clear</a
-                >
-                <a
-                  href="clear_modal"
-                  class="ms_save"
-                  data-toggle="modal"
-                  data-target="#save_modal"
-                  >save</a
                 >
               </div>
             </div>
@@ -237,8 +230,13 @@
                 </div>
               </div>
               <div class="jp-toggles flex-item">
-                <button class="jp-shuffle" tabindex="0" title="Shuffle">
-                  <i class="ms_play_control"></i>
+                <button
+                  class="jp-shuffle"
+                  tabindex="0"
+                  title="Shuffle"
+                  @click="isShuffle = !isShuffle"
+                >
+                  <i class="ms_play_control" :class="{ 'is-repeat': isShuffle }"></i>
                 </button>
                 <button
                   class="jp-repeat"
@@ -273,7 +271,9 @@ export default {
       time: 0,
       progressPercentage: "0%",
       volPercentage: "100%",
+      isShuffle: false,
       isLoop: false,
+      tempQueue: [],
     };
   },
   computed: {
@@ -291,7 +291,12 @@ export default {
     let myAudio = document.getElementById("myAudio");
 
     myAudio.addEventListener("ended", () => {
-      this.toNextSong();
+      if (this.isShuffle == false) {
+        this.toNextSong();
+      }else{
+        console.log("to random");
+        this.toRandomSong();
+      }
     });
   },
   methods: {
@@ -390,6 +395,15 @@ export default {
         this.setSingleAudio(this.queue[this.queueIndex]);
       }
     },
+    toRandomSong(){
+      let tmp = this.queueIndex
+      let i
+      do {
+        i =  Math.floor(Math.random()*this.queue.length)
+      } while (i==tmp);
+      this.setQueueIndex(i)
+      this.setSingleAudio(this.queue[this.queueIndex]);
+    }
   },
   filters: {
     convertTickToTime(ticks) {
