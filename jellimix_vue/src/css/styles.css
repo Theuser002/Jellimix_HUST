@@ -2588,7 +2588,7 @@ i.ms_icon.icon_share {
 
 .jp-volume-controls.flex-item {
     -ms-flex-preferred-size: 155px;
-    flex-basis: 80px;
+    flex-basis: 160px;
     margin-left: 40px;
 }
 
@@ -5690,7 +5690,7 @@ h2.widget-title:after {
     }
 
     .knob-container .knob-wrapper-outer .knob-wrapper {
-        width: 55px;
+        width: 155px;
     }
 
     .footer_box {
@@ -5853,7 +5853,7 @@ h2.widget-title:after {
     }
 
     .knob-container .knob-wrapper-outer .knob-wrapper {
-        width: 50px;
+        width: 155px;
     }
 
     .jp-progress-container.flex-item {

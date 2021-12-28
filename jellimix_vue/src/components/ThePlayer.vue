@@ -206,12 +206,17 @@
                         <div class="round">
                           <img src="../assets/images/svg/volume.svg" alt="" />
                         </div>
-                        <div data-v-8c84849c="" class="jp-progress">
+
+                        <div
+                          data-v-8c84849c=""
+                          class="jp-progress"
+                          style="width: 75%"
+                        >
                           <div
                             ref="volume"
                             data-v-8c84849c=""
                             class="jp-seek-bar"
-                            style="width: 100px"
+                            style="width: 100%"
                             @mousedown="updateVolume"
                           >
                             <div
@@ -236,7 +241,10 @@
                   title="Shuffle"
                   @click="isShuffle = !isShuffle"
                 >
-                  <i class="ms_play_control" :class="{ 'is-repeat': isShuffle }"></i>
+                  <i
+                    class="ms_play_control"
+                    :class="{ 'is-repeat': isShuffle }"
+                  ></i>
                 </button>
                 <button
                   class="jp-repeat"
@@ -293,7 +301,7 @@ export default {
     myAudio.addEventListener("ended", () => {
       if (this.isShuffle == false) {
         this.toNextSong();
-      }else{
+      } else {
         console.log("to random");
         this.toRandomSong();
       }
@@ -395,15 +403,15 @@ export default {
         this.setSingleAudio(this.queue[this.queueIndex]);
       }
     },
-    toRandomSong(){
-      let tmp = this.queueIndex
-      let i
+    toRandomSong() {
+      let tmp = this.queueIndex;
+      let i;
       do {
-        i =  Math.floor(Math.random()*this.queue.length)
-      } while (i==tmp);
-      this.setQueueIndex(i)
+        i = Math.floor(Math.random() * this.queue.length);
+      } while (i == tmp);
+      this.setQueueIndex(i);
       this.setSingleAudio(this.queue[this.queueIndex]);
-    }
+    },
   },
   filters: {
     convertTickToTime(ticks) {
