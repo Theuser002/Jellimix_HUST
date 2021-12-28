@@ -1,9 +1,6 @@
 <template>
   <div class="album">
-    <div v-if="mediaList == null" class="wrap">
-      <img src="../assets/loader1.gif" alt="" />
-    </div>
-    <div v-else>
+    <div>
       <div class="content-block">
         <router-link to="/Home">Back to home</router-link>
         <ul class="media-list">
@@ -76,12 +73,10 @@ export default {
   },
 
   created() {
-    this.getAllArtist()
+    this.getFeaturedArtist()
       .then((res) => {
-        setTimeout(() => {
           this.mediaList = res.data.Items;
           this.pageContent = this.mediaList;
-        }, 500);
       })
       .catch((res) => {
         console.log(res);

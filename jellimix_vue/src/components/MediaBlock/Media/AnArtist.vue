@@ -56,9 +56,9 @@
               >
             </li>
           </ul> -->
-          <!-- <div class="ms_play_icon" @click="displaySingleArtist">
+          <div class="ms_play_icon" @click="displaySingleArtist">
             <img src="../../../assets/images/svg/search.svg" alt="" />
-          </div> -->
+          </div>
         </div>
       </div>
       <div class="ms_rcnt_box_text">
