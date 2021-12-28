@@ -52,7 +52,7 @@ Author: Kamleshyadav
     --light-media-name-color: black;
     --light-media-small-text-color: #777777;
     --light-text-color: #202020;
-    --light-player-bg-color: rgba(219, 219, 219, 0.3);
+    --light-player-bg-color: rgb(54 95 115 / 60%);
     --light-player-close-color: #45abca;
     --light-border-color: #ededed;
     --light-footer-after-bg: -webkit-linear-gradient(-90deg, rgb(255, 255, 255) 0%, rgba(32, 167, 196, 0) 100%);
@@ -2676,6 +2676,10 @@ i.ms_icon.icon_share {
     margin: 0px;
     background-color: #fff;
     border-radius: 15px;
+}
+
+.knob-wrapper .jp-progress {
+    margin: 12px 10px 0px 12px;
 }
 
 .jp-seek-bar,
