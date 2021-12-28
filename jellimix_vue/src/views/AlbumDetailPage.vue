@@ -150,7 +150,6 @@ export default {
     };
   },
   created() {
-    console.log("hihi");
     this.getSingleAlbum(this.$route.params.id).then((res) => {
       this.album_data = res.data;
     });
@@ -160,15 +159,12 @@ export default {
     // });
     this.getAlbumSong(this.$route.params.id)
       .then((res) => {
-        setTimeout(() => {
           this.album_song = res.data.Items;
           this.pageContent = this.album_song;
-          console.log(this.pageContent);
           // this.pageContent = this.pageContent.filter(
           //   (song) => song.AlbumId == this.$route.params.id
           // );
           // console.log(this.pageContent[0].AlbumId == this.$route.params.id);
-        }, 500);
       })
       .catch((res) => {
         console.log(res);
