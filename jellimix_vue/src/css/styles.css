@@ -2977,7 +2977,11 @@ i.ms_icon.icon_share {
 }
 
 .jp-playlist li:hover .action .que_close {
-    background-color: var(--secondary-color);
+    /* background-color: var(--secondary-color); */
+}
+
+.jp-playlist li .action:hover .que_close {
+    background-color: var(--primary-color)
 }
 
 .que_more {
@@ -2998,7 +3002,7 @@ i.ms_icon.icon_share {
 .que_close {
     width: 20px;
     height: 20px;
-    background-color: var(--primary-color);
+    /* background-color: var(--primary-color); */
     display: inline-block;
     text-align: center;
     border-radius: 100%;
