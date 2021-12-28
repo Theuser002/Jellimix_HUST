@@ -11,26 +11,31 @@
       </div>
       <div class="album_single_text">
         <h2>{{ artist_data.Name }}</h2>
-        <p class="singer_name">Singer, New York</p>
-        <div class="about_artist">
-          The Artist (Real name Wingardium Leviosa) seems to be a great person
-          so he is loved by many people but all is just the big, shiny, flashy
-          friendly facade he puts on. &lt;The artist&gt; is in fact a psychopath
-          and was convited of serial m.u.r.d.e.r of 13 victims and is now
-          waiting on death row in Volatile prison. His music is good, he is not.
-          Here are some...<a href="#">Read More</a>
+        <div class="album_feature">
+          <span href="#" class="album_date"
+            >{{ artist_data.RunTimeTicks | convertTickToTime }}</span
+          >
+          
+          <span href="#" class="album_date"
+            ><strong>Overview:</strong> <span>{{artist_data.Overview!=null?artist_data.Overview.slice(0,200)+"...":"No info"}}</span></span
+          >
         </div>
         <div class="album_btn">
-          <a href="#" class="ms_btn play_btn"
+          <a href="#" class="ms_btn play_btn" @click="playAll"
             ><span class="play_all"
-              ><img src="images/svg/play_all.svg" alt="" />Play All</span
+              ><img src="../assets/images/svg/play_all.svg" alt="" />Play
+              All</span
             ><span class="pause_all"
-              ><img src="images/svg/pause_all.svg" alt="" />Pause</span
+              ><img
+                src="../assets/images/svg/pause_all.svg"
+                alt=""
+              />Pause</span
             ></a
           >
           <a href="#" class="ms_btn"
             ><span class="play_all"
-              ><img src="images/svg/add_q.svg" alt="" />Add To Queue</span
+              ><img src="../assets/images/svg/add_q.svg" alt="" />Add To
+              Queue</span
             ></a
           >
         </div>
@@ -165,6 +170,25 @@ export default {
   methods: {
     routeBack() {
       this.$router.push("/Artists");
+    },
+  },
+  filters: {
+    convertTickToTime(ticks) {
+      if (ticks != null) {
+        var seconds = Math.floor(ticks / 10000000);
+        var minute = Math.floor(
+          seconds / 60 < 60 ? (seconds / 60) % 60 : seconds / 60
+        );
+        var second = seconds % 60;
+
+        var result =
+          String(minute).padStart(minute > 99 ? 3 : 2, "0") +
+          ":" +
+          String(second).padStart(2, "0");
+        return result;
+      } else {
+        return "no source";
+      }
     },
   },
 };

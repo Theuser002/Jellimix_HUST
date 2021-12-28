@@ -1,9 +1,6 @@
 <template>
   <div class="album">
-    <div v-if="genreList == null" class="wrap">
-      <img src="../assets/loader1.gif" alt="" />
-    </div>
-    <div v-else>
+    <div>
       <div class="content-block">
         <router-link to="/Home">Back to home</router-link>
         <ul class="media-list">
@@ -77,10 +74,8 @@ export default {
   created() {
     this.getAllGenre()
       .then((res) => {
-        setTimeout(() => {
           this.genreList = res.data.Items;
           this.pageContent = this.genreList;
-        }, 500);
       })
       .catch((res) => {
         console.log(res);

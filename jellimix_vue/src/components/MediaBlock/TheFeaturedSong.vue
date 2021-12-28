@@ -64,11 +64,9 @@ export default {
     };
   },
   created() {
-    this.getAllSong()
+    this.getFeaturedSong()
       .then((res) => {
-        setTimeout(() => {
           this.mediaList = res.data.Items;
-        }, 500);
       })
       .catch((err) => {
         this.$toast.error(err.message);

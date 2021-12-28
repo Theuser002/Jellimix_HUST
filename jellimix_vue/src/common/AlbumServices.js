@@ -3,6 +3,12 @@ import { api_key, user } from './enums'
 
 var AlbumServices = {
     methods: {
+        async getFeaturedAlbum() {
+            let url = axios.defaults.baseURL +
+                'Users/' + user +
+                '/Items?SortBy=SortName&SortOrder=Ascending&IncludeItemTypes=MusicAlbum&Recursive=true&Fields=PrimaryImageAspectRatio%2CSortName%2CBasicSyncInfo&ImageTypeLimit=1&EnableImageTypes=Primary%2CBackdrop%2CBanner%2CThumb&StartIndex=0&Limit=10&ParentId=7e64e319657a9516ec78490da03edccb&api_key=' + api_key
+            return axios.get(url);
+        },
         async getAllAlbum() {
             let url = axios.defaults.baseURL +
                 'Users/' + user +
@@ -16,7 +22,7 @@ var AlbumServices = {
             return await axios.get(url);
         },
         async getAlbumSong(albumId) {
-            
+
             let url = axios.defaults.baseURL +
                 `Users/${user}/Items/?SortBy=IndexNumber&SortOrder=Ascending&` +
                 `IncludeItemTypes=Audio&Recursive=true&Fields=AudioInfo%2C` +

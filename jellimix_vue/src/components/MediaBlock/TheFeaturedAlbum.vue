@@ -64,11 +64,9 @@ export default {
     };
   },
   created() {
-    this.getAllAlbum()
+    this.getFeaturedAlbum()
       .then((res) => {
-        setTimeout(() => {
           this.mediaList = res.data.Items;
-        }, 500);
       })
       .catch((res) => {
         console.log(res);

@@ -1,5 +1,6 @@
 <template>
   <div class="ms_album_single_wrapper ms_artist_single">
+    <div @click="routeBack">Back</div>
     <div class="album_single_data">
       <div class="album_single_img">
         <img

@@ -68,11 +68,12 @@ export default {
     return {
       isOpenMenu: false,
       menuItems: [
-        { path: "/Home", name: "Trang chủ", icon: "icon_discover" }, //đường dẫn router, tên lựa chọn, tọa độ x-y của icon trong ảnh svg
-        { path: "/Songs", name: "Bài hát", icon: "icon_music" },
-        { path: "/Artists", name: "Nghệ sĩ", icon: "icon_artists" },
-        { path: "/Albums", name: "Album", icon: "icon_albums" },
-        { path: "/Playlists", name: "Playlist", icon: "icon_fe_playlist" },
+        { path: "/Home", name: "Home", icon: "icon_discover" }, //đường dẫn router, tên lựa chọn, tọa độ x-y của icon trong ảnh svg
+        { path: "/Songs", name: "Songs", icon: "icon_music" },
+        { path: "/Artists", name: "Artists", icon: "icon_artists" },
+        { path: "/Albums", name: "Albums", icon: "icon_albums" },
+        { path: "/Genres", name: "Genres", icon: "icon_genres" },
+        { path: "/Playlists", name: "Playlists", icon: "icon_fe_playlist" },
       ],
     };
   },
