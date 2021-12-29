@@ -90,9 +90,8 @@
           <ul class="album_list_name">
             <li>#</li>
             <li>Song Title</li>
-            <li>Artist</li>
+            <li>Year</li>
             <li class="text-center">Duration</li>
-            <li class="text-center">Add To Favourites</li>
             <li class="text-center">More</li>
           </ul>
         </div>

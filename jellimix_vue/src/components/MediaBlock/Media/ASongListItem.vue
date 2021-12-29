@@ -10,15 +10,10 @@
       <a class="album-song-name" @click="playAudio">{{ media_data.Name }}</a>
     </li>
     <li>
-      <router-link :to="`/Artists/${media_data.ArtistItems[0].Id}`">{{
-        media_data.Artists.join(", ")
-      }}</router-link>
+      <a>{{media_data.ProductionYear}}</a>
     </li>
     <li class="text-center">
       <a href="#">{{ media_data.RunTimeTicks | convertTickToTime }}</a>
-    </li>
-    <li class="text-center">
-      <a class="add_fav" href="#"><i class="far fa-heart"></i></a>
     </li>
     <li class="text-center ms_more_icon">
       <a href="javascript:;"><i class="fas fa-ellipsis-h"></i> </a>
