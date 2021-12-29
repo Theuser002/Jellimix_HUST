@@ -11,14 +11,6 @@
       </div>
       <div class="album_single_text">
         <h2>{{genre.Name}}</h2>
-        <!-- <div class="about_genre">
-          Alternative rock (also called alternative music, alt-rock, or simply alternative) is 
-          a category of rock music that emerged from the independent music underground of 
-          the 1970s and became widely popular in the 1990s. 
-          "Alternative" refers to the genre's distinction from mainstream or commercial rock or 
-          pop music. The term's original meaning was broader, referring to a musicians influenced 
-          by the musical style or independent, DIY ethos of late 1970s punk rock.<a href="#">Read More</a>
-        </div> -->
         <div class="album_btn">
           <a href="#" class="ms_btn play_btn" @click="playAll"
             ><span class="play_all"
@@ -76,9 +68,8 @@
         <ul class="album_list_name">
           <li>#</li>
           <li>Song Title</li>
-          <li>Album</li>
+          <li>Year</li>
           <li class="text-center">Duration</li>
-          <li class="text-center">Add To Favourites</li>
           <li class="text-center">More</li>
         </ul>
         <ul v-for="(item,index) in genre_data" :key="index">
@@ -88,11 +79,8 @@
             </a>
           </li>
           <li><a href="#">{{item.Name}}</a></li>
-          <li><a href="#">{{item.Album}}</a></li>
+          <li><a href="#">{{item.ProductionYear}}</a></li>
           <li class="text-center"><a href="#">{{item.RunTimeTicks | convertTickToTime}}</a></li>
-          <li class="text-center">
-            <a href="#"><span class="ms_icon1 ms_fav_icon"></span></a>
-          </li>
           <li class="text-center ms_more_icon">
             <a href="javascript:;"
               ><span class="ms_icon1 ms_active_icon"></span
