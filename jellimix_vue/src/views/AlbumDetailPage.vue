@@ -54,7 +54,7 @@
               />Pause</span
             ></a
           >
-          <a href="#" class="ms_btn"
+          <a href="#" class="ms_btn" @click="addToQueue"
             ><span class="play_all"
               ><img src="../assets/images/svg/add_q.svg" alt="" />Add To
               Queue</span
@@ -125,7 +125,7 @@
 import AlbumServices from "../common/AlbumServices";
 import "../../node_modules/vue-ads-pagination/dist/vue-ads-pagination.css";
 import VueAdsPagination, { VueAdsPageButton } from "vue-ads-pagination";
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   components: {
@@ -200,6 +200,7 @@ export default {
   },
   methods: {
     ...mapMutations(["setListAudio"]),
+    ...mapActions(["handleAddToQueue"]),
     getImage() {
       let url = this.getImageLink(this.album_data);
       this.img_url = url;
@@ -222,6 +223,9 @@ export default {
     playAll() {
       this.setListAudio(this.album_song);
     },
+    addToQueue(){
+      this.handleAddToQueue(this.album_song)
+    }
   },
 };
 </script>
