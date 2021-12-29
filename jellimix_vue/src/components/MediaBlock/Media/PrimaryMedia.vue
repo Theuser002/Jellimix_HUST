@@ -26,7 +26,7 @@
               >
             </li>
             <li>
-              <a href="#"
+              <a href="#" @click="addToQueue"
                 ><span class="opt_icon"
                   ><span class="icon icon_queue"></span></span
                 >Add To Queue</a
@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     ...mapMutations(["setSingleAudio", "setOpenPlayer", "setAddForm", "setAddLoginModal", "setListToAdd"]),
-    ...mapActions(["handlePlaySingleSong"]),
+    ...mapActions(["handlePlaySingleSong","handleAddToQueue"]),
     getImage() {
       let url = this.getImageLink(this.media_data);
       this.img_url = url;
@@ -118,6 +118,9 @@ export default {
     playAudio() {
       this.handlePlaySingleSong(this.media_data);
       this.setOpenPlayer(true);
+    },
+    addToQueue(){
+      this.handleAddToQueue(this.media_data);
     },
     download() {
       saveAs(this.song_url, `Jellimix-${this.media_data.Name}.mp3`);

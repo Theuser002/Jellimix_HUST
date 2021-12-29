@@ -91,6 +91,41 @@ const player = {
 
             //Gán lại queueIndex tương ứng
             commit('setQueueIndex', state.queue.findIndex(song => song.Id === newSong.Id))
+
+            //Mở thanh player
+            commit('setOpenPlayer', true)
+        },
+
+        /**
+         * Xử lý việc đưa thêm bài hát hoặc 1 list bài hát thêm vào queue hiện có:
+         * -Nếu queue trống thì xử lý như là set queue mới thông thường
+         * -Nếu queue đang chạy thì push bài hát hoặc list mới vào queue
+         * @param {*} param0 
+         * @param {*} newItem 
+         */
+        handleAddToQueue({ commit, dispatch, state }, newItem) {
+            //Queue đang trống
+            if (state.queue.length == 0) {
+                //Nếu newItem truyền vào là 1 array bài hát thì array chính là queue queue
+                if (Array.isArray(newItem)) {
+                    commit("setListAudio", newItem)
+                }
+                //Nếu newItem truyền vào là 1 bài hát đơn thì set bài hát vào player như 1 bài hát đơn
+                else {
+                    dispatch("handlePlaySingleSong", newItem)
+                }
+            }
+            //Nếu queue không trống
+            else {
+                //Nếu newItem là 1 array bài hát thì concat array vào queue hiện tại
+                if (Array.isArray(newItem)) {
+                    state.queue = state.queue.concat(newItem)
+                }
+                //Nếu newItem là 1 bài hát đơn thì push bài hát vào queue
+                else {
+                    state.queue.push(newItem)
+                }
+            }
         }
     },
 }

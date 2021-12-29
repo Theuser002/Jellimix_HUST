@@ -20,14 +20,14 @@
           by the musical style or independent, DIY ethos of late 1970s punk rock.<a href="#">Read More</a>
         </div> -->
         <div class="album_btn">
-          <a href="#" class="ms_btn play_btn"
+          <a href="#" class="ms_btn play_btn" @click="playAll"
             ><span class="play_all"
               ><img src="images/svg/play_all.svg" alt="" />Play All</span
             ><span class="pause_all"
               ><img src="images/svg/pause_all.svg" alt="" />Pause</span
             ></a
           >
-          <a href="#" class="ms_btn"
+          <a href="#" class="ms_btn" @click="addToQueue"
             ><span class="play_all"
               ><img src="images/svg/add_q.svg" alt="" />Add To Queue</span
             ></a
@@ -149,7 +149,7 @@
 
 <script>
 import GenreServices from '../common/GenreServices';
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   mixins: [GenreServices],
@@ -174,6 +174,8 @@ export default {
       });
   },
   methods: {
+    ...mapMutations(["setListAudio"]),
+    ...mapActions(["handleAddToQueue"]),
     routeBack(){
       this.$router.push('/Genres')
     },
@@ -181,6 +183,12 @@ export default {
       this.img_url = this.getImageLink(this.genre);
       console.log(this.img_url);
     },
+    playAll() {
+      this.setListAudio(this.genre_data);
+    },
+    addToQueue(){
+      this.handleAddToQueue(this.genre_data)
+    }
   },
   filters: {
     convertTickToTime(ticks) {
