@@ -11,6 +11,14 @@
       </div>
       <div class="album_single_text">
         <h2>{{genre.Name}}</h2>
+        <!-- <div class="about_genre">
+          Alternative rock (also called alternative music, alt-rock, or simply alternative) is 
+          a category of rock music that emerged from the independent music underground of 
+          the 1970s and became widely popular in the 1990s. 
+          "Alternative" refers to the genre's distinction from mainstream or commercial rock or 
+          pop music. The term's original meaning was broader, referring to a musicians influenced 
+          by the musical style or independent, DIY ethos of late 1970s punk rock.<a href="#">Read More</a>
+        </div> -->
         <div class="album_btn">
           <a href="#" class="ms_btn play_btn"
             ><span class="play_all"
@@ -29,7 +37,7 @@
       <div class="album_more_optn ms_more_icon">
         <span><img src="images/svg/more.svg" alt="" /></span>
       </div>
-      <ul class="more_option">
+      
         <li>
           <a href="#"
             ><span class="opt_icon"><span class="icon icon_fav"></span></span
@@ -144,52 +152,7 @@ import GenreServices from '../common/GenreServices';
 import { mapGetters } from "vuex";
 
 export default {
-  mixins: [GenreServices],
-  data() {
-      return {
-          genre: null,
-          genre_data: null,
-          img_url: null,
-          default_img:"default-genre.png"
-      }
-  },
-  computed: {
-      ...mapGetters(["tokenAuth", "userId"]),
-  },
-  created() {
-      this.getSingleGenre(this.$route.params.id).then((res)=>{
-          this.genre = res.data
-        this.getImage();
-      });
-      this.getSingleGenreSongs(this.$route.params.id).then((res)=>{
-          this.genre_data = res.data.Items
-      });
-  },
-  methods: {
-    routeBack(){
-      this.$router.push('/Genres')
-    },
-    getImage() {
-      this.img_url = this.getImageLink(this.genre);
-      console.log(this.img_url);
-    },
-  },
-  filters: {
-    convertTickToTime(ticks) {
-      var seconds = Math.floor(ticks / 10000000);
-      var hour = Math.floor(seconds / 3600);
-      var minute = Math.floor((seconds / 60) % 60);
-      var second = seconds % 60;
-
-      var result =
-        String(hour).padStart(2, "0") +
-        ":" +
-        String(minute).padStart(2, "0") +
-        ":" +
-        String(second).padStart(2, "0");
-      return result;
-    },
-  },
+ 
 };
 </script>
 
