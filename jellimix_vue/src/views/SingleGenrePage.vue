@@ -11,14 +11,6 @@
       </div>
       <div class="album_single_text">
         <h2>{{genre.Name}}</h2>
-        <!-- <div class="about_genre">
-          Alternative rock (also called alternative music, alt-rock, or simply alternative) is 
-          a category of rock music that emerged from the independent music underground of 
-          the 1970s and became widely popular in the 1990s. 
-          "Alternative" refers to the genre's distinction from mainstream or commercial rock or 
-          pop music. The term's original meaning was broader, referring to a musicians influenced 
-          by the musical style or independent, DIY ethos of late 1970s punk rock.<a href="#">Read More</a>
-        </div> -->
         <div class="album_btn">
           <a href="#" class="ms_btn play_btn"
             ><span class="play_all"
